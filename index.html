@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.M.M.O.S - Assistant IA pour Professionnels de l'Immobilier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        },
+                        dark: {
+                            100: '#1E293B',
+                            200: '#0F172A',
+                            300: '#0A0F1D',
+                        }
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0F172A;
+            color: #fff;
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+            background: linear-gradient(to right, #38bdf8, #ec4899);
+            padding: 1px;
+        }
+
+        .gradient-border > div {
+            background-color: #0F172A;
+            border-radius: 0.75rem;
+            height: 100%;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15), rgba(236, 72, 153, 0.15), rgba(15, 23, 42, 0));
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .typing-effect::after {
+            content: "|";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(to right, rgba(56, 189, 248, 0.3), rgba(236, 72, 153, 0.3));
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .scroll-down {
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(10px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.8; }
+        }
+
+        .dashboard-animation {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chart-bar {
+            animation: growUp 1.5s ease-out;
+            transform-origin: bottom;
+        }
+
+        @keyframes growUp {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+
+        .progress-ring-circle {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: progressRing 2s ease-out forwards;
+        }
+
+        @keyframes progressRing {
+            to { stroke-dashoffset: 70; }
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(to right, #38bdf8, #ec4899);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <meta name="description" content="Assistant IA pour Professionnels de l'Immobilier">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 glass-effect">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold gradient-text font-montserrat">I.M.M.O.S</div>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#accueil" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Accueil</a>
+                    <a href="#fonctionnalites" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Fonctionnalités</a>
+                    <a href="#statistiques" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Statistiques</a>
+                    <a href="#temoignages" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Témoignages</a>
+                    <a href="#tarifs" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Tarifs</a>
+                    <a href="#contact" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#essai-gratuit" class="cta-button bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all">Essai Gratuit</a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-200 absolute w-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#accueil" class="text-white hover:text-primary-300 transition-colors font-medium">Accueil</a>
+                <a href="#fonctionnalites" class="text-white hover:text-primary-300 transition-colors font-medium">Fonctionnalités</a>
+                <a href="#statistiques" class="text-white hover:text-primary-300 transition-colors font-medium">Statistiques</a>
+                <a href="#temoignages" class="text-white hover:text-primary-300 transition-colors font-medium">Témoignages</a>
+                <a href="#tarifs" class="text-white hover:text-primary-300 transition-colors font-medium">Tarifs</a>
+                <a href="#contact" class="text-white hover:text-primary-300 transition-colors font-medium">Contact</a>
+                <a href="#essai-gratuit" class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-2 rounded-full font-semibold text-center">Essai Gratuit</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="blob top-1/4 left-1/4"></div>
+        <div class="blob bottom-1/4 right-1/4"></div>
+        <div class="container mx-auto px-4 py-16 md:py-24 z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        <span class="gradient-text">Transformez</span> votre quotidien d'indépendant en immobilier
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-gray-300 typing-effect" id="hero-subtitle">Un assistant IA qui travaille pour vous 24/7</p>
+                    <p class="text-lg mb-10 text-gray-400">Ce logiciel intelligent planifie vos actions, récupère vos prospects, détecte les propriétaires et vous accompagne comme un coach personnel pour vendre plus… sans vous épuiser.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#essai-gratuit" class="cta-button bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-8 py-4 rounded-full font-bold text-lg text-center hover:shadow-lg transition-all">
+                            Commencer l'essai gratuit
+                        </a>
+                        <a href="#demonstration" class="border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg text-center hover:bg-white hover:text-dark-200 transition-all">
+                            Voir la démo
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center">
+                        <div class="flex -space-x-2">
+                            
+                            
+                            
+                            
+                        </div>
+                        <div class="ml-4">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="gradient-border w-full max-w-lg floating">
+                        <div class="p-4">
+                            <div class="bg-dark-100 rounded-lg overflow-hidden shadow-2xl">
+                                <div class="bg-dark-300 p-4 flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div class="text-gray-400 text-sm">I.M.M.O.S Dashboard</div>
+                                </div>
+                                <div class="p-6 dashboard-animation">
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mr-4">
+                                            <i class="fas fa-robot text-white text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-300 text-sm">Bonjour,</p>
+                                            <p class="text-white font-semibold">Thomas Martin</p>
+                                        </div>
+                                        <div class="ml-auto text-right">
+                                            <p class="text-gray-300 text-sm">Lundi</p>
+                                            <p class="text-white font-semibold">15 Avril 2025</p>
+                                        </div>
+                                    </div>
+                                    <div class="mb-6">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <h3 class="text-white font-bold">Objectifs hebdomadaires</h3>
+                                            <span class="text-primary-400 text-sm">3/7 jours</span>
+                                        </div>
+                                        <div class="bg-dark-300 h-3 rounded-full">
+                                            <div class="bg-gradient-to-r from-primary-500 to-secondary-500 h-3 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 mb-6">
+                                        <div class="bg-dark-300 p-4 rounded-lg">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-gray-400 text-sm">Prospects contactés</span>
+                                                <span class="text-white font-bold">120/240</span>
+                                            </div>
+                                            <div class="bg-dark-100 h-2 rounded-full">
+                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-dark-300 p-4 rounded-lg">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-gray-400 text-sm">Contacts initiaux</span>
+                                                <span class="text-white font-bold">15/20</span>
+                                            </div>
+                                            <div class="bg-dark-100 h-2 rounded-full">
+                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-dark-300 p-4 rounded-lg">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-gray-400 text-sm">Estimations</span>
+                                                <span class="text-white font-bold">6/8</span>
+                                            </div>
+                                            <div class="bg-dark-100 h-2 rounded-full">
+                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-dark-300 p-4 rounded-lg">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="text-gray-400 text-sm">Mandats signés</span>
+                                                <span class="text-white font-bold">1/2</span>
+                                            </div>
+                                            <div class="bg-dark-100 h-2 rounded-full">
+                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 50%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-dark-300 p-4 rounded-lg mb-6">
+                                        <div class="flex items-center mb-3">
+                                            <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3">
+                                                <i class="fas fa-lightbulb text-white"></i>
+                                            </div>
+                                            <h3 class="text-white font-semibold">Conseil I.M.M.O.S</h3>
+                                        </div>
+                                        <p class="text-gray-300 text-sm">Pour atteindre votre objectif hebdomadaire, concentrez-vous sur 30 appels supplémentaires aujourd'hui. J'ai déjà planifié votre journée en conséquence.</p>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors">
+                                            <i class="fas fa-calendar-alt mr-2"></i>Agenda
+                                        </button>
+                                        <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors">
+                                            <i class="fas fa-users mr-2"></i>Contacts
+                                        </button>
+                                        <button class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-lg">
+                                            <i class="fas fa-tasks mr-2"></i>Actions
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white scroll-down">
+                <p class="text-center mb-2">Découvrir plus</p>
+                <div class="flex justify-center">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problème Section -->
+    <section class="py-20 bg-dark-200 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Les <span class="gradient-text">défis quotidiens</span> des professionnels de l'immobilier</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Reconnaissez-vous ces situations qui freinent votre développement ?</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-dark-100 p-8 rounded-xl hover:shadow-lg transition-all hover:shadow-primary-500/20 feature-card">
+                    <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-running text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Course sans méthode</h3>
+                    <p class="text-gray-400">Vous passez vos journées à courir après les clients, sans structure ni méthode claire pour organiser votre activité.</p>
+                </div>
+                <div class="bg-dark-100 p-8 rounded-xl hover:shadow-lg transition-all hover:shadow-primary-500/20 feature-card">
+                    <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-question-circle text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Priorisation difficile</h3>
+                    <p class="text-gray-400">Vous avez l'impression de ne jamais savoir quelles actions prioriser pour maximiser vos chances de signer des mandats.</p>
+                </div>
+                <div class="bg-dark-100 p-8 rounded-xl hover:shadow-lg transition-all hover:shadow-primary-500/20 feature-card">
+                    <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-user-alt-slash text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Sentiment d'isolement</h3>
+                    <p class="text-gray-400">Vous vous sentez seul, sans soutien ni structure, dépassé par la charge mentale qu'implique la gestion de votre activité.</p>
+                </div>
+                <div class="bg-dark-100 p-8 rounded-xl hover:shadow-lg transition-all hover:shadow-primary-500/20 feature-card">
+                    <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-6">
+                        <i class="fas fa-random text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Outils dispersés</h3>
+                    <p class="text-gray-400">Vos outils sont dispersés, vos relances inefficaces et vos rendez-vous aléatoires, sans vision globale de votre activité.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-dark-100 relative">
+        <div class="blob top-1/2 right-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">La <span class="gradient-text">solution I.M.M.O.S</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Imaginez un assistant IA qui travaille pour vous 24/7, comme J.A.R.V.I.S dans Iron Man</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-calculator text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Calcul intelligent</h3>
+                        <p class="text-gray-300 mb-4">Calcule pour vous le nombre d'actions nécessaires pour atteindre vos objectifs de vente.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Définition d'objectifs réalistes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Suivi automatique des performances</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Ajustement en temps réel</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Organisation intelligente</h3>
+                        <p class="text-gray-300 mb-4">Organise votre agenda en fonction de vos statistiques personnelles pour maximiser votre efficacité.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Planification optimisée des tâches</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Rappels intelligents</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Synchronisation multi-appareils</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-search text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Détection automatique</h3>
+                        <p class="text-gray-300 mb-4">Scrape automatiquement vos messages pour retrouver les bons contacts et détecter les propriétaires potentiels.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Analyse de vos emails et messages</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Identification des opportunités</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Prise de RDV automatique</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-users-cog text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">CRM intelligent</h3>
+                        <p class="text-gray-300 mb-4">Classe vos leads et déclenche les bonnes relances au bon moment pour maximiser vos conversions.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Segmentation automatique</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Scoring des contacts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Relances personnalisées</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-brain text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Coaching personnalisé</h3>
+                        <p class="text-gray-300 mb-4">Vous forme, motive, structure et vous suit comme un véritable coach IA commercial adapté à vos besoins.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Conseils personnalisés</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Motivation quotidienne</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Normalisation de l'échec</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">Analyse prédictive</h3>
+                        <p class="text-gray-300 mb-4">Anticipe vos résultats et vous aide à ajuster votre stratégie pour atteindre vos objectifs.</p>
+                        <ul class="text-gray-400 space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Prévisions de vente</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Identification des tendances</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary-400 mt-1 mr-2"></i>
+                                <span>Recommandations stratégiques</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fonctionnalités Section -->
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 p-6">
+  <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-6xl flex flex-col md:flex-row" style="height: 80vh;">
+    <div class="bg-indigo-600 text-white p-6 w-full md:w-1/4 relative">
+      <div class="flex items-center mb-8">
+        <div class="h-12 w-12 bg-white rounded-full flex items-center justify-center">
+          <i class="fa fa-robot text-indigo-600 text-2xl"></i>
+        </div>
+        <h2 class="ml-3 text-xl font-bold">AssistantIA</h2>
+      </div>
+      
+      <div class="space-y-4 mb-6">
+        <div class="flex items-center">
+          <i class="fa fa-calendar-alt mr-3"></i>
+          <span>Planification</span>
+        </div>
+        <div class="flex items-center">
+          <i class="fa fa-tasks mr-3"></i>
+          <span>Tâches</span>
+        </div>
+        <div class="flex items-center">
+          <i class="fa fa-chart-line mr-3"></i>
+          <span>Productivité</span>
+        </div>
+      </div>
+      
+      <div class="mt-auto">
+        <div class="p-4 bg-indigo-700 rounded-lg">
+          <p class="text-sm opacity-90 mb-2">Adaptation automatique de votre agenda en cours...</p>
+          <div class="flex items-center">
+            <div class="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="particles" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+    </div>
+    
+    <div class="w-full md:w-3/4 p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-800">Mon Agenda Intelligent</h1>
+        <div class="flex space-x-3">
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center">
+            <i class="fa fa-magic mr-2"></i> Planifier avec IA
+          </button>
+        </div>
+      </div>
+      
+      <div class="mb-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg shadow-sm adaptive-message">
+        <div class="flex">
+          <div class="flex-shrink-0 mr-3">
+            <i class="fa fa-lightbulb text-indigo-600 text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-indigo-800 font-semibold mb-1">Agenda adaptatif intelligent</h3>
+            <p class="text-indigo-700 text-sm">Notre IA analyse en permanence vos objectifs professionnels et résultats pour adapter automatiquement votre planning. Elle identifie les plages horaires optimales, priorise vos tâches et vous suggère des ajustements pour maximiser votre efficacité.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex space-x-2">
+          <button class="p-2 rounded-lg hover:bg-gray-100">
+            <i class="fa fa-chevron-left text-gray-500"></i>
+          </button>
+          <h2 class="text-xl font-semibold text-gray-700">Avril 2023</h2>
+          <button class="p-2 rounded-lg hover:bg-gray-100">
+            <i class="fa fa-chevron-right text-gray-500"></i>
+          </button>
+        </div>
+        <div class="flex space-x-2">
+          <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Jour</button>
+          <button class="px-3 py-1 text-sm bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-md">Semaine</button>
+          <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Mois</button>
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden h-full">
+        <div class="grid grid-cols-7 bg-gray-100 border-b border-gray-200">
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Lun</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Mar</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Mer</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Jeu</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Ven</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Sam</div>
+          <div class="py-2 text-center text-sm font-medium text-gray-500">Dim</div>
+        </div>
+        
+        <div class="grid grid-cols-7 h-full">
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-1">
+            <div class="text-xs text-gray-500">1</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-2">
+            <div class="text-xs text-gray-500">2</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-3">
+            <div class="text-xs text-gray-500">3</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-4">
+            <div class="text-xs text-gray-500">4</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-5">
+            <div class="text-xs text-gray-500">5</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-6">
+            <div class="text-xs text-gray-500">6</div>
+          </div>
+          <div class="h-full border-b border-gray-200 p-2" id="cell-7">
+            <div class="text-xs text-gray-500">7</div>
+          </div>
+          
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-8">
+            <div class="text-xs text-gray-500">8</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-9">
+            <div class="text-xs text-gray-500">9</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-10">
+            <div class="text-xs text-gray-500">10</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-11">
+            <div class="text-xs text-gray-500">11</div>
+          </div>
+          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-12">
+            <div class="text-xs text-gray-500">12</div>
+          </div>
+          <div class="h-full border-b border-gray-200 p-2" id="cell-13">
+            <div class="text-xs text-gray-500">13</div>
+          </div>
+          <div class="h-full border-b border-gray-200 p-2" id="cell-14">
+            <div class="text-xs text-gray-500">14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+    }
+    
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      margin: 0 2px;
+      background-color: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.7;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-indicator span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes typing {
+      0% {
+        transform: translateY(0px);
+        opacity: 0.7;
+      }
+      50% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0px);
+        opacity: 0.7;
+      }
+    }
+    
+    .event-item {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s forwards;
+    }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .event-typing {
+      overflow: hidden;
+      border-right: 2px solid;
+      white-space: nowrap;
+      animation: typing-text 2s steps(20, end) forwards, blink 0.75s step-end infinite;
+    }
+    
+    @keyframes typing-text {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #818CF8 }
+    }
+    
+    .adaptive-message {
+      opacity: 0;
+      animation: slideIn 0.8s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const events = [
+        { day: 2, title: "Réunion équipe marketing", time: "10:00 - 11:30", color: "bg-blue-100 text-blue-700 border-blue-200" },
+        { day: 3, title: "Pige téléphonique", time: "08:00 - 08:30", color: "bg-red-100 text-red-700 border-red-200" },
+        { day: 4, title: "Présentation projet", time: "14:00 - 15:30", color: "bg-green-100 text-green-700 border-green-200" },
+        { day: 5, title: "Appel client", time: "09:30 - 10:00", color: "bg-yellow-100 text-yellow-700 border-yellow-200" },
+        { day: 6, title: "Prospection", time: "11:00 - 12:00", color: "bg-orange-100 text-orange-700 border-orange-200" },
+        { day: 7, title: "Rendez vous estimation", time: "13:00 - 14:00", color: "bg-teal-100 text-teal-700 border-teal-200" },
+        { day: 8, title: "Prise de mandat", time: "10:00 - 10:30", color: "bg-cyan-100 text-cyan-700 border-cyan-200" },
+        { day: 9, title: "Déjeuner d'affaires", time: "12:30 - 13:30", color: "bg-pink-100 text-pink-700 border-pink-200" },
+        { day: 10, title: "Formation IA", time: "15:00 - 17:00", color: "bg-purple-100 text-purple-700 border-purple-200" },
+        { day: 11, title: "Visite", time: "15:30 - 16:30", color: "bg-lime-100 text-lime-700 border-lime-200" },
+        { day: 12, title: "Review trimestrielle", time: "11:00 - 12:00", color: "bg-indigo-100 text-indigo-700 border-indigo-200" },
+        { day: 13, title: "Notaire", time: "16:30 - 17:30", color: "bg-emerald-100 text-emerald-700 border-emerald-200" }
+      ];
+      
+      function clearCells() {
+        for (let i = 1; i <= 14; i++) {
+          const cell = document.getElementById('cell-' + i);
+          if (cell) {
+            while (cell.childElementCount > 1) {
+              cell.removeChild(cell.lastChild);
+            }
+          }
+        }
+      }
+      
+      function createParticles() {
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 5; i++) {
+          const particle = document.createElement('div');
+          particle.className = 'absolute rounded-full bg-white';
+          particle.style.width = `${Math.random() * 4 + 2}px`;
+          particle.style.height = particle.style.width;
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+          particle.style.opacity = '0';
+          particles.appendChild(particle);
+          
+          setTimeout(() => {
+            particle.style.transition = 'transform 1.5s ease-out, opacity 1.5s ease-out';
+            particle.style.transform = `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`;
+            particle.style.opacity = '0.7';
+            
+            setTimeout(() => {
+              particle.style.opacity = '0';
+              setTimeout(() => {
+                particle.remove();
+              }, 1500);
+            }, 1000);
+          }, 10);
+        }
+      }
+      
+      function fillAgenda() {
+        clearCells();
+        let baseDelay = 1000;
+        events.forEach((event, index) => {
+          setTimeout(() => {
+            const cell = document.getElementById(`cell-${event.day}`);
+            if (cell) {
+              const eventElement = document.createElement('div');
+              eventElement.className = `mt-1 p-1 text-xs rounded-lg border ${event.color} event-item`;
+              
+              const timeDiv = document.createElement('div');
+              timeDiv.className = 'font-semibold';
+              timeDiv.textContent = event.time;
+              
+              const titleDiv = document.createElement('div');
+              titleDiv.className = 'event-typing font-medium';
+              titleDiv.style.width = '0';
+              titleDiv.textContent = event.title;
+              
+              eventElement.appendChild(timeDiv);
+              eventElement.appendChild(titleDiv);
+              cell.appendChild(eventElement);
+            }
+            createParticles();
+          }, baseDelay + index * 2000);
+        });
+        const totalDuration = baseDelay + events.length * 2000;
+        setTimeout(fillAgenda, totalDuration);
+      }
+      
+      fillAgenda();
+    });
+  </script>
+</div>
+
+    <!-- Statistiques Section -->
+    <section id="statistiques" class="py-20 bg-dark-100 relative">
+        <div class="blob bottom-0 left-1/4"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Les <span class="gradient-text">statistiques</span> qui font la différence</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">I.M.M.O.S s'appuie sur des données concrètes pour vous guider vers la réussite</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-dark-200 p-8 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Prospects contactés</h3>
+                        <div class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-phone-alt text-primary-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">240</div>
+                    <p class="text-gray-400">objectif hebdomadaire</p>
+                    <div class="mt-4 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <div class="mt-2 text-right text-sm text-gray-400">75% atteint</div>
+                </div>
+                <div class="bg-dark-200 p-8 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Contacts initiaux</h3>
+                        <div class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-handshake text-primary-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">20</div>
+                    <p class="text-gray-400">objectif hebdomadaire</p>
+                    <div class="mt-4 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 60%"></div>
+                    </div>
+                    <div class="mt-2 text-right text-sm text-gray-400">60% atteint</div>
+                </div>
+                <div class="bg-dark-200 p-8 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold">Estimations réalisées</h3>
+                        <div class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-calculator text-primary-400 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-4xl font-bold mb-2">8</div>
+                    <p class="text-gray-400">objectif hebdomadaire</p>
+                    <div class="mt-4 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                    <div class="mt-2 text-right text-sm text-gray-400">90% atteint</div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bg-dark-200 p-6 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Présentations</h3>
+                        <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-laptop-house text-primary-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">4</div>
+                    <p class="text-gray-400 text-sm">objectif hebdomadaire</p>
+                    <div class="mt-3 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <div class="mt-1 text-right text-xs text-gray-400">50% atteint</div>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Mandats signés</h3>
+                        <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-file-signature text-primary-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">2</div>
+                    <p class="text-gray-400 text-sm">objectif hebdomadaire</p>
+                    <div class="mt-3 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <div class="mt-1 text-right text-xs text-gray-400">100% atteint</div>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Visites réalisées</h3>
+                        <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-home text-primary-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">4-5</div>
+                    <p class="text-gray-400 text-sm">objectif hebdomadaire</p>
+                    <div class="mt-3 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                    <div class="mt-1 text-right text-xs text-gray-400">80% atteint</div>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl stat-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Annonces publiées</h3>
+                        <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center">
+                            <i class="fas fa-ad text-primary-400 text-lg"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-bold mb-2">1-2</div>
+                    <p class="text-gray-400 text-sm">objectif hebdomadaire</p>
+                    <div class="mt-3 bg-dark-300 h-2 rounded-full">
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <div class="mt-1 text-right text-xs text-gray-400">100% atteint</div>
+                </div>
+            </div>
+            <div class="mt-16">
+                <div class="gradient-border">
+                    <div class="p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+            <h3 class="text-2xl font-semibold mb-6">Comment I.M.M.O.S utilise ces données</h3>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold mb-1">Planification intelligente</h4>
+                        <p class="text-gray-400">I.M.M.O.S organise votre agenda en fonction de ces objectifs et de vos performances passées.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold mb-1">Suivi personnalisé</h4>
+                        <p class="text-gray-400">L'assistant vous informe en temps réel de votre progression et vous aide à ajuster vos efforts.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold mb-1">Prédictions de résultats</h4>
+                        <p class="text-gray-400">Grâce à l'IA, I.M.M.O.S peut prédire vos résultats futurs et vous aider à anticiper.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold mb-1">Normalisation de l'échec</h4>
+                        <p class="text-gray-400">L'assistant vous aide à comprendre que les échecs font partie du processus et vous guide pour rebondir.</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-primary-400 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-semibold mb-1">Qualification de contacts</h4>
+                        <p class="text-gray-400">I.M.M.O.S analyse vos emails et réseaux sociaux pour qualifier automatiquement vos contacts en 3 catégories :</p>
+                        <div class="mt-2 flex space-x-3">
+                            <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs font-semibold">Catégorie A</span>
+                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs font-semibold">Catégorie B</span>
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 rounded-full text-xs font-semibold">Catégorie C</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="bg-dark-200 p-6 rounded-xl h-full">
+                <h3 class="text-xl font-semibold mb-4">Équation de la réussite immobilière</h3>
+                <div class="mb-6">
+                    <p class="text-gray-300 mb-2">Pour atteindre <span class="font-bold text-white">1 vente par mois</span>, vous devez suivre cette progression :</p>
+                    <div class="flex items-center justify-center my-8">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+                                <i class="fas fa-phone-alt text-primary-400 text-xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-400">240 appels</span>
+                        </div>
+                        <div class="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"></div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+                                <i class="fas fa-handshake text-primary-400 text-xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-400">20 contacts</span>
+                        </div>
+                        <div class="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"></div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+                                <i class="fas fa-calculator text-primary-400 text-xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-400">8 estimations</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center mb-8">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+                                <i class="fas fa-file-signature text-primary-400 text-xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-400">2 mandats</span>
+                        </div>
+                        <div class="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"></div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+                                <i class="fas fa-home text-primary-400 text-xl"></i>
+                            </div>
+                            <span class="text-sm text-gray-400">4-5 visites</span>
+                        </div>
+                        <div class="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"></div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mb-2">
+                                <i class="fas fa-euro-sign text-white text-xl"></i>
+                            </div>
+                            <span class="text-sm text-white font-bold">1 vente</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-dark-300 p-4 rounded-lg">
+                    <div class="flex items-center mb-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-white"></i>
+                        </div>
+                        <h3 class="text-white font-semibold">Message I.M.M.O.S</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm">Avec I.M.M.O.S, vous n'avez plus à vous soucier de ces calculs. Je m'occupe de planifier vos actions quotidiennes pour atteindre vos objectifs mensuels.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Animation de qualification des contacts -->
+    <div class="mt-10 bg-dark-200 p-6 rounded-xl">
+        <h3 class="text-xl font-semibold mb-4 text-center">Comment I.M.M.O.S qualifie vos contacts</h3><p class="text-center mb-4">Que vous ayez 100, 1000 ou davantage de contacts, I.M.M.O.S gère votre CRM automatiquement. Plus besoin de vous occuper de la gestion de vos contacts - notre système s'en charge entièrement pour vous.</p>
+        <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+  <div class="flex-1 p-4 text-center">
+    <div class="mb-4">
+      <div class="w-20 h-20 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+        <i class="fas fa-envelope text-primary-400 text-2xl animate-pulse"></i>
+      </div>
+      <h4 class="font-semibold">Vos emails</h4>
+    </div>
+    <div class="contact-stream email-stream">
+      <i class="fas fa-user-circle text-gray-400 animate-stream"></i>
+      <i class="fas fa-user-circle text-gray-400 animate-stream delay-1"></i>
+      <i class="fas fa-user-circle text-gray-400 animate-stream delay-2"></i>
+    </div>
+  </div>
+  <div class="flex-1 p-4 text-center">
+    <div class="mb-4">
+      <div class="w-20 h-20 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
+        <i class="fas fa-share-alt text-primary-400 text-2xl animate-pulse"></i>
+      </div>
+      <h4 class="font-semibold">Vos réseaux sociaux</h4>
+    </div>
+    <div class="contact-stream social-stream">
+      <i class="fab fa-facebook-f text-blue-600 animate-stream"></i>
+      <i class="fab fa-twitter text-blue-400 animate-stream delay-1"></i>
+      <i class="fab fa-instagram text-pink-500 animate-stream delay-2"></i>
+    </div>
+  </div>
+  <div class="client-bubble-flow relative my-4 mx-auto">
+    <div class="w-full overflow-hidden">
+      <div class="flex space-x-4 animate-flow">
+        <i class="fas fa-user-circle text-green-400 animate-stream"></i>
+        <i class="fas fa-user-circle text-yellow-400 animate-stream delay-1"></i>
+        <i class="fas fa-user-circle text-red-400 animate-stream delay-2"></i>
+        <i class="fas fa-user-circle text-green-400 animate-stream delay-3"></i>
+        <i class="fas fa-user-circle text-yellow-400 animate-stream delay-1"></i>
+        <i class="fas fa-user-circle text-red-400 animate-stream delay-2"></i>
+        <i class="fas fa-user-circle text-green-400 animate-stream delay-3"></i>
+        <i class="fas fa-user-circle text-yellow-400 animate-stream delay-1"></i>
+      </div>
+    </div>
+    <div class="w-20 h-20 mt-4 mx-auto rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+      <i class="fas fa-brain text-white text-2xl animate-pulse"></i>
+    </div>
+  </div>
+  <div class="flex-1 md:flex-none md:w-1/3 p-4">
+    <div class="bg-dark-300 rounded-lg p-4 mb-4">
+      <h4 class="font-semibold text-green-400 flex items-center mb-2">
+        <span class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center mr-2">A</span>
+        Catégorie A
+      </h4>
+      <p class="text-gray-400 text-sm">Contacts prioritaires avec un fort potentiel d'achat ou de vente</p>
+      <div class="category-container cat-a mt-2">
+        <i class="fas fa-user-circle text-green-400 category-icon"></i>
+      </div>
+    </div>
+    <div class="bg-dark-300 rounded-lg p-4 mb-4">
+      <h4 class="font-semibold text-yellow-400 flex items-center mb-2">
+        <span class="w-6 h-6 bg-yellow-500/20 rounded-full flex items-center justify-center mr-2">B</span>
+        Catégorie B
+      </h4>
+      <p class="text-gray-400 text-sm">Contacts à potentiel moyen nécessitant un suivi régulier</p>
+      <div class="category-container cat-b mt-2">
+        <i class="fas fa-user-circle text-yellow-400 category-icon"></i>
+      </div>
+    </div>
+    <div class="bg-dark-300 rounded-lg p-4">
+      <h4 class="font-semibold text-red-400 flex items-center mb-2">
+        <span class="w-6 h-6 bg-red-500/20 rounded-full flex items-center justify-center mr-2">C</span>
+        Catégorie C
+      </h4>
+      <p class="text-gray-400 text-sm">Contacts à faible potentiel actuel, à maintenir informés</p>
+      <div class="category-container cat-c mt-2">
+        <i class="fas fa-user-circle text-red-400 category-icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+        
+    </div>
+    <!-- Animation de matching mandat -->
+    <div class="matrix-frame relative mt-10">
+  <div class="matrix-border"></div>
+  <div class="mt-10 bg-dark-200 p-6 rounded-xl relative z-10">
+  <div class="relative">
+    <style>
+      /* Style Matrix pour le cadre */
+      .matrix-frame {
+        position: relative;
+        padding: 4px;
+        border-radius: 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 70, 0.5);
+        overflow: hidden;
+      }
+      
+      .matrix-border {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        z-index: 1;
+      }
+      
+      .matrix-border::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          rgba(0, 255, 70, 0.2) 25%, 
+          rgba(0, 255, 70, 0.6) 50%, 
+          rgba(0, 255, 70, 0.2) 75%, 
+          transparent 100%);
+        z-index: 1;
+        animation: matrix-scan 3s linear infinite;
+      }
+      
+      .matrix-border::after {
+        content: "01010101010101010101010110101010101010101010101001010101010";
+        position: absolute;
+        font-family: monospace;
+        font-size: 10px;
+        color: rgba(0, 255, 70, 0.8);
+        white-space: nowrap;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover;
+        opacity: 0.3;
+        z-index: 0;
+        animation: matrix-rain 2s linear infinite;
+      }
+      
+      @keyframes matrix-scan {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      
+      @keyframes matrix-rain {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(100%);
+        }
+      }
+
+      .flux-line {
+        stroke: #2a6df4;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 10, 5;
+        animation: dash 3s linear infinite;
+        opacity: 0.8;
+      }
+      
+      .flux-line-glow {
+        filter: drop-shadow(0 0 3px rgba(42, 109, 244, 0.5));
+      }
+      
+      .data-point {
+        fill: #4f8dff;
+        filter: drop-shadow(0 0 2px #4f8dff);
+        animation: movePoint 3s linear infinite;
+      }
+      
+      .data-point-alt {
+        fill: #64c5ff;
+        filter: drop-shadow(0 0 2px #64c5ff);
+        animation: movePoint 3s linear infinite 1.5s;
+      }
+      
+      @keyframes dash {
+        to {
+          stroke-dashoffset: 30;
+        }
+      }
+      
+      @keyframes movePoint {
+        0% {
+          transform: translate(25%, 50%);
+          opacity: 0;
+          r: 2;
+        }
+        10% {
+          opacity: 1;
+          r: 4;
+        }
+        45% {
+          transform: translate(50%, 50%);
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        51% {
+          transform: translate(50%, 50%);
+          opacity: 0;
+          r: 2;
+        }
+        60% {
+          opacity: 1;
+          r: 4;
+        }
+        95% {
+          transform: translate(75%, 50%);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(75%, 50%);
+          opacity: 0;
+          r: 2;
+        }
+      }
+      
+      .stock-animation, .clients-animation {
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      
+      .matching-bubble {
+        position: absolute;
+        top: -70px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        font-size: 12px;
+        opacity: 0;
+        pointer-events: none;
+        animation: bubblePop 6s linear infinite;
+        width: 150px;
+        text-align: center;
+        z-index: 20;
+      }
+      
+      @keyframes bubblePop {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0) scale(0.5);
+        }
+        10% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-10px) scale(1);
+        }
+        40% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-10px) scale(1);
+        }
+        50% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px) scale(0.5);
+        }
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-20px) scale(0.5);
+        }
+      }
+      
+      /* Ajout des styles pour l'animation d'email de proposition de RDV */
+      .email {
+        position: absolute;
+        width: 24px;
+        height: 16px;
+        background: #ffffff;
+        border-radius: 3px;
+        z-index: 10;
+        opacity: 0;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        transform-origin: center;
+      }
+      
+      .email::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent 0%, transparent 45%, #4f8dff 45%, #4f8dff 55%, transparent 55%, transparent 100%);
+        opacity: 0.7;
+      }
+      
+      .email-a {
+        animation: sendEmailA 4s ease-in-out infinite;
+      }
+      
+      .email-b {
+        animation: sendEmailB 4s ease-in-out infinite 1.3s;
+      }
+      
+      .email-c {
+        animation: sendEmailC 4s ease-in-out infinite 2.6s;
+      }
+      
+      @keyframes sendEmailA {
+        0% {
+          opacity: 0;
+          transform: translate(50%, 50%) scale(0.5) rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+          transform: translate(50%, 50%) scale(1.2) rotate(-5deg);
+        }
+        25% {
+          transform: translate(60%, 45%) scale(1) rotate(3deg);
+        }
+        45% {
+          transform: translate(70%, 40%) scale(0.9) rotate(-3deg);
+          opacity: 1;
+        }
+        55% {
+          transform: translate(70%, 40%) scale(0) rotate(0deg);
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes sendEmailB {
+        0% {
+          opacity: 0;
+          transform: translate(50%, 50%) scale(0.5) rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+          transform: translate(50%, 50%) scale(1.2) rotate(-5deg);
+        }
+        25% {
+          transform: translate(62%, 50%) scale(1) rotate(5deg);
+        }
+        45% {
+          transform: translate(75%, 45%) scale(0.9) rotate(-5deg);
+          opacity: 1;
+        }
+        55% {
+          transform: translate(75%, 45%) scale(0) rotate(0deg);
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes sendEmailC {
+        0% {
+          opacity: 0;
+          transform: translate(50%, 50%) scale(0.5) rotate(0deg);
+        }
+        10% {
+          opacity: 1;
+          transform: translate(50%, 50%) scale(1.2) rotate(-5deg);
+        }
+        25% {
+          transform: translate(60%, 55%) scale(1) rotate(5deg);
+        }
+        45% {
+          transform: translate(70%, 65%) scale(0.9) rotate(-5deg);
+          opacity: 1;
+        }
+        55% {
+          transform: translate(70%, 65%) scale(0) rotate(0deg);
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      
+      .rdv-bubble {
+        position: absolute;
+        background: #4f8dff;
+        color: white;
+        font-size: 10px;
+        padding: 4px 6px;
+        border-radius: 8px;
+        opacity: 0;
+        z-index: 5;
+        white-space: nowrap;
+        box-shadow: 0 0 10px rgba(79, 141, 255, 0.7);
+      }
+      
+      .rdv-bubble-a {
+        top: 35%;
+        right: 25%;
+        animation: showRdvBubble 4s ease-in-out infinite;
+      }
+      
+      .rdv-bubble-b {
+        top: 50%;
+        right: 25%;
+        animation: showRdvBubble 4s ease-in-out infinite 1.3s;
+      }
+      
+      .rdv-bubble-c {
+        top: 65%;
+        right: 25%;
+        animation: showRdvBubble 4s ease-in-out infinite 2.6s;
+      }
+      
+      @keyframes showRdvBubble {
+        0%, 45% {
+          opacity: 0;
+          transform: translateX(10px) scale(0.5);
+        }
+        50%, 70% {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+        80%, 100% {
+          opacity: 0;
+          transform: translateY(-10px) scale(0.8);
+        }
+      }
+      
+      .notification-badge {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background-color: #ff6b6b;
+        border-radius: 50%;
+        transform: scale(0);
+        z-index: 15;
+      }
+      
+      .notification-a {
+        top: 35%;
+        right: 22%;
+        animation: showNotification 4s ease-in-out infinite;
+      }
+      
+      .notification-b {
+        top: 50%;
+        right: 22%;
+        animation: showNotification 4s ease-in-out infinite 1.3s;
+      }
+      
+      .notification-c {
+        top: 65%;
+        right: 22%;
+        animation: showNotification 4s ease-in-out infinite 2.6s;
+      }
+      
+      @keyframes showNotification {
+        0%, 45% {
+          transform: scale(0);
+        }
+        50%, 55% {
+          transform: scale(1.5);
+        }
+        60%, 80% {
+          transform: scale(1);
+        }
+        85%, 100% {
+          transform: scale(0);
+        }
+      }
+    </style>
+    <div class="flex items-center justify-around relative">
+      <div class="flex flex-col items-center stock-animation">
+        <div class="rounded-full mb-2 overflow-hidden" style="width: 100px; height: 100px;" role="img" aria-label="Mandat de Vente">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+            <polygon points="10,50 50,20 90,50" fill="#ff6b6b" class="roof">
+              <animate attributeName="fill" values="#ff6b6b;#e95858;#ff6b6b" dur="2s" repeatCount="indefinite"></animate>
+            </polygon>
+            <rect x="20" y="50" width="60" height="40" fill="#4ecdc4" class="body">
+              <animate attributeName="fill" values="#4ecdc4;#3dbdb3;#4ecdc4" dur="3s" repeatCount="indefinite"></animate>
+            </rect>
+            <rect x="40" y="65" width="20" height="25" fill="#6c5ce7" class="door">
+              <animate attributeName="height" values="25;22;25" dur="1.5s" repeatCount="indefinite"></animate>
+              <animate attributeName="y" values="65;68;65" dur="1.5s" repeatCount="indefinite"></animate>
+            </rect>
+            <rect x="25" y="55" width="15" height="15" fill="#ffeaa7" class="window">
+              <animate attributeName="fill" values="#ffeaa7;#fff;#ffeaa7" dur="4s" repeatCount="indefinite"></animate>
+            </rect>
+            <rect x="60" y="55" width="15" height="15" fill="#ffeaa7" class="window">
+              <animate attributeName="fill" values="#ffeaa7;#fff;#ffeaa7" dur="4s" repeatCount="indefinite"></animate>
+            </rect>
+            <rect x="70" y="30" width="10" height="15" fill="#636e72" class="chimney">
+              <animate attributeName="height" values="15;18;15" dur="2s" repeatCount="indefinite"></animate>
+            </rect>
+            <circle cx="75" cy="25" r="3" fill="#dfe6e9" opacity="0.7" class="smoke smoke1">
+              <animate attributeName="cy" values="25;15;5;-5" dur="3s" repeatCount="indefinite"></animate>
+              <animate attributeName="opacity" values="0.7;0.5;0.3;0" dur="3s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle cx="78" cy="20" r="2" fill="#dfe6e9" opacity="0.5" class="smoke smoke2">
+              <animate attributeName="cy" values="20;10;0;-10" dur="3.5s" repeatCount="indefinite"></animate>
+              <animate attributeName="opacity" values="0.5;0.4;0.2;0" dur="3.5s" repeatCount="indefinite"></animate>
+            </circle>
+          </svg>
+        </div>
+        <span class="text-gray-300">Stock Mandat</span>
+      </div>
+      <div class="flex flex-col items-center relative">
+        <div class="w-16 h-16 bg-dark-300 rounded-full flex items-center justify-center mb-2 animated-ai">
+          <i class="fas fa-robot text-white text-2xl"></i>
+        </div>
+        <div class="matching-bubble">Je gère automatiquement le rapprochement entre vos mandats et les acquéreurs qualifiés</div>
+        <span class="text-gray-300">IA Matching</span>
+      </div>
+      <div class="flex flex-col items-center clients-animation">
+        <div class="flex space-x-2">
+          <i class="fas fa-user-circle text-green-400 text-2xl matching-icon"></i>
+          <i class="fas fa-user-circle text-yellow-400 text-2xl matching-icon"></i>
+          <i class="fas fa-user-circle text-red-400 text-2xl matching-icon"></i>
+        </div>
+        <span class="text-gray-300">Clients A, B, C</span>
+      </div>
+      <svg class="absolute top-0 left-0 w-full h-full pointer-events-none flux-line-glow">
+        <line x1="25%" y1="50%" x2="50%" y2="50%" class="flux-line"></line>
+        <line x1="50%" y1="50%" x2="75%" y2="50%" class="flux-line"></line>
+        <circle class="data-point" cx="0" cy="0" r="3"></circle>
+        <circle class="data-point-alt" cx="0" cy="0" r="3"></circle>
+      </svg>
+      
+      <!-- Animations d'emails pour les propositions de RDV envoyées par l'IA lors de chaque matching -->
+      <div class="email email-a"></div>
+      <div class="email email-b"></div>
+      <div class="email email-c"></div>
+      
+      <!-- Bulles de rendez-vous -->
+      <div class="rdv-bubble rdv-bubble-a">Proposition RDV 📅</div>
+      <div class="rdv-bubble rdv-bubble-b">Proposition RDV 📅</div>
+      <div class="rdv-bubble rdv-bubble-c">Proposition RDV 📅</div>
+      
+      <!-- Badges de notification -->
+      <div class="notification-badge notification-a"></div>
+      <div class="notification-badge notification-b"></div>
+      <div class="notification-badge notification-c"></div>
+    </div>
+    <script>
+      // Animation dynamique et réactive
+      document.addEventListener('DOMContentLoaded', function() {
+        // Définition des délais pour synchroniser les animations
+        const animationCycles = [0, 1.3, 2.6]; // Délais pour chaque cycle client
+        
+        // Assure que les animations restent synchronisées
+        function syncAnimations() {
+          const emails = document.querySelectorAll('.email');
+          const bubbles = document.querySelectorAll('.rdv-bubble');
+          const notifications = document.querySelectorAll('.notification-badge');
+          
+          // Réinitialise les animations pour une exécution fluide
+          emails.forEach((email, index) => {
+            email.style.animationDelay = `${animationCycles[index]}s`;
+          });
+          
+          bubbles.forEach((bubble, index) => {
+            bubble.style.animationDelay = `${animationCycles[index]}s`;
+          });
+          
+          notifications.forEach((notif, index) => {
+            notif.style.animationDelay = `${animationCycles[index]}s`;
+          });
+        }
+        
+        // Appel initial pour synchroniser les animations
+        syncAnimations();
+        
+        // Synchronise les animations lors du redimensionnement de la fenêtre
+        window.addEventListener('resize', syncAnimations);
+      });
+    </script>
+  </div>
+</div>
+</div>
+    <style>
+        @keyframes streamAnimation {
+            0% { transform: translateX(0) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateX(150px) scale(1); opacity: 0; }
+        }
+        @keyframes categoryAppear {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .contact-stream {
+            position: relative;
+            height: 30px;
+            width: 150px;
+            margin: 0 auto;
+        }
+        .animate-stream {
+            position: absolute;
+            left: 0;
+            animation: streamAnimation 3s infinite;
+        }
+        .delay-1 {
+            animation-delay: 1s;
+        }
+        .delay-2 {
+            animation-delay: 2s;
+        }
+        .delay-3 {
+            animation-delay: 1.5s;
+        }
+        .category-container {
+            height: 30px;
+            display: flex;
+        }
+        .category-icon {
+            animation: categoryAppear 1s;
+            margin-right: 5px;
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        @keyframes matchAnimation {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10px) scale(1); opacity: 0; }
+        }
+        .matching-icon {
+            animation: matchAnimation 3s infinite;
+        }
+        .animated-ai {
+            animation: pulse 2s infinite;
+        }
+    </style>
+    <script>
+        function addContactIcons() {
+            const categories = ['cat-a', 'cat-b', 'cat-c'];
+            const counts = [3, 5, 7];
+            const delays = [200, 400, 600, 800, 1000, 1200, 1400];
+            categories.forEach((cat, idx) => {
+                const container = document.querySelector('.' + cat);
+                container.innerHTML = '';
+                for (let i = 0; i < counts[idx]; i++) {
+                    const icon = document.createElement('i');
+                    icon.className = 'fas fa-user-circle category-icon';
+                    if (cat === 'cat-a') icon.classList.add('text-green-400');
+                    else if (cat === 'cat-b') icon.classList.add('text-yellow-400');
+                    else icon.classList.add('text-red-400');
+                    icon.style.animationDelay = (delays[i] || 0) + 'ms';
+                    container.appendChild(icon);
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            addContactIcons();
+            setInterval(function() {
+                const containers = document.querySelectorAll('.category-container');
+                containers.forEach(container => {
+                    container.innerHTML = '';
+                });
+                setTimeout(addContactIcons, 300);
+            }, 10000);
+        });
+    </script>
+</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demonstration Section -->
+    
+
+    <!-- Témoignages Section -->
+    <section id="temoignages" class="py-20 bg-dark-100 relative">
+        <div class="blob top-0 right-1/4"></div>
+        
+    </section><div class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 text-white p-6 font-sans">
+    <div class="max-w-6xl mx-auto">
+        <!-- En-tête -->
+        <header class="mb-8 relative overflow-hidden rounded-xl bg-white/10 backdrop-blur-lg p-6 shadow-xl border border-white/20">
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-purple-500 rounded-full opacity-20 blur-3xl"></div>
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center relative z-10">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-indigo-200 to-purple-200">Débriefing Psychologique</h1>
+                    <p class="text-indigo-200" id="current-date">Jeudi, 22 Juin 2023</p>
+                </div>
+                <div class="flex items-center mt-4 md:mt-0">
+                    <div class="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center mr-4 shadow-lg">
+                        <i class="fa fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-medium">Bonjour,</p>
+                        <p class="text-xl font-semibold">Alexandre</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contenu principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Colonne de gauche -->
+            <div class="lg:col-span-2 space-y-6">
+    <!-- Résumé de la journée -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+        <div class="flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center mr-3 shadow-lg">
+                <i class="fa fa-calendar-check text-lg"></i>
+            </div>
+            <h2 class="text-2xl font-bold">Résumé de votre journée</h2>
+        </div>
+        
+        <textarea class="w-full h-40 bg-white/5 backdrop-blur-lg rounded-lg p-4 text-white placeholder-indigo-300 border border-white/10 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition-all" placeholder="Décrivez les événements importants de votre journée professionnelle..."></textarea>
+        
+        <div class="flex flex-wrap gap-3 mt-4">
+            <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
+                <i class="fa fa-home mr-2"></i> Visites (3)
+            </button>
+            <button class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
+                <i class="fa fa-handshake mr-2"></i> Clients (5)
+            </button>
+            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
+                <i class="fa fa-signature mr-2"></i> Signatures (1)
+            </button>
+            <button class="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
+                <i class="fa fa-phone mr-2"></i> Appels (12)
+            </button>
+        </div>
+    </div>
+
+    <!-- Analyse psychologique -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+        <div class="flex items-center mb-6">
+            <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center mr-3 shadow-lg">
+                <i class="fa fa-brain text-lg"></i>
+            </div>
+            <h2 class="text-2xl font-bold">Analyse Psychologique</h2>
+        </div>
+        
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">État émotionnel</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="satisfied">
+                    <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
+                        <i class="fa fa-smile text-2xl text-green-400"></i>
+                    </div>
+                    <p class="text-center">Satisfait</p>
+                </div>
+                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="stressed">
+                    <div class="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center mb-2">
+                        <i class="fa fa-meh text-2xl text-yellow-400"></i>
+                    </div>
+                    <p class="text-center">Stressé</p>
+                </div>
+                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="frustrated">
+                    <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mb-2">
+                        <i class="fa fa-angry text-2xl text-red-400"></i>
+                    </div>
+                    <p class="text-center">Frustré</p>
+                </div>
+                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="motivated">
+                    <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-2">
+                        <i class="fa fa-bolt text-2xl text-blue-400"></i>
+                    </div>
+                    <p class="text-center">Motivé</p>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Niveau de stress professionnel</h3>
+            <div class="bg-white/5 rounded-xl p-4">
+                <div class="mb-2 flex justify-between">
+                    <span>Faible</span>
+                    <span>Élevé</span>
+                </div>
+                <div class="w-full bg-white/10 rounded-full h-6 mb-3 relative overflow-hidden">
+                    <div id="stress-level" class="absolute h-full left-0 bg-gradient-to-r from-green-500 to-red-500 transition-all duration-1000" style="width: 65%;"></div>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <input type="range" id="stress-slider" min="0" max="100" value="65" class="w-full cursor-pointer appearance-none bg-transparent [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:h-4 [&amp;::-webkit-slider-thumb]:w-4 [&amp;::-webkit-slider-thumb]:rounded-full [&amp;::-webkit-slider-thumb]:bg-white">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialogue avec l'IA -->
+    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+        <div class="flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-teal-600 flex items-center justify-center mr-3 shadow-lg">
+                <i class="fa fa-comments text-lg"></i>
+            </div>
+            <h2 class="text-2xl font-bold">Dialogue avec l'IA</h2>
+        </div>
+        <div class="space-y-4">
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-indigo-300"><strong>Professionnel :</strong> Aujourd'hui j'ai perdu une vente importante sur un appartement. Les acheteurs ont changé d'avis au dernier moment après deux mois de négociations. J'ai l'impression d'avoir échoué et je me sens vraiment démoralisé.</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-purple-300"><strong>IA :</strong> Cette situation est certainement décevante. Ce que vous ressentez s'apparente au "biais d'attribution" : vous attribuez l'échec à vos compétences personnelles plutôt qu'à des facteurs externes. Pouvez-vous identifier des éléments de la situation qui étaient hors de votre contrôle ?</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-indigo-300"><strong>Professionnel :</strong> En réfléchissant, les acheteurs ont mentionné un changement dans leur situation financière et familiale. J'aurais peut-être dû anticiper leurs hésitations, mais c'est vrai que ce facteur était imprévisible.</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-purple-300"><strong>IA :</strong> Exactement. En psychologie, nous parlons de "locus de contrôle" - la distinction entre ce qui relève de votre influence et ce qui n'en relève pas. Reconnaître cette limite peut réduire votre auto-critique. Comment pourriez-vous transformer cette expérience en apprentissage pour vos futures négociations ?</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-indigo-300"><strong>Professionnel :</strong> Je pourrais peut-être intégrer plus de questions sur les changements potentiels dans la situation des clients au cours du processus. Et aussi me rappeler que même avec une préparation parfaite, certains facteurs restent imprévisibles.</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-purple-300"><strong>IA :</strong> C'est une excellente perspective qui montre de la résilience adaptative. Cette approche favorise ce que la psychologie positive appelle la "croissance post-échec". En normalisant l'imprévisibilité et en vous concentrant sur les leçons apprises, vous transformez une expérience négative en développement professionnel. Comment vous sentez-vous maintenant par rapport à cette situation ?</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-indigo-300"><strong>Professionnel :</strong> Un peu mieux, en fait. Je réalise que je m'imposais une pression excessive. J'ai quand même réussi à créer une bonne relation avec ces clients qui pourraient revenir plus tard ou me recommander. Je vais essayer d'adopter cette perspective pour les prochaines situations similaires.</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-purple-300"><strong>IA :</strong> Je sens que votre niveau de stress reste élevé. Puis-je vous proposer une courte séance de relaxation guidée pour vous aider à relâcher les tensions accumulées ? Cette technique est particulièrement efficace après une journée chargée émotionnellement.</p>
+            </div>
+            <div class="p-4 bg-white/5 rounded-lg">
+                <p class="text-sm text-indigo-300"><strong>Professionnel :</strong> Oui, je veux bien essayer. Je sens effectivement une tension dans mes épaules et mon cou.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Séance de relaxation guidée -->
+    <div id="relaxation-session" class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+        <div class="flex items-center mb-4">
+            <div class="w-10 h-10 rounded-full bg-cyan-600 flex items-center justify-center mr-3 shadow-lg">
+                <i class="fa fa-spa text-lg"></i>
+            </div>
+            <h2 class="text-2xl font-bold">Séance de relaxation guidée</h2>
+        </div>
+        
+        <div class="text-center mb-6">
+            <p class="text-indigo-200 mb-4">Suivez le cercle pour réguler votre respiration. Inspirez quand il s'agrandit, expirez quand il se réduit.</p>
+            <div class="flex justify-center">
+                <div id="breathing-circle" class="w-32 h-32 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center transform scale-100 opacity-80 transition-all duration-4000 shadow-lg shadow-purple-500/30 relative">
+                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 animate-pulse opacity-50 blur-md"></div>
+                    <div class="z-10 text-white font-medium breathing-text">Inspirez...</div>
+                </div>
+            </div>
+            <p id="relaxation-instruction" class="mt-6 text-lg font-medium text-white">Inspirez...</p>
+        </div>
+        
+        <div class="space-y-4 bg-white/5 rounded-lg p-4 mb-6">
+            <p class="text-sm text-purple-300"><strong>IA :</strong> Installez-vous confortablement. Cette séance de 2 minutes aide à réduire le stress et à retrouver votre calme intérieur. Suivez simplement le rythme du cercle et concentrez-vous sur votre respiration.</p>
+        </div>
+        
+        <div class="flex justify-between">
+            <button id="start-relaxation" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 rounded-lg font-medium shadow-lg transition-all flex items-center">
+                <i class="fa fa-play mr-2"></i>
+                Commencer la séance
+            </button>
+            <button id="stop-relaxation" class="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg font-medium shadow-lg transition-all flex items-center hidden">
+                <i class="fa fa-stop mr-2"></i>
+                Arrêter la séance
+            </button>
+            <div>
+                <span class="text-sm text-indigo-200">Durée: </span>
+                <select id="relaxation-duration" class="bg-white/10 rounded-lg px-3 py-2 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                    <option value="2">2 minutes</option>
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Colonne de droite -->
+            <div class="space-y-6">
+                <!-- Conseils personnalisés -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center mr-3 shadow-lg">
+                            <i class="fa fa-lightbulb text-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">Recommandations</h2>
+                    </div>
+                    
+                    <div class="space-y-4" id="recommendations">
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-white/30 transition-all">
+                            <div class="flex items-start">
+                                <i class="fa fa-star text-yellow-400 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-medium">Gestion du stress</h3>
+                                    <p class="text-sm text-indigo-200 mt-1">Prenez 10 minutes pour pratiquer la respiration profonde avant vos rendez-vous importants.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-white/30 transition-all">
+                            <div class="flex items-start">
+                                <i class="fa fa-clock text-green-400 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-medium">Organisation du temps</h3>
+                                    <p class="text-sm text-indigo-200 mt-1">Bloquez des plages horaires pour les tâches administratives pour éviter de les accumuler.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-white/30 transition-all">
+                            <div class="flex items-start">
+                                <i class="fa fa-users text-blue-400 mt-1 mr-3"></i>
+                                <div>
+                                    <h3 class="font-medium">Relation client</h3>
+                                    <p class="text-sm text-indigo-200 mt-1">Utilisez l'écoute active pour mieux comprendre les besoins implicites de vos clients.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphique de progression -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3 shadow-lg">
+                            <i class="fa fa-chart-line text-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">Votre progression</h2>
+                    </div>
+                    
+                    <div class="h-48 relative" id="chart-container">
+                        <canvas id="progressChart" class="w-full h-full"></canvas>
+                    </div>
+                    
+                    <div class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
+                        <div class="bg-white/5 p-2 rounded-lg">
+                            <p class="text-indigo-200">Stress</p>
+                            <p class="font-medium">-15%</p>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded-lg">
+                            <p class="text-indigo-200">Motivation</p>
+                            <p class="font-medium">+12%</p>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded-lg">
+                            <p class="text-indigo-200">Efficacité</p>
+                            <p class="font-medium">+8%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prochaines étapes -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center mr-3 shadow-lg">
+                            <i class="fa fa-forward text-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">Prochaines étapes</h2>
+                    </div>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-center bg-white/5 p-3 rounded-lg hover:bg-white/10 transition-all cursor-pointer">
+                            <i class="fa fa-check-circle text-green-400 mr-3"></i>
+                            <span>Plannifier votre journée de demain</span>
+                        </li>
+                        <li class="flex items-center bg-white/5 p-3 rounded-lg hover:bg-white/10 transition-all cursor-pointer">
+                            <i class="fa fa-check-circle text-green-400 mr-3"></i>
+                            <span>Revoir vos objectifs hebdomadaires</span>
+                        </li>
+                        <li class="flex items-center bg-white/5 p-3 rounded-lg hover:bg-white/10 transition-all cursor-pointer">
+                            <i class="fa fa-check-circle text-green-400 mr-3"></i>
+                            <span>Exercice de relaxation (5 min)</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full mt-4 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-lg font-medium shadow-lg transition-all flex items-center justify-center">
+                        <i class="fa fa-save mr-2"></i>
+                        Enregistrer le débriefing
+                    </button>
+                </div><div class="relative bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 p-8 rounded-xl shadow-2xl max-w-4xl mx-auto overflow-hidden">
+  <div class="absolute inset-0 bg-pattern opacity-10"></div>
+  
+  <h2 class="text-3xl font-bold text-white text-center mb-8 relative z-10">Gestion du Stress</h2>
+  
+  <div class="bg-white/20 backdrop-blur-lg p-8 rounded-lg shadow-lg relative z-10">
+    <div class="mb-8">
+      <label for="stress-level" class="block text-white text-xl mb-4 font-medium">Évaluez votre niveau de stress</label>
+      <div class="flex items-center gap-4">
+        <span class="text-white flex items-center"><i class="fas fa-smile text-green-300 mr-2"></i>1</span>
+        <input type="range" id="stress-level" min="1" max="10" value="5" class="w-full h-3 bg-white/30 rounded-lg appearance-none cursor-pointer">
+        <span class="text-white flex items-center">10<i class="fas fa-dizzy text-red-300 ml-2"></i></span>
+      </div>
+      <div class="text-center mt-6">
+        <span id="stress-value" class="text-white text-3xl font-bold">5</span>
+        <span class="text-white text-xl"> sur 10</span>
+      </div>
+    </div>
+    
+    <div id="animation-container" class="flex justify-center mb-10 h-72 relative">
+      <!-- Animation content will be dynamically inserted -->
+    </div>
+    
+    <div id="recommendation" class="bg-white/30 backdrop-blur-md p-6 rounded-lg text-center transition-all duration-500 transform hover:scale-105">
+      <h3 id="recommendation-title" class="text-2xl font-bold text-white mb-3">Recommandation personnalisée</h3>
+      <p id="recommendation-text" class="text-white text-lg mb-6">En fonction de votre niveau de stress actuel...</p>
+      <div class="mt-6 flex justify-center">
+        <button id="start-button" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 flex items-center">
+          <span>Commencer</span>
+          <i class="fas fa-play-circle ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <style>
+    @keyframes breathing {
+      0%, 100% { transform: scale(0.8); background-color: rgba(6, 182, 212, 0.7); }
+      50% { transform: scale(1.1); background-color: rgba(20, 184, 166, 0.7); }
+    }
+    
+    @keyframes floatCloud {
+      0% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(-5px); }
+    }
+    
+    @keyframes rise {
+      0% { transform: translateY(10px); opacity: 0; }
+      50% { transform: translateY(-15px); opacity: 1; }
+      100% { transform: translateY(-30px); opacity: 0; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes sunRay {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .bg-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    
+    .breathing-circle {
+      animation: breathing 5s ease-in-out infinite;
+    }
+    
+    .floating-cloud {
+      animation: floatCloud 3s ease-in-out infinite;
+    }
+    
+    .rising-zzz {
+      animation: rise 3s ease-in-out infinite;
+    }
+    
+    .sun-rays {
+      animation: sunRay 20s linear infinite;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const stressLevel = document.getElementById('stress-level');
+      const stressValue = document.getElementById('stress-value');
+      const recommendationTitle = document.getElementById('recommendation-title');
+      const recommendationText = document.getElementById('recommendation-text');
+      const animationContainer = document.getElementById('animation-container');
+      const startButton = document.getElementById('start-button');
+      
+      function updateStressUI() {
+        const value = parseInt(stressLevel.value);
+        stressValue.textContent = value;
+        
+        // Clear animation container
+        animationContainer.innerHTML = '';
+        
+        // Update colors based on stress level
+        const parent = document.querySelector('.from-indigo-600');
+        if (value <= 4) {
+          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-blue-500');
+          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-teal-400');
+          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-green-400');
+        } else if (value <= 7) {
+          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-indigo-600');
+          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-purple-500');
+          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-pink-500');
+        } else {
+          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-red-600');
+          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-orange-500');
+          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-yellow-500');
+        }
+        
+        // Add the appropriate animation based on stress level
+        if (value <= 5) {
+          // Relaxation animation
+          animationContainer.innerHTML = `
+            <div class="relative w-full h-full flex items-center justify-center">
+              <div class="breathing-circle w-56 h-56 bg-cyan-500 bg-opacity-70 rounded-full flex items-center justify-center shadow-xl">
+                <div class="text-center text-white">
+                  <i class="fas fa-wind text-4xl mb-3"></i>
+                  <p class="text-2xl font-medium">Respirez</p>
+                  <p class="text-sm mt-2 opacity-80">Inspirez... Expirez...</p>
+                </div>
+              </div>
+              <div class="absolute top-5 right-20 floating-cloud">
+                <i class="fas fa-cloud text-white text-4xl opacity-70"></i>
+              </div>
+              <div class="absolute bottom-10 left-24 floating-cloud" style="animation-delay: 1.5s">
+                <i class="fas fa-cloud text-white text-3xl opacity-60"></i>
+              </div>
+            </div>
+          `;
+          
+          recommendationTitle.innerHTML = '<i class="fas fa-heart-pulse mr-2"></i> Séance de relaxation';
+          recommendationText.innerHTML = "Votre niveau de stress est modéré. Une séance de relaxation guidée vous permettra de retrouver calme et sérénité.";
+          startButton.innerHTML = '<span>Démarrer la relaxation</span><i class="fas fa-spa ml-2"></i>';
+          
+        } else {
+          // Rest day animation
+          animationContainer.innerHTML = `
+            <div class="relative w-full h-full flex flex-col items-center justify-center">
+              <div class="sun-rays absolute w-64 h-64 rounded-full border-4 border-dashed border-yellow-200 opacity-40"></div>
+              <div class="relative">
+                <i class="fas fa-bed text-white text-7xl mb-2"></i>
+                <div class="absolute -top-6 -right-2 rising-zzz">
+                  <i class="fas fa-z text-white text-xl"></i>
+                </div>
+                <div class="absolute -top-10 right-2 rising-zzz" style="animation-delay: 1s">
+                  <i class="fas fa-z text-white text-2xl"></i>
+                </div>
+                <div class="absolute -top-14 right-6 rising-zzz" style="animation-delay: 2s">
+                  <i class="fas fa-z text-white text-3xl"></i>
+                </div>
+              </div>
+              <p class="text-white text-2xl mt-6 font-medium">Temps de repos</p>
+              <div class="mt-2 flex">
+                <div class="px-3 py-1 bg-white/30 rounded-full text-white text-sm mr-2">
+                  <i class="fas fa-clock mr-1"></i> 24h
+                </div>
+                <div class="px-3 py-1 bg-white/30 rounded-full text-white text-sm">
+                  <i class="fas fa-battery-full mr-1"></i> Récupération
+                </div>
+              </div>
+            </div>
+          `;
+          
+          recommendationTitle.innerHTML = '<i class="fas fa-moon mr-2"></i> Jour de repos nécessaire';
+          recommendationText.innerHTML = "Votre niveau de stress est élevé. Il est important de prendre une journée complète pour vous déconnecter et récupérer.";
+          startButton.innerHTML = '<span>Planifier mon repos</span><i class="fas fa-calendar-check ml-2"></i>';
+        }
+      }
+      
+      // Initialize UI
+      updateStressUI();
+      
+      // Event listeners
+      stressLevel.addEventListener('input', updateStressUI);
+      
+      startButton.addEventListener('click', function() {
+        const value = parseInt(stressLevel.value);
+        
+        // Button click animation
+        this.classList.add('animate-pulse');
+        setTimeout(() => {
+          this.classList.remove('animate-pulse');
+          
+          // Show program starting
+          this.innerHTML = '<span>En cours...</span><i class="fas fa-spinner fa-spin ml-2"></i>';
+          this.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
+          this.classList.remove('from-emerald-500', 'to-teal-500', 'hover:from-emerald-600', 'hover:to-teal-600');
+          
+          // Simulate program completion
+          setTimeout(() => {
+            this.innerHTML = '<span>Terminé !</span><i class="fas fa-check-circle ml-2"></i>';
+            this.classList.add('bg-gradient-to-r', 'from-green-500', 'to-emerald-500');
+            this.classList.remove('from-blue-500', 'to-purple-500');
+            
+            // Reset button after completion
+            setTimeout(() => {
+              this.classList.remove('from-green-500', 'to-emerald-500');
+              this.classList.add('from-emerald-500', 'to-teal-500', 'hover:from-emerald-600', 'hover:to-teal-600');
+              
+              if (value <= 5) {
+                this.innerHTML = '<span>Nouvelle séance</span><i class="fas fa-redo ml-2"></i>';
+              } else {
+                this.innerHTML = '<span>Je me sens mieux</span><i class="fas fa-smile ml-2"></i>';
+              }
+            }, 2000);
+          }, 3000);
+        }, 300);
+      });
+    });
+  </script>
+</div>
+            </div>
+        </div>
+
+        <!-- Historique des débriefings -->
+        <div class="mt-8 bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center mr-3 shadow-lg">
+                        <i class="fa fa-history text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Historique des débriefings</h2>
+                </div>
+                <button class="px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-all flex items-center">
+                    <i class="fa fa-filter mr-2"></i>
+                    Filtrer
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-white/10">
+                            <th class="py-3 px-4 text-left">Date</th>
+                            <th class="py-3 px-4 text-left">État émotionnel</th>
+                            <th class="py-3 px-4 text-left">Niveau de stress</th>
+                            <th class="py-3 px-4 text-left">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-all">
+                            <td class="py-3 px-4">Mercredi, 21 Juin 2023</td>
+                            <td class="py-3 px-4"><span class="inline-flex items-center"><i class="fa fa-smile text-green-400 mr-2"></i> Satisfait</span></td>
+                            <td class="py-3 px-4"><div class="w-32 h-2 bg-white/10 rounded-full"><div class="h-full bg-green-500 rounded-full" style="width: 40%"></div></div></td>
+                            <td class="py-3 px-4"><button class="text-indigo-300 hover:text-white transition-all"><i class="fa fa-eye"></i></button></td>
+                        </tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-all">
+                            <td class="py-3 px-4">Mardi, 20 Juin 2023</td>
+                            <td class="py-3 px-4"><span class="inline-flex items-center"><i class="fa fa-meh text-yellow-400 mr-2"></i> Stressé</span></td>
+                            <td class="py-3 px-4"><div class="w-32 h-2 bg-white/10 rounded-full"><div class="h-full bg-yellow-500 rounded-full" style="width: 70%"></div></div></td>
+                            <td class="py-3 px-4"><button class="text-indigo-300 hover:text-white transition-all"><i class="fa fa-eye"></i></button></td>
+                        </tr>
+                        <tr class="border-b border-white/5 hover:bg-white/5 transition-all">
+                            <td class="py-3 px-4">Lundi, 19 Juin 2023</td>
+                            <td class="py-3 px-4"><span class="inline-flex items-center"><i class="fa fa-angry text-red-400 mr-2"></i> Frustré</span></td>
+                            <td class="py-3 px-4"><div class="w-32 h-2 bg-white/10 rounded-full"><div class="h-full bg-red-500 rounded-full" style="width: 85%"></div></div></td>
+                            <td class="py-3 px-4"><button class="text-indigo-300 hover:text-white transition-all"><i class="fa fa-eye"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mettre à jour la date
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentDateElement = document.getElementById('current-date');
+            const now = new Date();
+            const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            currentDateElement.textContent = now.toLocaleDateString('fr-FR', options);
+            
+            // Gestion des émotions
+            const emotionCards = document.querySelectorAll('.emotion-card');
+            emotionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Réinitialiser toutes les cartes
+                    emotionCards.forEach(c => {
+                        c.classList.remove('bg-white/20', 'border-2', 'border-indigo-400', 'scale-105');
+                        c.classList.add('bg-white/5');
+                    });
+                    
+                    // Mettre en évidence la carte sélectionnée
+                    this.classList.remove('bg-white/5');
+                    this.classList.add('bg-white/20', 'border-2', 'border-indigo-400', 'scale-105');
+                    
+                    // Mettre à jour les recommandations en fonction de l'émotion
+                    updateRecommendations(this.dataset.emotion);
+                });
+            });
+            
+            // Gestion du slider de stress
+            const stressSlider = document.getElementById('stress-slider');
+            const stressLevel = document.getElementById('stress-level');
+            
+            stressSlider.addEventListener('input', function() {
+                stressLevel.style.width = this.value + '%';
+            });
+            
+            // Animation des particules
+            initParticles();
+            
+            // Initialiser le graphique
+            initChart();
+
+            // Animation de respiration guidée
+            initBreathingAnimation();
+        });
+        
+        function updateRecommendations(emotion) {
+            const recommendationsContainer = document.getElementById('recommendations');
+            
+            const recommendations = {
+                satisfied: [
+                    { icon: 'trophy', color: 'text-yellow-400', title: 'Maintenir le cap', content: 'Continuez sur cette lancée positive et notez ce qui a bien fonctionné pour reproduire ces conditions.' },
+                    { icon: 'balance-scale', color: 'text-blue-400', title: 'Équilibre travail-vie', content: 'Profitez de cet état positif pour renforcer votre équilibre entre vie professionnelle et personnelle.' },
+                    { icon: 'share-alt', color: 'text-green-400', title: 'Partage d\'expérience', content: 'Envisagez de partager vos techniques de réussite avec vos collègues ou votre équipe.' }
+                ],
+                stressed: [
+                    { icon: 'wind', color: 'text-blue-400', title: 'Respiration contrôlée', content: 'Pratiquez 5 minutes de respiration abdominale pour réduire immédiatement votre niveau de stress.' },
+                    { icon: 'list', color: 'text-yellow-400', title: 'Priorisation', content: 'Identifiez les 3 tâches vraiment importantes et reportez ou déléguez le reste.' },
+                    { icon: 'walking', color: 'text-green-400', title: 'Pause active', content: 'Faites une courte marche de 10 minutes pour vous aérer l\'esprit et retrouver votre concentration.' }
+                ],
+                frustrated: [
+                    { icon: 'pen', color: 'text-indigo-400', title: 'Expression écrite', content: 'Notez précisément les sources de votre frustration pour mieux les identifier et les traiter.' },
+                    { icon: 'comments', color: 'text-purple-400', title: 'Communication', content: 'Exprimez clairement vos attentes et limites avec vos clients ou collaborateurs.' },
+                    { icon: 'puzzle-piece', color: 'text-red-400', title: 'Résolution de problèmes', content: 'Décomposez les situations complexes en petites étapes abordables.' }
+                ],
+                motivated: [
+                    { icon: 'bullseye', color: 'text-red-400', title: 'Objectifs clairs', content: 'Profitez de cette motivation pour définir des objectifs ambitieux mais atteignables.' },
+                    { icon: 'graduation-cap', color: 'text-blue-400', title: 'Apprentissage', content: 'C\'est le moment idéal pour développer une nouvelle compétence professionnelle.' },
+                    { icon: 'users', color: 'text-green-400', title: 'Leadership', content: 'Utilisez votre énergie positive pour inspirer et motiver votre entourage professionnel.' }
+                ]
+            };
+            
+            const selectedRecommendations = recommendations[emotion] || recommendations.satisfied;
+            
+            // Animation de transition
+            recommendationsContainer.style.opacity = '0';
+            setTimeout(() => {
+                let html = '';
+                selectedRecommendations.forEach(rec => {
+                    html += `
+                    <div class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-white/30 transition-all transform hover:scale-102">
+                        <div class="flex items-start">
+                            <i class="fa fa-${rec.icon} ${rec.color} mt-1 mr-3"></i>
+                            <div>
+                                <h3 class="font-medium">${rec.title}</h3>
+                                <p class="text-sm text-indigo-200 mt-1">${rec.content}</p>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                recommendationsContainer.innerHTML = html;
+                recommendationsContainer.style.opacity = '1';
+            }, 300);
+        }
+        
+        function initParticles() {
+            // Cette fonction pourrait implémenter une animation de particules légères
+            // Pour simplifier, nous ne l'implémentons pas complètement ici
+        }
+        
+        function initChart() {
+            // Si Chart.js était disponible :
+            if (typeof Chart !== 'undefined') {
+                const ctx = document.getElementById('progressChart').getContext('2d');
+                
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'],
+                        datasets: [
+                            {
+                                label: 'Stress',
+                                data: [85, 70, 60, 65, 45],
+                                borderColor: 'rgba(239, 68, 68, 0.8)',
+                                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Motivation',
+                                data: [50, 55, 65, 70, 80],
+                                borderColor: 'rgba(59, 130, 246, 0.8)',
+                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Efficacité',
+                                data: [60, 65, 68, 75, 82],
+                                borderColor: 'rgba(16, 185, 129, 0.8)',
+                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'rgba(255, 255, 255, 0.7)'
+                                }
+                            }
+                        },
+                        elements: {
+                            point: {
+                                radius: 4,
+                                hoverRadius: 6
+                            }
+                        }
+                    }
+                });
+            } else {
+                // Fallback si Chart.js n'est pas disponible
+                const chartContainer = document.getElementById('chart-container');
+                chartContainer.innerHTML = '<div class="flex items-center justify-center h-full"><p>Graphique de progression (nécessite Chart.js)</p></div>';
+            }
+        }
+
+        // Animation de respiration guidée
+        function initBreathingAnimation() {
+            const startButton = document.getElementById('start-relaxation');
+            const stopButton = document.getElementById('stop-relaxation');
+            const breathingCircle = document.getElementById('breathing-circle');
+            const instructionText = document.getElementById('relaxation-instruction');
+            const durationSelect = document.getElementById('relaxation-duration');
+            const breathingText = document.querySelector('.breathing-text');
+            
+            let isRelaxing = false;
+            let relaxationInterval;
+            let breathingPhase = 'inhale'; // 'inhale', 'hold', 'exhale', 'rest'
+            let cycleCount = 0;
+            let totalCycles = 0;
+            
+            startButton.addEventListener('click', startRelaxation);
+            stopButton.addEventListener('click', stopRelaxation);
+            
+            function startRelaxation() {
+                if (isRelaxing) return;
+                isRelaxing = true;
+                
+                // Calculer le nombre total de cycles en fonction de la durée
+                const durationMinutes = parseInt(durationSelect.value);
+                totalCycles = durationMinutes * 3; // Environ 3 cycles par minute
+                cycleCount = 0;
+                
+                startButton.classList.add('hidden');
+                stopButton.classList.remove('hidden');
+                
+                // Commencer l'animation de respiration
+                runBreathingCycle();
+                
+                // Intervalle pour les cycles de respiration
+                relaxationInterval = setInterval(runBreathingCycle, 10000); // 10 secondes par cycle complet
+            }
+            
+            function stopRelaxation() {
+                if (!isRelaxing) return;
+                isRelaxing = false;
+                
+                clearInterval(relaxationInterval);
+                
+                // Réinitialiser l'animation
+                breathingCircle.style.transform = 'scale(1)';
+                breathingText.textContent = 'Inspirez...';
+                instructionText.textContent = 'Inspirez...';
+                
+                startButton.classList.remove('hidden');
+                stopButton.classList.add('hidden');
+            }
+            
+            function runBreathingCycle() {
+                cycleCount++;
+                
+                // Phase d'inspiration (4 secondes)
+                breathingPhase = 'inhale';
+                breathingCircle.style.transform = 'scale(1.5)';
+                breathingText.textContent = 'Inspirez...';
+                instructionText.textContent = 'Inspirez profondément...';
+                
+                // Phase de rétention (1 seconde)
+                setTimeout(() => {
+                    breathingPhase = 'hold';
+                    breathingText.textContent = 'Retenez...';
+                    instructionText.textContent = 'Retenez votre respiration...';
+                }, 4000);
+                
+                // Phase d'expiration (4 secondes)
+                setTimeout(() => {
+                    breathingPhase = 'exhale';
+                    breathingCircle.style.transform = 'scale(1)';
+                    breathingText.textContent = 'Expirez...';
+                    instructionText.textContent = 'Expirez lentement...';
+                }, 5000);
+                
+                // Phase de repos (1 seconde)
+                setTimeout(() => {
+                    breathingPhase = 'rest';
+                    breathingText.textContent = 'Relaxez...';
+                    instructionText.textContent = 'Détendez-vous complètement...';
+                }, 9000);
+                
+                // Vérifier si la séance est terminée
+                if (cycleCount >= totalCycles) {
+                    setTimeout(() => {
+                        stopRelaxation();
+                        instructionText.textContent = 'Séance terminée. Comment vous sentez-vous ?';
+                    }, 10000);
+                }
+            }
+        }
+    </script>
+</div>
+
+    <!-- Tarifs Section -->
+    
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-dark-100 relative">
+        <div class="blob bottom-0 right-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Questions <span class="gradient-text">fréquentes</span></h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Tout ce que vous devez savoir sur I.M.M.O.S</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Comment I.M.M.O.S accède-t-il à mes emails ?</h3>
+                    <p class="text-gray-400">I.M.M.O.S se connecte à votre boîte email via une API sécurisée. Toutes les données sont chiffrées et nous respectons strictement le RGPD. Vous gardez le contrôle total sur les accès accordés.</p>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Combien de temps faut-il pour maîtriser l'outil ?</h3>
+                    <p class="text-gray-400">La prise en main est très rapide, généralement moins d'une journée. I.M.M.O.S est conçu pour être intuitif et s'adapte à votre façon de travailler. De plus, nous proposons des tutoriels et un support réactif.</p>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Est-ce que I.M.M.O.S s'intègre avec d'autres outils ?</h3>
+                    <p class="text-gray-400">Oui, I.M.M.O.S s'intègre avec de nombreux outils comme Google Calendar, Outlook, les principaux CRM immobiliers, et les plateformes d'annonces. Nous ajoutons régulièrement de nouvelles intégrations.</p>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Puis-je personnaliser les objectifs et les statistiques ?</h3>
+                    <p class="text-gray-400">Absolument ! I.M.M.O.S est entièrement personnalisable. Vous pouvez définir vos propres objectifs, ajuster les statistiques en fonction de votre marché local et adapter l'outil à votre méthode de travail.</p>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Comment fonctionne la détection de propriétaires ?</h3>
+                    <p class="text-gray-400">Notre IA analyse les conversations pour identifier les signaux indiquant qu'une personne est propriétaire et pourrait vouloir vendre. Elle reconnaît des patterns spécifiques dans le langage et le contexte des échanges.</p>
+                </div>
+                <div class="bg-dark-200 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-3">Que se passe-t-il après la période d'essai ?</h3>
+                    <p class="text-gray-400">À la fin de votre période d'essai de 14 jours, vous pouvez choisir l'abonnement qui vous convient. Si vous ne souhaitez pas continuer, aucun frais ne sera prélevé et vous pouvez exporter vos données.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Essai Gratuit Section -->
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-100 relative">
+        <div class="blob top-1/2 left-0"></div>
+        <div class="container mx-auto px-4 z-10 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Besoin de plus <span class="gradient-text">d'informations</span> ?</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Notre équipe est à votre disposition pour répondre à toutes vos questions</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+                <div>
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4">Contactez-nous</h3>
+                        <p class="text-gray-400 mb-6">Nous sommes là pour vous aider à transformer votre activité immobilière grâce à l'intelligence artificielle.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center mr-4 shrink-0">
+                                    <i class="fas fa-envelope text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-400">contact@immos-assistant.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center mr-4 shrink-0">
+                                    <i class="fas fa-phone-alt text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Téléphone</h4>
+                                    <p class="text-gray-400">+33 6 72 16 30 10</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                
+                                <div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Suivez-nous</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center hover:bg-primary-500 transition-colors">
+                                <i class="fab fa-facebook-f text-primary-400 hover:text-white transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center hover:bg-primary-500 transition-colors">
+                                <i class="fab fa-twitter text-primary-400 hover:text-white transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center hover:bg-primary-500 transition-colors">
+                                <i class="fab fa-linkedin-in text-primary-400 hover:text-white transition-colors"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center hover:bg-primary-500 transition-colors">
+                                <i class="fab fa-instagram text-primary-400 hover:text-white transition-colors"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="gradient-border h-full">
+                    <div class="p-8 h-full">
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-300 mb-2">Nom complet</label>
+                                <input type="text" id="name" class="w-full bg-dark-300 border border-dark-100 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-300 mb-2">Adresse email</label>
+                                <input type="email" id="email" class="w-full bg-dark-300 border border-dark-100 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-300 mb-2">Sujet</label>
+                                <input type="text" id="subject" class="w-full bg-dark-300 border border-dark-100 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full bg-dark-300 border border-dark-100 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500"></textarea>
+                            </div>
+                            <button type="submit" class="cta-button w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all">
+                                Envoyer le message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="text-2xl font-bold gradient-text font-montserrat mb-4">I.M.M.O.S</div>
+                    <p class="text-gray-400 mb-4">L'assistant IA qui révolutionne le quotidien des professionnels de l'immobilier.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-primary-400 transition-colors">Accueil</a></li>
+                        <li><a href="#fonctionnalites" class="text-gray-400 hover:text-primary-400 transition-colors">Fonctionnalités</a></li>
+                        <li><a href="#statistiques" class="text-gray-400 hover:text-primary-400 transition-colors">Statistiques</a></li>
+                        <li><a href="#temoignages" class="text-gray-400 hover:text-primary-400 transition-colors">Témoignages</a></li>
+                        <li><a href="#tarifs" class="text-gray-400 hover:text-primary-400 transition-colors">Tarifs</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Légal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">Conditions d'utilisation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">Politique de confidentialité</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">Mentions légales</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-400 transition-colors">CGV</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Recevez nos actualités et conseils pour booster votre activité immobilière.</p>
+                    <form>
+                        <div class="flex">
+                            <input type="email" placeholder="Votre email" class="bg-dark-200 border border-dark-100 rounded-l-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 w-full">
+                            <button type="submit" class="bg-primary-500 text-white px-4 py-2 rounded-r-lg hover:bg-primary-600 transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-dark-100 pt-8 text-center">
+                <p class="text-gray-400">© 2025 I.M.M.O.S - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Typing effect for hero subtitle
+        const subtitleElement = document.getElementById('hero-subtitle');
+        const subtitleText = "Un assistant IA qui travaille pour vous 24/7";
+        let i = 0;
+
+        function typeWriter() {
+            if (i < subtitleText.length) {
+                subtitleElement.textContent = subtitleText.substring(0, i + 1);
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                subtitleElement.classList.remove('typing-effect');
+                setTimeout(() => {
+                    i = 0;
+                    subtitleElement.textContent = '';
+                    subtitleElement.classList.add('typing-effect');
+                    typeWriter();
+                }, 3000);
+            }
+        }
+
+        // Start typing effect when page loads
+        window.addEventListener('load', typeWriter);
+
+        // Intersection Observer for animations
+        const animatedElements = document.querySelectorAll('.feature-card, .stat-card, .testimonial-card, .dashboard-animation');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(element);
+        });
+
+        // Highlight active navigation link based on scroll position
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary-300');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('text-primary-300');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
