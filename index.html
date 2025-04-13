@@ -1781,7 +1781,7 @@
 <!--...--><div class="bg-gray-900 p-6 font-sans max-w-5xl mx-auto rounded-xl shadow-2xl text-white transition-all duration-500 ease-in-out transform hover:scale-102">
     <div class="text-center mb-8 animate-fade-in">
         <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-2">Quelle est la valeur cachée de chaque action dans une vente immobilière ?</h1>
-        <p class="text-xl text-gray-300 mt-2">Objectif: <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">10 000 €</span></p>
+        <p class="text-xl text-gray-300 mt-2">Objectif: <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">10 000 € = 1 vente</span></p>
     </div>
     
     <div class="funnel-container relative mb-10">
@@ -1907,7 +1907,7 @@
                     </div>
                     <div class="p-4 md:p-6 flex-grow">
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                            <h3 class="text-lg font-bold text-gray-200">Contacts initiaux</h3>
+                            <h3 class="text-lg font-bold text-gray-200">Contacts initiaux - Rendez-vous mandat</h3>
                             <div>
                                 <span class="counter text-xl font-bold text-green-400" data-target="700">0</span>
                                 <span class="text-gray-400">€ / 1 000 €</span>
@@ -2477,7 +2477,348 @@
             <!-- Colonne de gauche -->
             <div class="lg:col-span-2 space-y-6">
     <!-- Résumé de la journée -->
-    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
+    <div class="bg-gradient-to-r from-indigo-900 via-blue-800 to-indigo-900 p-6 rounded-xl shadow-2xl max-w-6xl mx-auto my-8 transform transition-all duration-500 hover:scale-[1.01]">
+    <h2 class="text-3xl font-bold text-white text-center mb-8">Scan du point de blocage</h2>
+    
+    <!-- Barre de progression interactive -->
+    <div class="relative mb-16">
+        <!-- Ligne de base -->
+        <div class="h-2 bg-gray-300 bg-opacity-30 rounded-full w-full">
+            <div id="progressBar" class="h-2 bg-gradient-to-r from-green-400 to-blue-500 rounded-full transition-all duration-1000" style="width: 42%;"></div>
+        </div>
+        
+        <!-- Points d'étape -->
+        <div class="flex justify-between mt-2">
+            <div id="stage1" class="flex flex-col items-center relative cursor-pointer group" onclick="setProgress(1)">
+                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-search"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Prospection</span>
+                <div class="w-4 h-4 bg-green-500 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage2" class="flex flex-col items-center relative cursor-pointer group" onclick="setProgress(2)">
+                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Rendez-vous mandat</span>
+                <div class="w-4 h-4 bg-green-500 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage3" class="flex flex-col items-center relative cursor-pointer group" onclick="setProgress(3)">
+                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-calculator"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Estimation</span>
+                <div class="w-4 h-4 bg-green-500 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage4" class="flex flex-col items-center relative cursor-pointer group" onclick="setProgress(4)">
+                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center shadow-lg text-white animate-pulse">
+                    <i class="fa fa-file-signature"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Signature mandat</span>
+                <div class="w-4 h-4 bg-red-500 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage5" class="flex flex-col items-center relative cursor-pointer group opacity-60" onclick="setProgress(5)">
+                <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-home"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Visite</span>
+                <div class="w-4 h-4 bg-gray-400 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage6" class="flex flex-col items-center relative cursor-pointer group opacity-60" onclick="setProgress(6)">
+                <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-handshake"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Offre</span>
+                <div class="w-4 h-4 bg-gray-400 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div id="stage7" class="flex flex-col items-center relative cursor-pointer group opacity-60" onclick="setProgress(7)">
+                <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center shadow-lg text-white">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <span class="text-xs font-medium text-white mt-2">Vente</span>
+                <div class="w-4 h-4 bg-gray-400 rotate-45 absolute -top-6 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+        </div>
+        
+        <!-- Curseur animé avec radar -->
+        <div id="cursor" class="absolute w-12 h-12 bg-white rounded-full flex items-center justify-center -top-5 shadow-lg border-4 border-red-500 transition-all duration-1000" style="left: calc(42% - 24px);">
+            <i class="fa fa-exclamation-triangle text-red-500 text-xl animate-bounce"></i>
+            
+            <!-- Radar animation -->
+            <div class="radar-container absolute top-0 left-0 w-full h-full">
+                <div class="radar-ring absolute w-full h-full rounded-full border-2 border-cyan-400 opacity-50"></div>
+                <div class="radar-ring absolute w-[140%] h-[140%] top-[-20%] left-[-20%] rounded-full border-2 border-cyan-300 opacity-30"></div>
+                <div class="radar-ring absolute w-[180%] h-[180%] top-[-40%] left-[-40%] rounded-full border-2 border-cyan-200 opacity-20"></div>
+                <div class="radar-sweep absolute top-0 left-0 w-full h-full"></div>
+            </div>
+        </div>
+        
+        <!-- Trace du parcours -->
+        <div id="scanPath" class="absolute h-1 top-0 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-40 transition-all duration-1000" style="width: 42%; left: 0;"></div>
+    </div>
+    
+    <!-- Section de blocage et formation -->
+    <div id="trainingSection" class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm transition-all duration-500">
+        <div class="flex items-start">
+            <div class="w-1/2 pr-8">
+                <h3 class="text-xl font-bold text-white mb-3">Point de blocage identifié</h3>
+                <div class="bg-red-500 bg-opacity-20 p-4 rounded-lg border border-red-500 mb-4">
+                    <p class="text-white"><i class="fa fa-info-circle mr-2"></i> Vous rencontrez des difficultés à <span class="font-bold">convertir l'estimation en signature de mandat</span></p>
+                </div>
+                <div class="space-y-2 text-white">
+                    <p class="flex items-center"><i class="fa fa-times-circle text-red-400 mr-2"></i> Taux de conversion actuel: <span class="font-bold">23%</span></p>
+                    <p class="flex items-center"><i class="fa fa-chart-line text-green-400 mr-2"></i> Moyenne du secteur: <span class="font-bold">45%</span></p>
+                    <p class="flex items-center"><i class="fa fa-arrow-up text-yellow-400 mr-2"></i> Potentiel d'amélioration: <span class="font-bold">+22%</span></p>
+                </div>
+            </div>
+            <div class="w-1/2 bg-blue-900 bg-opacity-50 p-6 rounded-xl border border-blue-400 transform transition-all hover:scale-105 duration-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-bold text-white">Formation recommandée</h3>
+                    <span id="trainingSuccessRate" class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">94% de réussite</span>
+                </div>
+                <h4 id="trainingTitle" class="text-lg font-semibold text-blue-300 mb-2">Maîtriser la conversion d'estimation en signature</h4>
+                <p id="trainingDescription" class="text-white text-sm mb-4">Cette formation vous permettra d'acquérir les techniques avancées pour convaincre vos clients de signer le mandat après l'estimation.</p>
+                <div class="flex space-x-3 mb-4">
+                    <span id="trainingDuration" class="bg-blue-800 text-xs text-white px-2 py-1 rounded-full">4 heures</span>
+                    <span class="bg-blue-800 text-xs text-white px-2 py-1 rounded-full">En ligne</span>
+                    <span class="bg-blue-800 text-xs text-white px-2 py-1 rounded-full">Certifiante</span>
+                </div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="flex">
+                        
+                        
+                    </div>
+                    <span id="trainingProfessionals" class="text-white text-xs">+240 professionnels formés</span>
+                </div>
+                <button class="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 rounded-lg font-bold transition-all hover:from-green-600 hover:to-blue-600 transform hover:-translate-y-1 shadow-lg">
+                    <i class="fa fa-play-circle mr-2"></i> Commencer la formation
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Indicateur de performance -->
+    <div class="flex justify-between items-center mt-8 bg-white bg-opacity-5 rounded-lg p-4">
+        <div class="text-white">
+            <span class="text-xs uppercase font-semibold opacity-70">Performance globale</span>
+            <div class="flex items-center">
+                <span class="text-2xl font-bold mr-2">62%</span>
+                <span class="text-green-400 text-sm"><i class="fa fa-arrow-up"></i> +5%</span>
+            </div>
+        </div>
+        <div class="flex space-x-2">
+            <button class="bg-white bg-opacity-10 hover:bg-opacity-20 text-white px-4 py-2 rounded-lg transition-all">
+                <i class="fa fa-download mr-2"></i> Rapport complet
+            </button>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all">
+                <i class="fa fa-sync-alt mr-2"></i> Actualiser
+            </button>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { opacity: 0.2; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes radar-sweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .radar-ring {
+            animation: pulse-ring 2s infinite;
+        }
+        
+        .radar-sweep {
+            background: linear-gradient(90deg, rgba(34,211,238,0) 0%, rgba(34,211,238,0.3) 50%, rgba(34,211,238,0) 100%);
+            clip-path: polygon(50% 50%, 100% 0%, 100% 20%, 50% 50%);
+            animation: radar-sweep 3s infinite linear;
+            transform-origin: center;
+        }
+        
+        .radar-container {
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+    
+    <script>
+        // Points de blocage et formations correspondantes
+        const stageData = [
+            { 
+                stage: 1, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>trouver de nouveaux prospects</span>",
+                conversionRate: "18%", 
+                industryAverage: "35%", 
+                training: "Techniques avancées de prospection immobilière",
+                trainingDescription: "Apprenez les méthodes les plus efficaces pour identifier et attirer de nouveaux prospects qualifiés dans votre secteur immobilier.",
+                trainingDuration: "6 heures",
+                trainingSuccessRate: "89%",
+                trainingProfessionals: "+320 professionnels formés"
+            },
+            { 
+                stage: 2, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>convertir vos prospects en rendez-vous</span>",
+                conversionRate: "26%", 
+                industryAverage: "40%", 
+                training: "Communication persuasive pour obtenir des rendez-vous",
+                trainingDescription: "Développez des techniques de communication persuasive par téléphone et email pour augmenter significativement votre taux de prise de rendez-vous.",
+                trainingDuration: "3 heures",
+                trainingSuccessRate: "91%",
+                trainingProfessionals: "+280 professionnels formés"
+            },
+            { 
+                stage: 3, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>réaliser des estimations précises et convaincantes</span>",
+                conversionRate: "31%", 
+                industryAverage: "50%", 
+                training: "L'art de l'estimation immobilière performante",
+                trainingDescription: "Maîtrisez les techniques d'estimation précise et apprenez à présenter vos analyses de manière convaincante pour gagner la confiance des vendeurs.",
+                trainingDuration: "5 heures",
+                trainingSuccessRate: "93%",
+                trainingProfessionals: "+210 professionnels formés"
+            },
+            { 
+                stage: 4, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>convertir l'estimation en signature de mandat</span>",
+                conversionRate: "23%", 
+                industryAverage: "45%", 
+                training: "Maîtriser la conversion d'estimation en signature",
+                trainingDescription: "Cette formation vous permettra d'acquérir les techniques avancées pour convaincre vos clients de signer le mandat après l'estimation.",
+                trainingDuration: "4 heures",
+                trainingSuccessRate: "94%",
+                trainingProfessionals: "+240 professionnels formés"
+            },
+            { 
+                stage: 5, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>organiser des visites qualifiées</span>",
+                conversionRate: "28%", 
+                industryAverage: "55%", 
+                training: "Organisation et conduite de visites efficaces",
+                trainingDescription: "Optimisez la préparation et la conduite de vos visites pour maximiser les chances de coup de cœur et minimiser les objections des acheteurs potentiels.",
+                trainingDuration: "3.5 heures",
+                trainingSuccessRate: "88%",
+                trainingProfessionals: "+195 professionnels formés"
+            },
+            { 
+                stage: 6, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>obtenir des offres d'achat</span>",
+                conversionRate: "19%", 
+                industryAverage: "38%", 
+                training: "Techniques de négociation et d'obtention d'offres",
+                trainingDescription: "Découvrez les techniques psychologiques avancées pour encourager les acheteurs potentiels à passer à l'action et à formuler des offres d'achat.",
+                trainingDuration: "5 heures",
+                trainingSuccessRate: "90%",
+                trainingProfessionals: "+230 professionnels formés"
+            },
+            { 
+                stage: 7, 
+                blockageText: "Vous rencontrez des difficultés à <span class='font-bold'>finaliser les ventes</span>",
+                conversionRate: "35%", 
+                industryAverage: "65%", 
+                training: "L'accompagnement jusqu'à la signature finale",
+                trainingDescription: "Apprenez à sécuriser le parcours client de l'offre acceptée jusqu'à la signature chez le notaire, en évitant les écueils courants.",
+                trainingDuration: "4.5 heures",
+                trainingSuccessRate: "96%",
+                trainingProfessionals: "+270 professionnels formés"
+            }
+        ];
+        
+        // Position du curseur actuel (1-7)
+        let currentStage = 4;
+        
+        // Fonction pour mettre à jour la position du curseur et le contenu
+        function setProgress(stage) {
+            currentStage = stage;
+            const progress = ((stage - 1) / 6) * 100;
+            
+            // Mise à jour de la barre de progression
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Mise à jour de la position du curseur
+            document.getElementById('cursor').style.left = `calc(${progress}% - 24px)`;
+            
+            // Mise à jour du tracé du scan
+            document.getElementById('scanPath').style.width = progress + '%';
+            
+            // Mise à jour du style des étapes
+            for (let i = 1; i <= 7; i++) {
+                const el = document.getElementById('stage' + i);
+                const icon = el.querySelector('div');
+                
+                if (i < stage) {
+                    // Étapes terminées
+                    el.classList.remove('opacity-60');
+                    icon.classList.remove('bg-red-500', 'bg-gray-400', 'animate-pulse');
+                    icon.classList.add('bg-green-500');
+                } else if (i === stage) {
+                    // Étape de blocage actuelle
+                    el.classList.remove('opacity-60');
+                    icon.classList.remove('bg-green-500', 'bg-gray-400');
+                    icon.classList.add('bg-red-500', 'animate-pulse');
+                } else {
+                    // Étapes futures
+                    el.classList.add('opacity-60');
+                    icon.classList.remove('bg-green-500', 'bg-red-500', 'animate-pulse');
+                    icon.classList.add('bg-gray-400');
+                }
+            }
+            
+            // Mise à jour du texte de blocage
+            const data = stageData[stage - 1];
+            document.querySelector('.bg-red-500.bg-opacity-20 p').innerHTML = `<i class="fa fa-info-circle mr-2"></i> ${data.blockageText}`;
+            document.querySelectorAll('.space-y-2 p')[0].innerHTML = `<i class="fa fa-times-circle text-red-400 mr-2"></i> Taux de conversion actuel: <span class="font-bold">${data.conversionRate}</span>`;
+            document.querySelectorAll('.space-y-2 p')[1].innerHTML = `<i class="fa fa-chart-line text-green-400 mr-2"></i> Moyenne du secteur: <span class="font-bold">${data.industryAverage}</span>`;
+            
+            // Calcul de la différence pour le potentiel d'amélioration
+            const current = parseInt(data.conversionRate);
+            const average = parseInt(data.industryAverage);
+            const potential = average - current;
+            document.querySelectorAll('.space-y-2 p')[2].innerHTML = `<i class="fa fa-arrow-up text-yellow-400 mr-2"></i> Potentiel d'amélioration: <span class="font-bold">+${potential}%</span>`;
+            
+            // Mise à jour des informations de formation
+            document.getElementById('trainingTitle').textContent = data.training;
+            document.getElementById('trainingDescription').textContent = data.trainingDescription;
+            document.getElementById('trainingDuration').textContent = data.trainingDuration;
+            document.getElementById('trainingSuccessRate').textContent = data.trainingSuccessRate + " de réussite";
+            document.getElementById('trainingProfessionals').textContent = data.trainingProfessionals;
+            
+            // Animation de la section de formation
+            const trainingSection = document.getElementById('trainingSection');
+            trainingSection.classList.add('scale-105');
+            setTimeout(() => {
+                trainingSection.classList.remove('scale-105');
+            }, 300);
+            
+            // Effet de scan lors du changement
+            const cursor = document.getElementById('cursor');
+            cursor.classList.add('pulse-intense');
+            setTimeout(() => {
+                cursor.classList.remove('pulse-intense');
+            }, 1000);
+        }
+        
+        // Initialiser avec la première étape définie
+        window.onload = function() {
+            setProgress(currentStage);
+            
+            // Animation automatique pour la démo (toutes les 5 secondes)
+            setInterval(() => {
+                currentStage = currentStage === 7 ? 1 : currentStage + 1;
+                setProgress(currentStage);
+            }, 5000);
+        };
+    </script>
+</div><div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
         <div class="flex items-center mb-4">
             <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center mr-3 shadow-lg">
                 <i class="fa fa-calendar-check text-lg"></i>
@@ -2504,60 +2845,7 @@
     </div>
 
     <!-- Analyse psychologique -->
-    <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
-        <div class="flex items-center mb-6">
-            <div class="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center mr-3 shadow-lg">
-                <i class="fa fa-brain text-lg"></i>
-            </div>
-            <h2 class="text-2xl font-bold">Analyse Psychologique</h2>
-        </div>
-        
-        <div class="mb-6">
-            <h3 class="text-lg font-semibold mb-3">État émotionnel</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="satisfied">
-                    <div class="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mb-2">
-                        <i class="fa fa-smile text-2xl text-green-400"></i>
-                    </div>
-                    <p class="text-center">Satisfait</p>
-                </div>
-                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="stressed">
-                    <div class="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center mb-2">
-                        <i class="fa fa-meh text-2xl text-yellow-400"></i>
-                    </div>
-                    <p class="text-center">Stressé</p>
-                </div>
-                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="frustrated">
-                    <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center mb-2">
-                        <i class="fa fa-angry text-2xl text-red-400"></i>
-                    </div>
-                    <p class="text-center">Frustré</p>
-                </div>
-                <div class="emotion-card cursor-pointer bg-white/5 hover:bg-white/15 rounded-lg p-4 flex flex-col items-center justify-center transition-all" data-emotion="motivated">
-                    <div class="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-2">
-                        <i class="fa fa-bolt text-2xl text-blue-400"></i>
-                    </div>
-                    <p class="text-center">Motivé</p>
-                </div>
-            </div>
-        </div>
-        
-        <div>
-            <h3 class="text-lg font-semibold mb-3">Niveau de stress professionnel</h3>
-            <div class="bg-white/5 rounded-xl p-4">
-                <div class="mb-2 flex justify-between">
-                    <span>Faible</span>
-                    <span>Élevé</span>
-                </div>
-                <div class="w-full bg-white/10 rounded-full h-6 mb-3 relative overflow-hidden">
-                    <div id="stress-level" class="absolute h-full left-0 bg-gradient-to-r from-green-500 to-red-500 transition-all duration-1000" style="width: 65%;"></div>
-                </div>
-                <div class="flex justify-between text-sm">
-                    <input type="range" id="stress-slider" min="0" max="100" value="65" class="w-full cursor-pointer appearance-none bg-transparent [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:h-4 [&amp;::-webkit-slider-thumb]:w-4 [&amp;::-webkit-slider-thumb]:rounded-full [&amp;::-webkit-slider-thumb]:bg-white">
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
     <!-- Dialogue avec l'IA -->
     <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
@@ -2974,224 +3262,92 @@
                         <i class="fa fa-save mr-2"></i>
                         Enregistrer le débriefing
                     </button>
-                </div><div class="relative bg-gradient-to-br from-indigo-600 via-purple-500 to-pink-500 p-8 rounded-xl shadow-2xl max-w-4xl mx-auto overflow-hidden">
-  <div class="absolute inset-0 bg-pattern opacity-10"></div>
+                </div><div class="bg-gradient-to-br from-purple-50 to-purple-200 p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+  <!-- En-tête -->
+  <div class="mb-6 flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-purple-800">Bilan Émotionnel</h2>
+    <div class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+      Aujourd'hui
+    </div>
+  </div>
   
-  <h2 class="text-3xl font-bold text-white text-center mb-8 relative z-10">Gestion du Stress</h2>
+  <!-- Indicateur d'état émotionnel -->
+  <div class="mb-8">
+    <div class="flex justify-between mb-2 text-sm text-gray-600">
+      <span>Niveau de stress</span>
+      <span class="font-semibold text-purple-700">78%</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-3">
+      <div class="bg-purple-500 h-3 rounded-full w-[78%]"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+      
+      
+      
+      
+      
+    </div>
+  </div>
   
-  <div class="bg-white/20 backdrop-blur-lg p-8 rounded-lg shadow-lg relative z-10">
-    <div class="mb-8">
-      <label for="stress-level" class="block text-white text-xl mb-4 font-medium">Évaluez votre niveau de stress</label>
-      <div class="flex items-center gap-4">
-        <span class="text-white flex items-center"><i class="fas fa-smile text-green-300 mr-2"></i>1</span>
-        <input type="range" id="stress-level" min="1" max="10" value="5" class="w-full h-3 bg-white/30 rounded-lg appearance-none cursor-pointer">
-        <span class="text-white flex items-center">10<i class="fas fa-dizzy text-red-300 ml-2"></i></span>
-      </div>
-      <div class="text-center mt-6">
-        <span id="stress-value" class="text-white text-3xl font-bold">5</span>
-        <span class="text-white text-xl"> sur 10</span>
+  <!-- Résumé -->
+  <div class="bg-white p-5 rounded-xl shadow-md mb-8 overflow-hidden">
+    <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+      <i class="fa fa-chart-line text-purple-600 mr-2"></i>
+      Analyse de votre état
+    </h3>
+    <p class="text-gray-700 leading-relaxed">
+      Votre niveau de stress est actuellement <span class="font-semibold text-purple-600">élevé</span>. Les indicateurs montrent une accumulation de fatigue et une baisse d'énergie significative. Ces signes indiquent un besoin urgent de récupération pour éviter l'épuisement professionnel.
+    </p>
+  </div>
+  
+  <!-- Recommandations -->
+  <h3 class="text-xl font-bold text-purple-800 mb-4">Nos recommandations</h3>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Option 1: Relaxation -->
+    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl shadow-md overflow-hidden transition-transform hover:scale-[1.02] cursor-pointer">
+      <img src="https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/529a36106819d714.jpeg" data-initial="true">
+      <div class="p-5">
+        <div class="flex items-center mb-3">
+          <i class="fa fa-spa text-purple-600 mr-2"></i>
+          <span class="text-purple-800 font-medium">60 minutes</span>
+        </div>
+        <p class="text-gray-700 mb-4 line-clamp-3">
+          Une séance guidée pour réduire votre niveau de stress et retrouver votre sérénité. Techniques de respiration et méditation adaptées à votre état actuel.
+        </p>
+        <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center">
+          <i class="fa fa-calendar-check mr-2"></i>
+          Planifier une séance
+        </button>
       </div>
     </div>
     
-    <div id="animation-container" class="flex justify-center mb-10 h-72 relative">
-      <!-- Animation content will be dynamically inserted -->
-    </div>
-    
-    <div id="recommendation" class="bg-white/30 backdrop-blur-md p-6 rounded-lg text-center transition-all duration-500 transform hover:scale-105">
-      <h3 id="recommendation-title" class="text-2xl font-bold text-white mb-3">Recommandation personnalisée</h3>
-      <p id="recommendation-text" class="text-white text-lg mb-6">En fonction de votre niveau de stress actuel...</p>
-      <div class="mt-6 flex justify-center">
-        <button id="start-button" class="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 flex items-center">
-          <span>Commencer</span>
-          <i class="fas fa-play-circle ml-2"></i>
+    <!-- Option 2: Jour off -->
+    <div class="bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl shadow-md overflow-hidden transition-transform hover:scale-[1.02] cursor-pointer">
+      <img src="https://d1olmvoet3matb.cloudfront.net/lKK90NkWZ4/images/a2bc615c347bb447.jpeg" data-initial="true">
+      <div class="p-5">
+        <div class="flex items-center mb-3">
+          <i class="fa fa-umbrella-beach text-purple-500 mr-2"></i>
+          <span class="text-purple-800 font-medium">Journée complète</span>
+        </div>
+        <p class="text-gray-700 mb-4 line-clamp-3">
+          Un jour complet pour vous détendre et recharger vos batteries. Déconnectez-vous et prenez le temps de vous ressourcer pleinement.
+        </p>
+        <button class="w-full bg-purple-500 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center">
+          <i class="fa fa-calendar-plus mr-2"></i>
+          Programmer un jour off
         </button>
       </div>
     </div>
   </div>
   
-  <style>
-    @keyframes breathing {
-      0%, 100% { transform: scale(0.8); background-color: rgba(6, 182, 212, 0.7); }
-      50% { transform: scale(1.1); background-color: rgba(20, 184, 166, 0.7); }
-    }
-    
-    @keyframes floatCloud {
-      0% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      100% { transform: translateX(-5px); }
-    }
-    
-    @keyframes rise {
-      0% { transform: translateY(10px); opacity: 0; }
-      50% { transform: translateY(-15px); opacity: 1; }
-      100% { transform: translateY(-30px); opacity: 0; }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    @keyframes sunRay {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    .bg-pattern {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-    
-    .breathing-circle {
-      animation: breathing 5s ease-in-out infinite;
-    }
-    
-    .floating-cloud {
-      animation: floatCloud 3s ease-in-out infinite;
-    }
-    
-    .rising-zzz {
-      animation: rise 3s ease-in-out infinite;
-    }
-    
-    .sun-rays {
-      animation: sunRay 20s linear infinite;
-    }
-  </style>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const stressLevel = document.getElementById('stress-level');
-      const stressValue = document.getElementById('stress-value');
-      const recommendationTitle = document.getElementById('recommendation-title');
-      const recommendationText = document.getElementById('recommendation-text');
-      const animationContainer = document.getElementById('animation-container');
-      const startButton = document.getElementById('start-button');
-      
-      function updateStressUI() {
-        const value = parseInt(stressLevel.value);
-        stressValue.textContent = value;
-        
-        // Clear animation container
-        animationContainer.innerHTML = '';
-        
-        // Update colors based on stress level
-        const parent = document.querySelector('.from-indigo-600');
-        if (value <= 4) {
-          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-blue-500');
-          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-teal-400');
-          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-green-400');
-        } else if (value <= 7) {
-          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-indigo-600');
-          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-purple-500');
-          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-pink-500');
-        } else {
-          parent.className = parent.className.replace(/from-\w+-\d+/g, 'from-red-600');
-          parent.className = parent.className.replace(/via-\w+-\d+/g, 'via-orange-500');
-          parent.className = parent.className.replace(/to-\w+-\d+/g, 'to-yellow-500');
-        }
-        
-        // Add the appropriate animation based on stress level
-        if (value <= 5) {
-          // Relaxation animation
-          animationContainer.innerHTML = `
-            <div class="relative w-full h-full flex items-center justify-center">
-              <div class="breathing-circle w-56 h-56 bg-cyan-500 bg-opacity-70 rounded-full flex items-center justify-center shadow-xl">
-                <div class="text-center text-white">
-                  <i class="fas fa-wind text-4xl mb-3"></i>
-                  <p class="text-2xl font-medium">Respirez</p>
-                  <p class="text-sm mt-2 opacity-80">Inspirez... Expirez...</p>
-                </div>
-              </div>
-              <div class="absolute top-5 right-20 floating-cloud">
-                <i class="fas fa-cloud text-white text-4xl opacity-70"></i>
-              </div>
-              <div class="absolute bottom-10 left-24 floating-cloud" style="animation-delay: 1.5s">
-                <i class="fas fa-cloud text-white text-3xl opacity-60"></i>
-              </div>
-            </div>
-          `;
-          
-          recommendationTitle.innerHTML = '<i class="fas fa-heart-pulse mr-2"></i> Séance de relaxation';
-          recommendationText.innerHTML = "Votre niveau de stress est modéré. Une séance de relaxation guidée vous permettra de retrouver calme et sérénité.";
-          startButton.innerHTML = '<span>Démarrer la relaxation</span><i class="fas fa-spa ml-2"></i>';
-          
-        } else {
-          // Rest day animation
-          animationContainer.innerHTML = `
-            <div class="relative w-full h-full flex flex-col items-center justify-center">
-              <div class="sun-rays absolute w-64 h-64 rounded-full border-4 border-dashed border-yellow-200 opacity-40"></div>
-              <div class="relative">
-                <i class="fas fa-bed text-white text-7xl mb-2"></i>
-                <div class="absolute -top-6 -right-2 rising-zzz">
-                  <i class="fas fa-z text-white text-xl"></i>
-                </div>
-                <div class="absolute -top-10 right-2 rising-zzz" style="animation-delay: 1s">
-                  <i class="fas fa-z text-white text-2xl"></i>
-                </div>
-                <div class="absolute -top-14 right-6 rising-zzz" style="animation-delay: 2s">
-                  <i class="fas fa-z text-white text-3xl"></i>
-                </div>
-              </div>
-              <p class="text-white text-2xl mt-6 font-medium">Temps de repos</p>
-              <div class="mt-2 flex">
-                <div class="px-3 py-1 bg-white/30 rounded-full text-white text-sm mr-2">
-                  <i class="fas fa-clock mr-1"></i> 24h
-                </div>
-                <div class="px-3 py-1 bg-white/30 rounded-full text-white text-sm">
-                  <i class="fas fa-battery-full mr-1"></i> Récupération
-                </div>
-              </div>
-            </div>
-          `;
-          
-          recommendationTitle.innerHTML = '<i class="fas fa-moon mr-2"></i> Jour de repos nécessaire';
-          recommendationText.innerHTML = "Votre niveau de stress est élevé. Il est important de prendre une journée complète pour vous déconnecter et récupérer.";
-          startButton.innerHTML = '<span>Planifier mon repos</span><i class="fas fa-calendar-check ml-2"></i>';
-        }
-      }
-      
-      // Initialize UI
-      updateStressUI();
-      
-      // Event listeners
-      stressLevel.addEventListener('input', updateStressUI);
-      
-      startButton.addEventListener('click', function() {
-        const value = parseInt(stressLevel.value);
-        
-        // Button click animation
-        this.classList.add('animate-pulse');
-        setTimeout(() => {
-          this.classList.remove('animate-pulse');
-          
-          // Show program starting
-          this.innerHTML = '<span>En cours...</span><i class="fas fa-spinner fa-spin ml-2"></i>';
-          this.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-500');
-          this.classList.remove('from-emerald-500', 'to-teal-500', 'hover:from-emerald-600', 'hover:to-teal-600');
-          
-          // Simulate program completion
-          setTimeout(() => {
-            this.innerHTML = '<span>Terminé !</span><i class="fas fa-check-circle ml-2"></i>';
-            this.classList.add('bg-gradient-to-r', 'from-green-500', 'to-emerald-500');
-            this.classList.remove('from-blue-500', 'to-purple-500');
-            
-            // Reset button after completion
-            setTimeout(() => {
-              this.classList.remove('from-green-500', 'to-emerald-500');
-              this.classList.add('from-emerald-500', 'to-teal-500', 'hover:from-emerald-600', 'hover:to-teal-600');
-              
-              if (value <= 5) {
-                this.innerHTML = '<span>Nouvelle séance</span><i class="fas fa-redo ml-2"></i>';
-              } else {
-                this.innerHTML = '<span>Je me sens mieux</span><i class="fas fa-smile ml-2"></i>';
-              }
-            }, 2000);
-          }, 3000);
-        }, 300);
-      });
-    });
-  </script>
+  <div class="mt-8 text-center">
+    <a href="#" class="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium">
+      <i class="fa fa-history mr-2"></i>
+      Voir l'historique de vos bilans
+    </a>
+  </div>
 </div>
             </div>
         </div>
