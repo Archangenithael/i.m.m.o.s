@@ -1280,9 +1280,39 @@
         <div class="blob bottom-0 left-1/4"></div>
         <div class="container mx-auto px-4 z-10 relative">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Les <span class="gradient-text">statistiques</span> qui font la différence</h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">I.M.M.O.S s'appuie sur des données concrètes pour vous guider vers la réussite</p>
-            </div>
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">Le <span id="dynamic-feature" class="gradient-text">CRM automatisé</span> qui travaille pour vous</h2>
+    <p class="text-xl text-gray-400 max-w-3xl mx-auto">I.M.M.O.S s'appuie sur un système intelligent qui fonctionne sans aucune action de l'utilisateur</p>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = [
+                "CRM automatisé",
+                "suivi client autonome",
+                "système intelligent",
+                "assistant virtuel",
+                "gestionnaire silencieux"
+            ];
+            
+            let currentIndex = 0;
+            const dynamicElement = document.getElementById('dynamic-feature');
+            
+            dynamicElement.style.transition = 'opacity 0.5s ease';
+            
+            setInterval(() => {
+                // Fade out
+                dynamicElement.style.opacity = 0;
+                
+                setTimeout(() => {
+                    // Change text and fade in
+                    currentIndex = (currentIndex + 1) % features.length;
+                    dynamicElement.textContent = features[currentIndex];
+                    dynamicElement.style.opacity = 1;
+                }, 500);
+                
+            }, 3000);
+        });
+    </script>
+</div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 
                 
