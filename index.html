@@ -1418,6 +1418,7 @@
         <h4 class="font-semibold text-sm">Vos emails</h4>
       </div>
       <div class="scanner-beam absolute left-0 right-0 h-1 bg-gradient-to-r from-blue-400/0 via-blue-400/80 to-blue-400/0 z-10 animate-scanner"></div>
+      <div class="radar-ping absolute top-0 left-0 w-full h-full rounded-md opacity-0"></div>
       <div class="contact-stream email-stream">
         <i class="fas fa-user-circle text-gray-400 animate-stream"></i>
         <i class="fas fa-user-circle text-gray-400 animate-stream delay-1"></i>
@@ -1431,6 +1432,7 @@
         <h4 class="font-semibold text-sm">Vos réseaux sociaux</h4>
       </div>
       <div class="scanner-beam absolute left-0 right-0 h-1 bg-gradient-to-r from-purple-400/0 via-purple-400/80 to-purple-400/0 z-10 animate-scanner-reversed"></div>
+      <div class="radar-ping absolute top-0 left-0 w-full h-full rounded-md opacity-0"></div>
       <div class="contact-stream social-stream">
         <i class="fab fa-facebook-f text-blue-600 animate-stream"></i>
         <i class="fab fa-twitter text-blue-400 animate-stream delay-1"></i>
@@ -1445,6 +1447,7 @@
         <div class="incoming-contacts absolute top-0 left-0 w-full">
           <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 0s;"></i>
           <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 3s;"></i>
+          <i class="fas fa-home text-gray-400 animate-incoming-contact" style="--delay: 6s;"></i>
         </div>
         
         <div class="outgoing-contacts-a absolute">
@@ -1460,40 +1463,256 @@
         </div>
         
         <div class="outgoing-contacts-prop absolute">
-          <i class="fas fa-user-circle text-blue-400 animate-to-cat-prop" style="--delay: 2.5s;"></i>
+          <i class="fas fa-home text-blue-400 animate-to-cat-prop" style="--delay: 2.5s;"></i>
+          <i class="fas fa-home text-blue-400 animate-to-cat-prop" style="--delay: 7s;"></i>
         </div>
       </div>
     </div>
     <div class="flex-1 md:flex-none md:w-1/4 p-2">
-      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
-        <h4 class="font-semibold text-green-400 flex items-center mb-1">
-          <span class="w-4 h-4 bg-green-500/20 rounded-full flex items-center justify-center mr-1 text-xs">A</span>
-          Catégorie A
-        </h4>
-        <p class="text-gray-400 text-xs">Contacts prioritaires à fort potentiel</p>
-      </div>
-      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
-        <h4 class="font-semibold text-yellow-400 flex items-center mb-1">
-          <span class="w-4 h-4 bg-yellow-500/20 rounded-full flex items-center justify-center mr-1 text-xs">B</span>
-          Catégorie B
-        </h4>
-        <p class="text-gray-400 text-xs">Contacts à potentiel moyen</p>
-      </div>
-      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
-        <h4 class="font-semibold text-red-400 flex items-center mb-1">
-          <span class="w-4 h-4 bg-red-500/20 rounded-full flex items-center justify-center mr-1 text-xs">C</span>
-          Catégorie C
-        </h4>
-        <p class="text-gray-400 text-xs">Contacts à faible potentiel</p>
-      </div>
-      <div class="bg-dark-300 rounded-lg p-2 border border-blue-400 animate-blink-border text-sm">
-        <h4 class="font-semibold text-blue-400 flex items-center mb-1">
-          <span class="w-4 h-4 bg-blue-500/20 rounded-full flex items-center justify-center mr-1 text-xs">P</span>
-          Acquéreurs Propriétaires
-        </h4>
-        <p class="text-gray-400 text-xs">Propriétaires avec intention d'achat</p>
-      </div>
+  <style>
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.5); }
+    }
+    
+    .bubble-animate {
+      animation: pulse 2s infinite ease-in-out;
+    }
+    
+    .bubble-float {
+      animation: float 3s infinite ease-in-out;
+    }
+    
+    .bubble-fade-in {
+      animation: fadeIn 0.5s forwards;
+    }
+    
+    .bubble-fade-out {
+      animation: fadeOut 0.5s forwards;
+    }
+    
+    .animate-delay-1 {
+      animation-delay: 0.2s;
+    }
+    
+    .animate-delay-2 {
+      animation-delay: 0.4s;
+    }
+    
+    .animate-delay-3 {
+      animation-delay: 0.6s;
+    }
+    
+    .animate-delay-4 {
+      animation-delay: 0.8s;
+    }
+    
+    .animate-delay-5 {
+      animation-delay: 1s;
+    }
+  </style>
+
+  <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+    <h4 class="font-semibold text-green-400 flex items-center mb-1">
+      <span class="w-4 h-4 bg-green-500/20 rounded-full flex items-center justify-center mr-1 text-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      Catégorie A
+    </h4>
+    <p class="text-gray-400 text-xs">Contacts prioritaires à fort potentiel</p>
+    <div class="flex mt-2 flex-wrap" id="categoryA">
+      <span class="w-3 h-3 bg-green-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-green-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate animate-delay-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-green-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate animate-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-green-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate animate-delay-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-green-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate animate-delay-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
     </div>
+  </div>
+  <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+    <h4 class="font-semibold text-yellow-400 flex items-center mb-1">
+      <span class="w-4 h-4 bg-yellow-500/20 rounded-full flex items-center justify-center mr-1 text-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      Catégorie B
+    </h4>
+    <p class="text-gray-400 text-xs">Contacts à potentiel moyen</p>
+    <div class="flex mt-2 flex-wrap" id="categoryB">
+      <span class="w-3 h-3 bg-yellow-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-yellow-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float animate-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-yellow-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float animate-delay-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+  <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+    <h4 class="font-semibold text-red-400 flex items-center mb-1">
+      <span class="w-4 h-4 bg-red-500/20 rounded-full flex items-center justify-center mr-1 text-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      Catégorie C
+    </h4>
+    <p class="text-gray-400 text-xs">Contacts à faible potentiel</p>
+    <div class="flex mt-2 flex-wrap" id="categoryC">
+      <span class="w-3 h-3 bg-red-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate bubble-float">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-red-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-animate bubble-float animate-delay-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+  <div class="bg-dark-300 rounded-lg p-2 border border-blue-400 animate-blink-border text-sm relative">
+    <h4 class="font-semibold text-blue-400 flex items-center mb-1">
+      <span class="w-4 h-4 bg-blue-500/20 rounded-full flex items-center justify-center mr-1 text-xs">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+      </span>
+      Acquéreurs Propriétaires
+    </h4>
+    <p class="text-gray-400 text-xs">Propriétaires avec intention d'achat</p>
+    <div class="flex mt-2 flex-wrap" id="categoryProp">
+      <span class="w-3 h-3 bg-blue-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-blue-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float animate-delay-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-blue-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float animate-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+      </span>
+      <span class="w-3 h-3 bg-blue-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-float animate-delay-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+      </span>
+    </div>
+    <div class="prop-incoming-marker absolute left-0 bottom-0 w-4 h-4 bg-blue-400/20 rounded-full"></div>
+  </div>
+
+  <script>
+    // Script pour rendre les bulles dynamiques
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fonction pour créer une nouvelle bulle
+      function createBubble(category, color, iconPath, delay) {
+        const bubble = document.createElement('span');
+        bubble.className = `w-3 h-3 bg-${color}-500/80 rounded-full mr-1 mb-1 flex items-center justify-center text-[8px] text-white bubble-fade-in`;
+        if (delay) {
+          bubble.style.animationDelay = `${delay}s`;
+        }
+        
+        bubble.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 20 20" fill="currentColor">
+            <path ${iconPath.includes('M10.707') ? 'd="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"' : 'fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"'}>
+            </path>
+          </svg>
+        `;
+        
+        // Ajoute et retire la bulle après un délai pour simuler une activité dynamique
+        document.getElementById(category).appendChild(bubble);
+        
+        // Simuler la suppression de certaines bulles
+        if (Math.random() > 0.7) {
+          setTimeout(() => {
+            bubble.classList.remove('bubble-fade-in');
+            bubble.classList.add('bubble-fade-out');
+            setTimeout(() => {
+              if (bubble.parentNode) {
+                bubble.parentNode.removeChild(bubble);
+              }
+            }, 500);
+          }, 5000 + Math.random() * 10000);
+        } else {
+          // Pour les bulles qui ne sont pas supprimées, ajouter une animation permanente
+          setTimeout(() => {
+            bubble.classList.remove('bubble-fade-in');
+            bubble.classList.add(Math.random() > 0.5 ? 'bubble-animate' : 'bubble-float');
+          }, 500);
+        }
+      }
+      
+      // Simuler l'ajout dynamique de bulles
+      setInterval(() => {
+        const categories = [{id: 'categoryA', color: 'green', icon: ''}, 
+                           {id: 'categoryB', color: 'yellow', icon: ''}, 
+                           {id: 'categoryC', color: 'red', icon: ''}, 
+                           {id: 'categoryProp', color: 'blue', icon: 'M10.707'}];
+        
+        // Sélectionner une catégorie aléatoire
+        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+        
+        // Créer une nouvelle bulle si la catégorie n'a pas trop de bulles
+        const bubbleContainer = document.getElementById(randomCategory.id);
+        if (bubbleContainer && bubbleContainer.children.length < 8) {
+          createBubble(randomCategory.id, randomCategory.color, randomCategory.icon, Math.random() * 0.5);
+        }
+      }, 3000);
+    });
+  </script>
+</div>
     
     <style>
       @keyframes incoming-contact {
@@ -1526,9 +1745,9 @@
       
       @keyframes to-cat-prop {
         0% { transform: translate(40px, 40px); opacity: 0; }
-        25% { transform: translate(15px, 50px); opacity: 1; }
-        75% { transform: translate(-10px, 80px); opacity: 1; }
-        100% { transform: translate(-40px, 90px); opacity: 0; }
+        25% { transform: translate(30px, 60px); opacity: 1; }
+        75% { transform: translate(20px, 100px); opacity: 1; }
+        100% { transform: translate(10px, 140px); opacity: 0; }
       }
       
       @keyframes blink {
@@ -1544,23 +1763,46 @@
       }
       
       @keyframes scanner {
-        0% { top: 0; opacity: 0.7; box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.7); }
-        50% { opacity: 1; box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.8); }
-        100% { top: 100%; opacity: 0.7; box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.7); }
+        0% { top: 0; opacity: 0.7; transform: perspective(500px) rotateX(45deg) scale(0.9); box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.7); }
+        20% { opacity: 0.9; transform: perspective(500px) rotateX(45deg) scale(0.95); box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.8); }
+        50% { opacity: 1; transform: perspective(500px) rotateX(45deg) scale(1); box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.9); }
+        80% { opacity: 0.9; transform: perspective(500px) rotateX(45deg) scale(0.95); box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.8); }
+        100% { top: 100%; opacity: 0.7; transform: perspective(500px) rotateX(45deg) scale(0.9); box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.7); }
       }
       
       @keyframes scanner-reversed {
-        0% { top: 100%; opacity: 0.7; box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.7); }
-        50% { opacity: 1; box-shadow: 0 0 12px 3px rgba(168, 85, 247, 0.8); }
-        100% { top: 0; opacity: 0.7; box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.7); }
+        0% { top: 100%; opacity: 0.7; transform: perspective(500px) rotateX(-45deg) scale(0.9); box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.7); }
+        20% { opacity: 0.9; transform: perspective(500px) rotateX(-45deg) scale(0.95); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.8); }
+        50% { opacity: 1; transform: perspective(500px) rotateX(-45deg) scale(1); box-shadow: 0 0 12px 3px rgba(168, 85, 247, 0.9); }
+        80% { opacity: 0.9; transform: perspective(500px) rotateX(-45deg) scale(0.95); box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.8); }
+        100% { top: 0; opacity: 0.7; transform: perspective(500px) rotateX(-45deg) scale(0.9); box-shadow: 0 0 8px 1px rgba(168, 85, 247, 0.7); }
+      }
+      
+      @keyframes radar-ping {
+        0% { transform: scale(0.2); opacity: 0.1; border: 1px solid rgba(59, 130, 246, 0.3); }
+        50% { opacity: 0.3; border: 1px solid rgba(59, 130, 246, 0.5); }
+        100% { transform: scale(1.2); opacity: 0; border: 1px solid rgba(59, 130, 246, 0); }
+      }
+      
+      @keyframes prop-bubble-indicator {
+        0% { opacity: 0.3; transform: scale(0.8); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0.3; transform: scale(0.8); }
       }
       
       .animate-scanner {
-        animation: scanner 3s ease-in-out infinite;
+        animation: scanner 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        transform-origin: center;
       }
       
       .animate-scanner-reversed {
-        animation: scanner-reversed 3s ease-in-out infinite;
+        animation: scanner-reversed 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        transform-origin: center;
+      }
+      
+      .radar-ping {
+        animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        border-radius: 50%;
       }
       
       .animate-incoming-contact {
@@ -1601,6 +1843,10 @@
         animation: blink-border 1.5s ease-in-out infinite;
       }
       
+      .prop-incoming-marker {
+        animation: prop-bubble-indicator 2s ease-in-out infinite;
+      }
+      
       .ai-circle {
         transition: all 0.5s ease;
       }
@@ -1625,6 +1871,8 @@
         position: absolute;
         width: 100%;
         pointer-events: none;
+        transform-style: preserve-3d;
+        box-shadow: 0 0 10px 2px rgba(59, 130, 246, 0.5);
       }
       
       .category-icon-overlay {
@@ -1642,7 +1890,7 @@
   </div>
 </div>
     <!-- Animation de matching mandat -->
-    <div class="mt-10 bg-dark-200 p-6 rounded-xl relative z-10">
+    <div class="mt-8 bg-dark-200 p-5 rounded-xl relative z-10">
   <div class="relative">
     <style>
       .flux-line {
@@ -1728,7 +1976,7 @@
       
       .matching-bubble {
         position: absolute;
-        top: -70px;
+        top: -65px;
         left: 50%;
         transform: translateX(-50%);
         background: #fff;
@@ -1736,11 +1984,11 @@
         padding: 5px 10px;
         border-radius: 10px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        font-size: 12px;
+        font-size: 11px;
         opacity: 0;
         pointer-events: none;
         animation: bubblePop 6s linear infinite;
-        width: 150px;
+        width: 140px;
         text-align: center;
         z-index: 20;
       }
@@ -1771,8 +2019,8 @@
       /* Ajout des styles pour l'animation d'email de proposition de RDV */
       .email {
         position: absolute;
-        width: 24px;
-        height: 16px;
+        width: 22px;
+        height: 15px;
         background: #ffffff;
         border-radius: 3px;
         z-index: 10;
@@ -1883,8 +2131,8 @@
         position: absolute;
         background: #4f8dff;
         color: white;
-        font-size: 10px;
-        padding: 4px 6px;
+        font-size: 9px;
+        padding: 3px 5px;
         border-radius: 8px;
         opacity: 0;
         z-index: 5;
@@ -1927,8 +2175,8 @@
       
       .notification-badge {
         position: absolute;
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         background-color: #ff6b6b;
         border-radius: 50%;
         transform: scale(0);
@@ -1970,7 +2218,7 @@
     </style>
     <div class="flex items-center justify-around relative">
       <div class="flex flex-col items-center stock-animation">
-        <div class="rounded-full mb-2 overflow-hidden" style="width: 100px; height: 100px;" role="img" aria-label="Mandat de Vente">
+        <div class="rounded-full mb-2 overflow-hidden" style="width: 85px; height: 85px;" role="img" aria-label="Mandat de Vente">
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
             <polygon points="10,50 50,20 90,50" fill="#ff6b6b" class="roof">
               <animate attributeName="fill" values="#ff6b6b;#e95858;#ff6b6b" dur="2s" repeatCount="indefinite"></animate>
@@ -2001,22 +2249,22 @@
             </circle>
           </svg>
         </div>
-        <span class="text-gray-300">Stock Mandat</span>
+        <span class="text-gray-300 text-sm">Stock Mandat</span>
       </div>
       <div class="flex flex-col items-center relative">
-        <div class="w-16 h-16 bg-dark-300 rounded-full flex items-center justify-center mb-2 animated-ai">
-          <i class="fas fa-robot text-white text-2xl"></i>
+        <div class="w-14 h-14 bg-dark-300 rounded-full flex items-center justify-center mb-2 animated-ai">
+          <i class="fas fa-robot text-white text-xl"></i>
         </div>
         <div class="matching-bubble">Je gère automatiquement le rapprochement entre vos mandats et les acquéreurs qualifiés</div>
-        <span class="text-gray-300">IA Matching</span>
+        <span class="text-gray-300 text-sm">IA Matching</span>
       </div>
       <div class="flex flex-col items-center clients-animation">
-        <div class="flex space-x-2">
-          <i class="fas fa-user-circle text-green-400 text-2xl matching-icon"></i>
-          <i class="fas fa-user-circle text-yellow-400 text-2xl matching-icon"></i>
-          <i class="fas fa-user-circle text-red-400 text-2xl matching-icon"></i>
+        <div class="flex space-x-1.5">
+          <i class="fas fa-user-circle text-green-400 text-xl matching-icon"></i>
+          <i class="fas fa-user-circle text-yellow-400 text-xl matching-icon"></i>
+          <i class="fas fa-user-circle text-red-400 text-xl matching-icon"></i>
         </div>
-        <span class="text-gray-300">Clients A, B, C</span>
+        <span class="text-gray-300 text-sm">Clients A, B, C</span>
       </div>
       <svg class="absolute top-0 left-0 w-full h-full pointer-events-none flux-line-glow">
         <line x1="25%" y1="50%" x2="50%" y2="50%" class="flux-line"></line>
