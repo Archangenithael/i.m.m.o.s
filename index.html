@@ -2818,31 +2818,7 @@
             }, 5000);
         };
     </script>
-</div><div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
-        <div class="flex items-center mb-4">
-            <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center mr-3 shadow-lg">
-                <i class="fa fa-calendar-check text-lg"></i>
-            </div>
-            <h2 class="text-2xl font-bold">Résumé de votre journée</h2>
-        </div>
-        
-        <textarea class="w-full h-40 bg-white/5 backdrop-blur-lg rounded-lg p-4 text-white placeholder-indigo-300 border border-white/10 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400 focus:outline-none transition-all" placeholder="Décrivez les événements importants de votre journée professionnelle..."></textarea>
-        
-        <div class="flex flex-wrap gap-3 mt-4">
-            <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
-                <i class="fa fa-home mr-2"></i> Visites (3)
-            </button>
-            <button class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
-                <i class="fa fa-handshake mr-2"></i> Clients (5)
-            </button>
-            <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
-                <i class="fa fa-signature mr-2"></i> Signatures (1)
-            </button>
-            <button class="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-xl flex items-center">
-                <i class="fa fa-phone mr-2"></i> Appels (12)
-            </button>
-        </div>
-    </div>
+</div>
 
     <!-- Analyse psychologique -->
     
@@ -3146,93 +3122,7 @@
                 </div>
 
                 <!-- Graphique de progression -->
-                <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
-    <div class="flex items-center mb-4">
-        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3 shadow-lg">
-            <i class="fa fa-chart-line text-lg"></i>
-        </div>
-        <h2 class="text-2xl font-bold">Votre progression</h2>
-    </div>
-    <div class="h-48 relative" id="chart-container">
-        <canvas id="progressChart" class="w-full h-full"></canvas>
-    </div>
-    <div class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
-        <div class="bg-white/5 p-2 rounded-lg">
-            <p class="text-indigo-200">Stress</p>
-            <p class="font-medium">-15%</p>
-            <div class="w-full bg-gray-700 h-2 rounded-full mt-1">
-                <div id="stressProgress" class="bg-red-500 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease-in-out;"></div>
-            </div>
-        </div>
-        <div class="bg-white/5 p-2 rounded-lg">
-            <p class="text-indigo-200">Motivation</p>
-            <p class="font-medium">+12%</p>
-        </div>
-        <div class="bg-white/5 p-2 rounded-lg">
-            <p class="text-indigo-200">Efficacité</p>
-            <p class="font-medium">+8%</p>
-        </div>
-    </div>
-    <script>
-        (function(){
-            // Animation dynamique du niveau de stress
-            const stressBar = document.getElementById('stressProgress');
-            const maxStress = 60; // Niveau max que le stress atteindra pendant l'animation
-            const finalStress = 15; // Niveau final après la diminution
-            
-            // Fonction pour changer la couleur en fonction du niveau de stress
-            function updateStressColor(percent) {
-                if (percent < 20) {
-                    stressBar.style.backgroundColor = '#ef4444'; // rouge clair
-                } else if (percent < 40) {
-                    stressBar.style.backgroundColor = '#f97316'; // orange
-                } else {
-                    stressBar.style.backgroundColor = '#dc2626'; // rouge foncé
-                }
-            }
-            
-            // Simulation d'un stress élevé qui diminue progressivement
-            let currentStep = 0;
-            const totalSteps = 15;
-            
-            function animateStress() {
-                currentStep++;
                 
-                if (currentStep <= 4) {
-                    // Augmentation rapide du stress
-                    const stressLevel = (currentStep / 4) * maxStress;
-                    stressBar.style.width = stressLevel + '%';
-                    updateStressColor(stressLevel);
-                    setTimeout(animateStress, 300);
-                } 
-                else if (currentStep <= 8) {
-                    // Légère fluctuation du stress
-                    const fluctuation = Math.sin((currentStep - 4) * Math.PI / 8) * 10;
-                    const stressLevel = maxStress - ((currentStep - 4) / 4) * 5 + fluctuation;
-                    stressBar.style.width = stressLevel + '%';
-                    updateStressColor(stressLevel);
-                    setTimeout(animateStress, 250);
-                }
-                else if (currentStep <= totalSteps) {
-                    // Diminution progressive vers le niveau final
-                    const remaining = totalSteps - currentStep;
-                    const stressLevel = finalStress + (remaining / (totalSteps - 8)) * (maxStress - finalStress - 15);
-                    stressBar.style.width = stressLevel + '%';
-                    updateStressColor(stressLevel);
-                    setTimeout(animateStress, 350);
-                }
-                else {
-                    // Niveau final
-                    stressBar.style.width = finalStress + '%';
-                    updateStressColor(finalStress);
-                }
-            }
-            
-            // Démarrer l'animation après un court délai
-            setTimeout(animateStress, 500);
-        })();
-    </script>
-</div>
 
                 <!-- Prochaines étapes -->
                 <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
