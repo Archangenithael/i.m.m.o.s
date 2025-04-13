@@ -2015,32 +2015,92 @@
 
                 <!-- Graphique de progression -->
                 <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3 shadow-lg">
-                            <i class="fa fa-chart-line text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold">Votre progression</h2>
-                    </div>
-                    
-                    <div class="h-48 relative" id="chart-container">
-                        <canvas id="progressChart" class="w-full h-full"></canvas>
-                    </div>
-                    
-                    <div class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
-                        <div class="bg-white/5 p-2 rounded-lg">
-                            <p class="text-indigo-200">Stress</p>
-                            <p class="font-medium">-15%</p>
-                        </div>
-                        <div class="bg-white/5 p-2 rounded-lg">
-                            <p class="text-indigo-200">Motivation</p>
-                            <p class="font-medium">+12%</p>
-                        </div>
-                        <div class="bg-white/5 p-2 rounded-lg">
-                            <p class="text-indigo-200">Efficacité</p>
-                            <p class="font-medium">+8%</p>
-                        </div>
-                    </div>
-                </div>
+    <div class="flex items-center mb-4">
+        <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center mr-3 shadow-lg">
+            <i class="fa fa-chart-line text-lg"></i>
+        </div>
+        <h2 class="text-2xl font-bold">Votre progression</h2>
+    </div>
+    <div class="h-48 relative" id="chart-container">
+        <canvas id="progressChart" class="w-full h-full"></canvas>
+    </div>
+    <div class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
+        <div class="bg-white/5 p-2 rounded-lg">
+            <p class="text-indigo-200">Stress</p>
+            <p class="font-medium">-15%</p>
+            <div class="w-full bg-gray-700 h-2 rounded-full mt-1">
+                <div id="stressProgress" class="bg-red-500 h-2 rounded-full" style="width: 0%; transition: width 0.5s ease-in-out;"></div>
+            </div>
+        </div>
+        <div class="bg-white/5 p-2 rounded-lg">
+            <p class="text-indigo-200">Motivation</p>
+            <p class="font-medium">+12%</p>
+        </div>
+        <div class="bg-white/5 p-2 rounded-lg">
+            <p class="text-indigo-200">Efficacité</p>
+            <p class="font-medium">+8%</p>
+        </div>
+    </div>
+    <script>
+        (function(){
+            // Animation dynamique du niveau de stress
+            const stressBar = document.getElementById('stressProgress');
+            const maxStress = 60; // Niveau max que le stress atteindra pendant l'animation
+            const finalStress = 15; // Niveau final après la diminution
+            
+            // Fonction pour changer la couleur en fonction du niveau de stress
+            function updateStressColor(percent) {
+                if (percent < 20) {
+                    stressBar.style.backgroundColor = '#ef4444'; // rouge clair
+                } else if (percent < 40) {
+                    stressBar.style.backgroundColor = '#f97316'; // orange
+                } else {
+                    stressBar.style.backgroundColor = '#dc2626'; // rouge foncé
+                }
+            }
+            
+            // Simulation d'un stress élevé qui diminue progressivement
+            let currentStep = 0;
+            const totalSteps = 15;
+            
+            function animateStress() {
+                currentStep++;
+                
+                if (currentStep <= 4) {
+                    // Augmentation rapide du stress
+                    const stressLevel = (currentStep / 4) * maxStress;
+                    stressBar.style.width = stressLevel + '%';
+                    updateStressColor(stressLevel);
+                    setTimeout(animateStress, 300);
+                } 
+                else if (currentStep <= 8) {
+                    // Légère fluctuation du stress
+                    const fluctuation = Math.sin((currentStep - 4) * Math.PI / 8) * 10;
+                    const stressLevel = maxStress - ((currentStep - 4) / 4) * 5 + fluctuation;
+                    stressBar.style.width = stressLevel + '%';
+                    updateStressColor(stressLevel);
+                    setTimeout(animateStress, 250);
+                }
+                else if (currentStep <= totalSteps) {
+                    // Diminution progressive vers le niveau final
+                    const remaining = totalSteps - currentStep;
+                    const stressLevel = finalStress + (remaining / (totalSteps - 8)) * (maxStress - finalStress - 15);
+                    stressBar.style.width = stressLevel + '%';
+                    updateStressColor(stressLevel);
+                    setTimeout(animateStress, 350);
+                }
+                else {
+                    // Niveau final
+                    stressBar.style.width = finalStress + '%';
+                    updateStressColor(finalStress);
+                }
+            }
+            
+            // Démarrer l'animation après un court délai
+            setTimeout(animateStress, 500);
+        })();
+    </script>
+</div>
 
                 <!-- Prochaines étapes -->
                 <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 shadow-xl border border-white/20 transition-all duration-500 hover:shadow-2xl hover:bg-white/15">
@@ -2619,7 +2679,449 @@
     
 
     <!-- FAQ Section -->
-    <section class="py-20 bg-dark-100 relative">
+    <section class="w-full py-16 px-4 bg-gradient-to-br from-blue-900 to-indigo-900 text-white overflow-hidden">
+    <!-- Titre -->
+    <div class="container mx-auto text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 relative inline-block">
+            
+            <span class="absolute bottom-0 left-0 w-full h-3 bg-amber-500 opacity-50 z-0"></span>
+        </h2>
+        <p class="text-xl text-blue-100 max-w-3xl mx-auto">IMMOS révolutionne votre gestion immobilière avec une approche intelligente et personnalisée.</p>
+    </div>
+
+    <!-- Schéma dynamique -->
+    <div class="immos-schema relative max-w-6xl mx-auto h-[600px] bg-blue-950/40 rounded-xl p-6 backdrop-blur-sm shadow-2xl overflow-hidden border border-blue-800">
+        
+        <!-- Particles background -->
+        <div id="particles-js" class="absolute inset-0 opacity-30"></div>
+        
+        <!-- Glowing background effect -->
+        <div class="absolute inset-0 bg-gradient-radial from-blue-500/10 to-transparent z-0"></div>
+        
+        <!-- Centre du schéma - IMMOS core -->
+        <div id="immos-core" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-full flex items-center justify-center z-20 shadow-lg border-4 border-white/20 rotate-animation">
+            <div class="text-center">
+                <i class="fa fa-brain text-4xl mb-2 text-white glow-effect"></i>
+                <h3 class="text-xl font-bold">IMMOS</h3>
+                <p class="text-sm">Système intelligent</p>
+            </div>
+        </div>
+        
+        <!-- Module 1: Gestion d'agenda -->
+        <div id="agenda-module" class="module-card absolute top-[10%] left-[20%] w-64 p-4 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg shadow-xl border border-purple-700/50 transition-all duration-500 hover:scale-110 hover:shadow-purple-500/30 hover:shadow-2xl hover:z-30">
+            <div class="text-center mb-2">
+                <i class="fa fa-calendar-check text-3xl text-purple-300 icon-float"></i>
+                <h4 class="font-bold mt-2">Gestion d'agenda intelligente</h4>
+            </div>
+            <ul class="text-sm text-purple-100">
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Planification selon objectifs</li>
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Adaptation personnalisée</li>
+                <li class="flex items-center gap-2 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Optimisation du temps</li>
+            </ul>
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-purple-500/0 to-purple-300/20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        </div>
+        
+        <!-- Module 2: Analyse psychologique -->
+        <div id="psycho-module" class="module-card absolute top-[15%] right-[20%] w-64 p-4 bg-gradient-to-br from-blue-800 to-cyan-900 rounded-lg shadow-xl border border-blue-700/50 transition-all duration-500 hover:scale-110 hover:shadow-blue-500/30 hover:shadow-2xl hover:z-30">
+            <div class="text-center mb-2">
+                <i class="fa fa-user-shield text-3xl text-blue-300 icon-float"></i>
+                <h4 class="font-bold mt-2">Suivi psychologique</h4>
+            </div>
+            <ul class="text-sm text-blue-100">
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Analyse de la fatigue</li>
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Suivi émotionnel</li>
+                <li class="flex items-center gap-2 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Ajustement en temps réel</li>
+            </ul>
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500/0 to-cyan-300/20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        </div>
+        
+        <!-- Module 3: Collecte de données -->
+        <div id="data-module" class="module-card absolute bottom-[15%] left-[20%] w-64 p-4 bg-gradient-to-br from-red-800 to-orange-900 rounded-lg shadow-xl border border-red-700/50 transition-all duration-500 hover:scale-110 hover:shadow-red-500/30 hover:shadow-2xl hover:z-30">
+            <div class="text-center mb-2">
+                <i class="fa fa-database text-3xl text-red-300 icon-float"></i>
+                <h4 class="font-bold mt-2">Collecte multi-sources</h4>
+            </div>
+            <ul class="text-sm text-red-100">
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Réseaux sociaux</li>
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Emails &amp; formulaires</li>
+                <li class="flex items-center gap-2 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Appels &amp; interactions</li>
+            </ul>
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-red-500/0 to-orange-300/20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        </div>
+        
+        <!-- Module 4: Qualification clients -->
+        <div id="client-module" class="module-card absolute bottom-[10%] right-[20%] w-64 p-4 bg-gradient-to-br from-green-800 to-emerald-900 rounded-lg shadow-xl border border-green-700/50 transition-all duration-500 hover:scale-110 hover:shadow-green-500/30 hover:shadow-2xl hover:z-30">
+            <div class="text-center mb-2">
+                <i class="fa fa-users-cog text-3xl text-green-300 icon-float"></i>
+                <h4 class="font-bold mt-2">Qualification clients</h4>
+            </div>
+            <ul class="text-sm text-green-100">
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Classification intelligente</li>
+                <li class="flex items-center gap-2 mb-1 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Matching avec mandats</li>
+                <li class="flex items-center gap-2 hover:translate-x-1 transition-transform"><i class="fa fa-check text-green-400"></i> Suivi automatisé</li>
+            </ul>
+            <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-green-500/0 to-emerald-300/20 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        </div>
+        
+        <!-- Connexions animées -->
+        <div id="connections" class="absolute inset-0 z-10">
+            <svg width="100%" height="100%" class="connection-svg">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#ffffff"></polygon>
+                    </marker>
+                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+                    </filter>
+                </defs>
+                <!-- Les chemins seront ajoutés par JS -->
+            </svg>
+        </div>
+        
+        <!-- Données animées -->
+        <div id="data-flow" class="absolute inset-0 z-30 pointer-events-none">
+            <!-- Les particules de données seront ajoutées par JS -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configuration de l'arrière-plan avec particles.js
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 100, density: { enable: true, value_area: 800 } },
+                    color: { value: ["#3498db", "#9b59b6", "#f1c40f", "#e74c3c", "#2ecc71"] },
+                    shape: { 
+                        type: ["circle", "triangle", "polygon"],
+                        polygon: { nb_sides: 6 },
+                        stroke: { width: 0, color: "#000000" }
+                    },
+                    opacity: { 
+                        value: 0.6, 
+                        random: true,
+                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                    },
+                    size: { 
+                        value: 4, 
+                        random: true,
+                        anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                    },
+                    line_linked: { 
+                        enable: true, 
+                        distance: 150, 
+                        color: "#ffffff", 
+                        opacity: 0.3, 
+                        width: 1,
+                        shadow: { enable: true, blur: 5, color: "#ffffff" }
+                    },
+                    move: { 
+                        enable: true, 
+                        speed: 1.5, 
+                        direction: "none", 
+                        random: true, 
+                        straight: false, 
+                        out_mode: "out",
+                        bounce: false,
+                        attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 140, line_linked: { opacity: 1 } },
+                        push: { particles_nb: 4 }
+                    }
+                },
+                retina_detect: true
+            });
+            
+            // Création des connexions SVG entre les modules
+            const svg = document.querySelector('.connection-svg');
+            const core = document.getElementById('immos-core');
+            const modules = [
+                document.getElementById('agenda-module'),
+                document.getElementById('psycho-module'),
+                document.getElementById('data-module'),
+                document.getElementById('client-module')
+            ];
+            
+            const colors = [
+                "rgba(168, 85, 247, 0.8)", 
+                "rgba(59, 130, 246, 0.8)", 
+                "rgba(239, 68, 68, 0.8)", 
+                "rgba(16, 185, 129, 0.8)"
+            ];
+            
+            // Récupérer les coordonnées
+            function getCenter(element) {
+                const rect = element.getBoundingClientRect();
+                const parentRect = svg.getBoundingClientRect();
+                return {
+                    x: rect.left + rect.width/2 - parentRect.left,
+                    y: rect.top + rect.height/2 - parentRect.top
+                };
+            }
+            
+            // Créer les lignes
+            function drawConnections() {
+                // Effacer les connexions existantes
+                const paths = svg.querySelectorAll('path:not(.permanent)');
+                paths.forEach(path => path.remove());
+                
+                const corePos = getCenter(core);
+                
+                modules.forEach((module, index) => {
+                    const modulePos = getCenter(module);
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    
+                    // Créer un chemin courbe plus élaboré
+                    const dx = modulePos.x - corePos.x;
+                    const dy = modulePos.y - corePos.y;
+                    const dr = Math.sqrt(dx * dx + dy * dy) * 1.2;
+                    
+                    // Point de contrôle intermédiaire pour une courbe plus naturelle
+                    const cpx = (corePos.x + modulePos.x)/2 + (dy > 0 ? -80 : 80);
+                    const cpy = (corePos.y + modulePos.y)/2 + (dx > 0 ? 80 : -80);
+                    
+                    path.setAttribute('d', `M${corePos.x},${corePos.y} Q${cpx},${cpy} ${modulePos.x},${modulePos.y}`);
+                    path.setAttribute('stroke', colors[index]);
+                    path.setAttribute('stroke-width', '3');
+                    path.setAttribute('fill', 'none');
+                    path.setAttribute('marker-end', 'url(#arrowhead)');
+                    path.setAttribute('class', 'path-animation');
+                    path.setAttribute('filter', 'url(#glow)');
+                    
+                    svg.appendChild(path);
+                    
+                    // Animation de la ligne en pointillés avec effet de flux
+                    path.innerHTML = `
+                        <animate attributeName="stroke-dasharray" from="0, 30" to="30, 30" dur="2s" repeatCount="indefinite" />
+                        <animate attributeName="stroke-opacity" values="0.3; 0.8; 0.3" dur="3s" repeatCount="indefinite" />
+                    `;
+                });
+            }
+            
+            // Animation des données qui circulent avec effets améliorés
+            function createDataFlow() {
+                const dataFlow = document.getElementById('data-flow');
+                
+                modules.forEach((module, index) => {
+                    setInterval(() => {
+                        const modulePos = getCenter(module);
+                        const corePos = getCenter(core);
+                        
+                        // Créer une particule de données avec effet de lueur
+                        const dataParticle = document.createElement('div');
+                        dataParticle.classList.add('data-particle');
+                        dataParticle.style.position = 'absolute';
+                        dataParticle.style.width = '12px';
+                        dataParticle.style.height = '12px';
+                        dataParticle.style.borderRadius = '50%';
+                        dataParticle.style.backgroundColor = colors[index].replace('0.8', '1');
+                        dataParticle.style.boxShadow = `0 0 15px 5px ${colors[index]}`;
+                        dataParticle.style.left = `${modulePos.x}px`;
+                        dataParticle.style.top = `${modulePos.y}px`;
+                        dataParticle.style.zIndex = '40';
+                        dataParticle.style.filter = 'blur(0.5px)';
+                        
+                        dataFlow.appendChild(dataParticle);
+                        
+                        // Animer la particule avec une trajectoire plus naturelle
+                        const keyframes = [];
+                        // Ajouter des points intermédiaires pour un mouvement plus fluide
+                        const steps = 20;
+                        const cpx = (corePos.x + modulePos.x)/2 + (modulePos.y > corePos.y ? -80 : 80);
+                        const cpy = (corePos.y + modulePos.y)/2 + (modulePos.x > corePos.x ? 80 : -80);
+                        
+                        // Générer des keyframes pour suivre une courbe de Bézier quadratique
+                        for (let i = 0; i <= steps; i++) {
+                            const t = i / steps;
+                            const u = 1 - t;
+                            const px = u*u*modulePos.x + 2*u*t*cpx + t*t*corePos.x;
+                            const py = u*u*modulePos.y + 2*u*t*cpy + t*t*corePos.y;
+                            
+                            keyframes.push({ 
+                                left: `${px}px`, 
+                                top: `${py}px`,
+                                transform: `scale(${1 - 0.5*t})`
+                            });
+                        }
+                        
+                        const animation = dataParticle.animate(keyframes, {
+                            duration: 1800,
+                            easing: 'ease-in-out'
+                        });
+                        
+                        animation.onfinish = () => {
+                            dataParticle.remove();
+                            
+                            // Créer un effet d'explosion au centre
+                            const pulse = document.createElement('div');
+                            pulse.classList.add('pulse-effect');
+                            pulse.style.position = 'absolute';
+                            pulse.style.width = '40px';
+                            pulse.style.height = '40px';
+                            pulse.style.borderRadius = '50%';
+                            pulse.style.backgroundColor = 'transparent';
+                            pulse.style.border = `3px solid ${colors[index]}`;
+                            pulse.style.left = `${corePos.x - 20}px`;
+                            pulse.style.top = `${corePos.y - 20}px`;
+                            pulse.style.boxShadow = `0 0 20px ${colors[index]}`;
+                            dataFlow.appendChild(pulse);
+                            
+                            pulse.animate([
+                                { transform: 'scale(0.8)', opacity: 1, borderWidth: '3px' },
+                                { transform: 'scale(3)', opacity: 0, borderWidth: '1px' }
+                            ], {
+                                duration: 1200,
+                                easing: 'cubic-bezier(0.1, 0.7, 0.3, 1)'
+                            }).onfinish = () => pulse.remove();
+                        };
+                    }, 3000 + index * 750);
+                });
+            }
+            
+            // Animation 3D subtile pour les modules lors du survol
+            modules.forEach(module => {
+                module.addEventListener('mousemove', (e) => {
+                    const rect = module.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // x position within the element
+                    const y = e.clientY - rect.top;  // y position within the element
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const deltaX = (x - centerX) / 20;
+                    const deltaY = (y - centerY) / 20;
+                    
+                    module.style.transform = `perspective(1000px) rotateX(${-deltaY}deg) rotateY(${deltaX}deg) scale(1.1)`;
+                });
+                
+                module.addEventListener('mouseleave', () => {
+                    module.style.transform = '';
+                });
+            });
+            
+            // Animation pulse pour le core avec effet amélioré
+            const coreElement = document.getElementById('immos-core');
+            coreElement.innerHTML += `
+                <div class="absolute inset-0 rounded-full bg-white opacity-20 pulse-ring-1"></div>
+                <div class="absolute inset-0 rounded-full bg-white opacity-15 pulse-ring-2"></div>
+                <div class="absolute inset-0 rounded-full bg-white opacity-10 pulse-ring-3"></div>
+            `;
+            
+            // Appliquer le style pour les animations améliorées
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes pulse1 {
+                    0% { transform: scale(1); opacity: 0.2; }
+                    50% { transform: scale(1.1); opacity: 0.1; }
+                    100% { transform: scale(1.3); opacity: 0; }
+                }
+                @keyframes pulse2 {
+                    0% { transform: scale(1); opacity: 0.15; }
+                    50% { transform: scale(1.2); opacity: 0.08; }
+                    100% { transform: scale(1.4); opacity: 0; }
+                }
+                @keyframes pulse3 {
+                    0% { transform: scale(1); opacity: 0.1; }
+                    50% { transform: scale(1.3); opacity: 0.05; }
+                    100% { transform: scale(1.5); opacity: 0; }
+                }
+                .pulse-ring-1 {
+                    animation: pulse1 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                }
+                .pulse-ring-2 {
+                    animation: pulse2 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite 0.3s;
+                }
+                .pulse-ring-3 {
+                    animation: pulse3 3s cubic-bezier(0.4, 0, 0.6, 1) infinite 0.6s;
+                }
+                .path-animation {
+                    stroke-dasharray: 5, 5;
+                    animation: dash 3s linear infinite;
+                }
+                @keyframes dash {
+                    to {
+                        stroke-dashoffset: 100;
+                    }
+                }
+                
+                /* Animation de rotation subtile pour le core */
+                @keyframes rotate {
+                    0% { transform: translate(-50%, -50%) rotate(0deg); }
+                    100% { transform: translate(-50%, -50%) rotate(360deg); }
+                }
+                .rotate-animation {
+                    animation: rotate 60s linear infinite;
+                }
+                .rotate-animation > * {
+                    animation: counter-rotate 60s linear infinite;
+                }
+                @keyframes counter-rotate {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(-360deg); }
+                }
+                
+                /* Animation de flottement pour les icônes */
+                @keyframes float {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-8px); }
+                }
+                .icon-float {
+                    animation: float 3s ease-in-out infinite;
+                    display: inline-block;
+                }
+                
+                /* Effet de lueur pour les éléments importants */
+                .glow-effect {
+                    animation: glow 2s ease-in-out infinite alternate;
+                }
+                @keyframes glow {
+                    from { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #4f46e5, 0 0 20px #4f46e5; }
+                    to { text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #4f46e5, 0 0 40px #4f46e5; }
+                }
+                
+                /* Effet de gradient radial */
+                .bg-gradient-radial {
+                    background: radial-gradient(circle at center, var(--tw-gradient-from), var(--tw-gradient-to));
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Dessiner les connexions initiales et configurer les redessins lors du redimensionnement
+            drawConnections();
+            window.addEventListener('resize', drawConnections);
+            
+            // Démarrer les animations de flux de données
+            createDataFlow();
+            
+            // Ajouter des événements d'interaction sur les modules
+            modules.forEach((module, index) => {
+                module.addEventListener('mouseenter', () => {
+                    // Intensifier l'animation de particules lorsqu'on survole un module
+                    const moreParticles = new CustomEvent('intensify-particles', { 
+                        detail: { index: index }
+                    });
+                    document.dispatchEvent(moreParticles);
+                });
+            });
+            
+            // Gestion de fenêtre inactive/active pour optimiser les performances
+            let isPageActive = true;
+            document.addEventListener('visibilitychange', () => {
+                isPageActive = document.visibilityState === 'visible';
+            });
+        });
+    </script>
+</section><section class="py-20 bg-dark-100 relative">
         <div class="blob bottom-0 right-0"></div>
         <div class="container mx-auto px-4 z-10 relative">
             <div class="text-center mb-16">
