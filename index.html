@@ -1406,138 +1406,143 @@
         </div>
     </div>
     <!-- Animation de qualification des contacts -->
-    <div class="mt-10 bg-dark-200 p-6 rounded-xl">
-  <h3 class="text-xl font-semibold mb-4 text-center">Comment I.M.M.O.S qualifie vos contacts</h3>
-  <p class="text-center mb-4">Que vous ayez 100, 1000 ou davantage de contacts, I.M.M.O.S gère votre CRM automatiquement. Plus besoin de vous occuper de la gestion de vos contacts - notre système s'en charge entièrement pour vous.</p>
-  <div class="flex flex-col md:flex-row items-center justify-between mb-8">
-    <div class="flex-1 p-4 text-center relative">
-      <div class="mb-4">
-        <div class="w-20 h-20 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
-          <i class="fas fa-envelope text-primary-400 text-2xl animate-pulse"></i>
+    <div class="mt-6 bg-dark-200 p-4 rounded-xl">
+  <h3 class="text-lg font-semibold mb-2 text-center">Comment I.M.M.O.S qualifie vos contacts</h3>
+  <p class="text-center mb-3 text-sm">I.M.M.O.S gère votre CRM automatiquement. Plus besoin de vous occuper de la gestion de vos contacts - notre système s'en charge pour vous.</p>
+  <div class="flex flex-col md:flex-row items-center justify-between mb-4">
+    <div class="flex-1 p-2 text-center relative">
+      <div class="mb-2">
+        <div class="w-12 h-12 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-1">
+          <i class="fas fa-envelope text-primary-400 text-lg animate-pulse"></i>
         </div>
-        <h4 class="font-semibold">Vos emails</h4>
+        <h4 class="font-semibold text-sm">Vos emails</h4>
       </div>
-      <!-- Scanner pour les emails -->
       <div class="scanner-beam absolute left-0 right-0 h-1 bg-gradient-to-r from-blue-400/0 via-blue-400/80 to-blue-400/0 z-10 animate-scanner"></div>
       <div class="contact-stream email-stream">
         <i class="fas fa-user-circle text-gray-400 animate-stream"></i>
         <i class="fas fa-user-circle text-gray-400 animate-stream delay-1"></i>
-        <i class="fas fa-user-circle text-gray-400 animate-stream delay-2"></i>
       </div>
     </div>
-    <div class="flex-1 p-4 text-center relative">
-      <div class="mb-4">
-        <div class="w-20 h-20 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-2">
-          <i class="fas fa-share-alt text-primary-400 text-2xl animate-pulse"></i>
+    <div class="flex-1 p-2 text-center relative">
+      <div class="mb-2">
+        <div class="w-12 h-12 mx-auto rounded-full bg-primary-500/20 flex items-center justify-center mb-1">
+          <i class="fas fa-share-alt text-primary-400 text-lg animate-pulse"></i>
         </div>
-        <h4 class="font-semibold">Vos réseaux sociaux</h4>
+        <h4 class="font-semibold text-sm">Vos réseaux sociaux</h4>
       </div>
-      <!-- Scanner pour les réseaux sociaux -->
       <div class="scanner-beam absolute left-0 right-0 h-1 bg-gradient-to-r from-purple-400/0 via-purple-400/80 to-purple-400/0 z-10 animate-scanner-reversed"></div>
       <div class="contact-stream social-stream">
         <i class="fab fa-facebook-f text-blue-600 animate-stream"></i>
         <i class="fab fa-twitter text-blue-400 animate-stream delay-1"></i>
-        <i class="fab fa-instagram text-pink-500 animate-stream delay-2"></i>
       </div>
     </div>
-    <div class="client-bubble-flow relative my-4 mx-auto">
-      <!-- IA qui trie les contacts -->
-      <div class="ai-sorting-container relative w-64 h-64">
-        <!-- Cercle IA central -->
-        <div class="ai-circle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500/30 rounded-full flex items-center justify-center z-20 shadow-lg shadow-blue-500/50 animate-pulse">
-          <i class="fas fa-brain text-blue-400 text-3xl"></i>
+    <div class="client-bubble-flow relative my-2 mx-auto">
+      <div class="ai-sorting-container relative w-40 h-40">
+        <div class="ai-circle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-blue-500/30 rounded-full flex items-center justify-center z-20 shadow-lg shadow-blue-500/50 animate-pulse">
+          <i class="fas fa-brain text-blue-400 text-xl"></i>
         </div>
         
-        <!-- Contacts entrants -->
         <div class="incoming-contacts absolute top-0 left-0 w-full">
           <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 0s;"></i>
-          <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 2s;"></i>
-          <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 4s;"></i>
-          <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 6s;"></i>
+          <i class="fas fa-user-circle text-gray-400 animate-incoming-contact" style="--delay: 3s;"></i>
         </div>
         
-        <!-- Contacts sortants catégorie A -->
         <div class="outgoing-contacts-a absolute">
           <i class="fas fa-user-circle text-green-400 animate-to-cat-a" style="--delay: 1s;"></i>
-          <i class="fas fa-user-circle text-green-400 animate-to-cat-a" style="--delay: 7s;"></i>
         </div>
         
-        <!-- Contacts sortants catégorie B -->
         <div class="outgoing-contacts-b absolute">
           <i class="fas fa-user-circle text-yellow-400 animate-to-cat-b" style="--delay: 3s;"></i>
-          <i class="fas fa-user-circle text-yellow-400 animate-to-cat-b" style="--delay: 9s;"></i>
         </div>
         
-        <!-- Contacts sortants catégorie C -->
         <div class="outgoing-contacts-c absolute">
           <i class="fas fa-user-circle text-red-400 animate-to-cat-c" style="--delay: 5s;"></i>
-          <i class="fas fa-user-circle text-red-400 animate-to-cat-c" style="--delay: 11s;"></i>
+        </div>
+        
+        <div class="outgoing-contacts-prop absolute">
+          <i class="fas fa-user-circle text-blue-400 animate-to-cat-prop" style="--delay: 2.5s;"></i>
         </div>
       </div>
     </div>
-    <div class="flex-1 md:flex-none md:w-1/3 p-4">
-      <div class="bg-dark-300 rounded-lg p-4 mb-4">
-        <h4 class="font-semibold text-green-400 flex items-center mb-2">
-          <span class="w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center mr-2">A</span>
+    <div class="flex-1 md:flex-none md:w-1/4 p-2">
+      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+        <h4 class="font-semibold text-green-400 flex items-center mb-1">
+          <span class="w-4 h-4 bg-green-500/20 rounded-full flex items-center justify-center mr-1 text-xs">A</span>
           Catégorie A
         </h4>
-        <p class="text-gray-400 text-sm">Contacts prioritaires avec un fort potentiel d'achat ou de vente</p>
-        <div class="category-container cat-a mt-2">
-          <i class="fas fa-user-circle text-green-400 category-icon"></i>
-        </div>
+        <p class="text-gray-400 text-xs">Contacts prioritaires à fort potentiel</p>
       </div>
-      <div class="bg-dark-300 rounded-lg p-4 mb-4">
-        <h4 class="font-semibold text-yellow-400 flex items-center mb-2">
-          <span class="w-6 h-6 bg-yellow-500/20 rounded-full flex items-center justify-center mr-2">B</span>
+      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+        <h4 class="font-semibold text-yellow-400 flex items-center mb-1">
+          <span class="w-4 h-4 bg-yellow-500/20 rounded-full flex items-center justify-center mr-1 text-xs">B</span>
           Catégorie B
         </h4>
-        <p class="text-gray-400 text-sm">Contacts à potentiel moyen nécessitant un suivi régulier</p>
-        <div class="category-container cat-b mt-2">
-          <i class="fas fa-user-circle text-yellow-400 category-icon"></i>
-        </div>
+        <p class="text-gray-400 text-xs">Contacts à potentiel moyen</p>
       </div>
-      <div class="bg-dark-300 rounded-lg p-4">
-        <h4 class="font-semibold text-red-400 flex items-center mb-2">
-          <span class="w-6 h-6 bg-red-500/20 rounded-full flex items-center justify-center mr-2">C</span>
+      <div class="bg-dark-300 rounded-lg p-2 mb-2 text-sm">
+        <h4 class="font-semibold text-red-400 flex items-center mb-1">
+          <span class="w-4 h-4 bg-red-500/20 rounded-full flex items-center justify-center mr-1 text-xs">C</span>
           Catégorie C
         </h4>
-        <p class="text-gray-400 text-sm">Contacts à faible potentiel actuel, à maintenir informés</p>
-        <div class="category-container cat-c mt-2">
-          <i class="fas fa-user-circle text-red-400 category-icon"></i>
-        </div>
+        <p class="text-gray-400 text-xs">Contacts à faible potentiel</p>
+      </div>
+      <div class="bg-dark-300 rounded-lg p-2 border border-blue-400 animate-blink-border text-sm">
+        <h4 class="font-semibold text-blue-400 flex items-center mb-1">
+          <span class="w-4 h-4 bg-blue-500/20 rounded-full flex items-center justify-center mr-1 text-xs">P</span>
+          Acquéreurs Propriétaires
+        </h4>
+        <p class="text-gray-400 text-xs">Propriétaires avec intention d'achat</p>
       </div>
     </div>
     
     <style>
       @keyframes incoming-contact {
-        0% { transform: translate(-50px, -50px); opacity: 0; }
-        25% { transform: translate(30px, 30px); opacity: 1; }
-        50% { transform: translate(60px, 60px); opacity: 1; }
-        100% { transform: translate(120px, 120px); opacity: 0; }
+        0% { transform: translate(-30px, -30px); opacity: 0; }
+        25% { transform: translate(20px, 20px); opacity: 1; }
+        50% { transform: translate(40px, 40px); opacity: 1; }
+        100% { transform: translate(80px, 80px); opacity: 0; }
       }
       
       @keyframes to-cat-a {
-        0% { transform: translate(60px, 60px); opacity: 0; }
-        25% { transform: translate(80px, 20px); opacity: 1; }
-        75% { transform: translate(150px, -30px); opacity: 1; }
-        100% { transform: translate(180px, -60px); opacity: 0; }
+        0% { transform: translate(40px, 40px); opacity: 0; }
+        25% { transform: translate(50px, 10px); opacity: 1; }
+        75% { transform: translate(90px, -20px); opacity: 1; }
+        100% { transform: translate(110px, -40px); opacity: 0; }
       }
       
       @keyframes to-cat-b {
-        0% { transform: translate(60px, 60px); opacity: 0; }
-        25% { transform: translate(100px, 80px); opacity: 1; }
-        75% { transform: translate(150px, 100px); opacity: 1; }
-        100% { transform: translate(180px, 120px); opacity: 0; }
+        0% { transform: translate(40px, 40px); opacity: 0; }
+        25% { transform: translate(60px, 50px); opacity: 1; }
+        75% { transform: translate(90px, 70px); opacity: 1; }
+        100% { transform: translate(110px, 80px); opacity: 0; }
       }
       
       @keyframes to-cat-c {
-        0% { transform: translate(60px, 60px); opacity: 0; }
-        25% { transform: translate(80px, 100px); opacity: 1; }
-        75% { transform: translate(120px, 150px); opacity: 1; }
-        100% { transform: translate(150px, 180px); opacity: 0; }
+        0% { transform: translate(40px, 40px); opacity: 0; }
+        25% { transform: translate(50px, 60px); opacity: 1; }
+        75% { transform: translate(80px, 90px); opacity: 1; }
+        100% { transform: translate(90px, 110px); opacity: 0; }
       }
       
-      /* Animation du scanner */
+      @keyframes to-cat-prop {
+        0% { transform: translate(40px, 40px); opacity: 0; }
+        25% { transform: translate(15px, 50px); opacity: 1; }
+        75% { transform: translate(-10px, 80px); opacity: 1; }
+        100% { transform: translate(-40px, 90px); opacity: 0; }
+      }
+      
+      @keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+      }
+      
+      @keyframes blink-border {
+        0% { border-color: rgba(96, 165, 250, 1); }
+        50% { border-color: rgba(96, 165, 250, 0.3); }
+        100% { border-color: rgba(96, 165, 250, 1); }
+      }
+      
       @keyframes scanner {
         0% { top: 0; opacity: 0.7; box-shadow: 0 0 8px 1px rgba(59, 130, 246, 0.7); }
         50% { opacity: 1; box-shadow: 0 0 12px 3px rgba(59, 130, 246, 0.8); }
@@ -1582,6 +1587,20 @@
         animation-delay: var(--delay);
       }
       
+      .animate-to-cat-prop {
+        position: absolute;
+        animation: to-cat-prop 4s infinite;
+        animation-delay: var(--delay);
+      }
+      
+      .animate-blink {
+        animation: blink 1.5s ease-in-out infinite;
+      }
+      
+      .animate-blink-border {
+        animation: blink-border 1.5s ease-in-out infinite;
+      }
+      
       .ai-circle {
         transition: all 0.5s ease;
       }
@@ -1602,11 +1621,22 @@
         100% { transform: scale(0.95); opacity: 1; }
       }
       
-      /* Style pour le faisceau du scanner */
       .scanner-beam {
         position: absolute;
         width: 100%;
         pointer-events: none;
+      }
+      
+      .category-icon-overlay {
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        font-size: 0.7em;
+      }
+      
+      .category-container {
+        position: relative;
+        display: inline-block;
       }
     </style>
   </div>
