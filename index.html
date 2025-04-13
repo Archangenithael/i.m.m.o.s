@@ -653,141 +653,444 @@
     <div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 p-6">
   <div class="bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-6xl flex flex-col md:flex-row" style="height: 80vh;">
     <div class="bg-indigo-600 text-white p-6 w-full md:w-1/4 relative">
-      <div class="flex items-center mb-8">
-        <div class="h-12 w-12 bg-white rounded-full flex items-center justify-center">
-          <i class="fa fa-robot text-indigo-600 text-2xl"></i>
-        </div>
-        <h2 class="ml-3 text-xl font-bold">AssistantIA</h2>
-      </div>
-      
-      <div class="space-y-4 mb-6">
-        <div class="flex items-center">
-          <i class="fa fa-calendar-alt mr-3"></i>
-          <span>Planification</span>
-        </div>
-        <div class="flex items-center">
-          <i class="fa fa-tasks mr-3"></i>
-          <span>Tâches</span>
-        </div>
-        <div class="flex items-center">
-          <i class="fa fa-chart-line mr-3"></i>
-          <span>Productivité</span>
-        </div>
-      </div>
-      
-      <div class="mt-auto">
-        <div class="p-4 bg-indigo-700 rounded-lg">
-          <p class="text-sm opacity-90 mb-2">Adaptation automatique de votre agenda en cours...</p>
-          <div class="flex items-center">
-            <div class="typing-indicator">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div id="particles" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+  <div class="flex items-center mb-8">
+    <div class="h-12 w-12 bg-white rounded-full flex items-center justify-center">
+      <i class="fa fa-robot text-indigo-600 text-2xl"></i>
+    </div>
+    <h2 class="ml-3 text-xl font-bold">AssistantIA</h2>
+  </div>
+  
+  <div class="space-y-4 mb-6">
+    <div class="flex items-center">
+      <i class="fa fa-calendar-alt mr-3"></i>
+      <span>Planification</span>
+    </div>
+    <div class="flex items-center">
+      <i class="fa fa-tasks mr-3"></i>
+      <span>Tâches</span>
+    </div>
+    <div class="flex items-center">
+      <i class="fa fa-chart-line mr-3"></i>
+      <span>Productivité</span>
+    </div>
+  </div>
+  
+  <!-- Section calendrier avec événements -->
+  <div class="mb-6 bg-indigo-700/50 rounded-lg p-3 relative">
+    <h3 class="text-sm font-bold mb-2">Événements de l'agenda</h3>
+    <div id="calendar-events" class="space-y-2">
+      <!-- Les événements seront ajoutés ici -->
     </div>
     
-    <div class="w-full md:w-3/4 p-6">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Mon Agenda Intelligent</h1>
-        <div class="flex space-x-3">
-          <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center">
-            <i class="fa fa-magic mr-2"></i> Planifier avec IA
-          </button>
+    <!-- Assistant IA qui suit les rendez-vous -->
+    <div id="ai-tracker" class="absolute z-10 transition-all duration-500">
+      <div class="relative">
+        <div class="h-6 w-6 bg-white rounded-full flex items-center justify-center shadow-lg ai-assistant-glow">
+          <i class="fa fa-robot text-indigo-600 text-xs"></i>
         </div>
+        <div class="tracking-beam"></div>
       </div>
-      
-      <div class="mb-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg shadow-sm adaptive-message">
-        <div class="flex">
-          <div class="flex-shrink-0 mr-3">
-            <i class="fa fa-lightbulb text-indigo-600 text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-indigo-800 font-semibold mb-1">Agenda adaptatif intelligent</h3>
-            <p class="text-indigo-700 text-sm">Notre IA analyse en permanence vos objectifs professionnels et résultats pour adapter automatiquement votre planning. Elle identifie les plages horaires optimales, priorise vos tâches et vous suggère des ajustements pour maximiser votre efficacité.</p>
-          </div>
-        </div>
-      </div>
-      
-      <div class="flex justify-between items-center mb-6">
-        <div class="flex space-x-2">
-          <button class="p-2 rounded-lg hover:bg-gray-100">
-            <i class="fa fa-chevron-left text-gray-500"></i>
-          </button>
-          <h2 class="text-xl font-semibold text-gray-700">Avril 2023</h2>
-          <button class="p-2 rounded-lg hover:bg-gray-100">
-            <i class="fa fa-chevron-right text-gray-500"></i>
-          </button>
-        </div>
-        <div class="flex space-x-2">
-          <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Jour</button>
-          <button class="px-3 py-1 text-sm bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-md">Semaine</button>
-          <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Mois</button>
-        </div>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden h-full">
-        <div class="grid grid-cols-7 bg-gray-100 border-b border-gray-200">
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Lun</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Mar</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Mer</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Jeu</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Ven</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Sam</div>
-          <div class="py-2 text-center text-sm font-medium text-gray-500">Dim</div>
-        </div>
-        
-        <div class="grid grid-cols-7 h-full">
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-1">
-            <div class="text-xs text-gray-500">1</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-2">
-            <div class="text-xs text-gray-500">2</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-3">
-            <div class="text-xs text-gray-500">3</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-4">
-            <div class="text-xs text-gray-500">4</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-5">
-            <div class="text-xs text-gray-500">5</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-6">
-            <div class="text-xs text-gray-500">6</div>
-          </div>
-          <div class="h-full border-b border-gray-200 p-2" id="cell-7">
-            <div class="text-xs text-gray-500">7</div>
-          </div>
-          
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-8">
-            <div class="text-xs text-gray-500">8</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-9">
-            <div class="text-xs text-gray-500">9</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-10">
-            <div class="text-xs text-gray-500">10</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-11">
-            <div class="text-xs text-gray-500">11</div>
-          </div>
-          <div class="h-full border-b border-r border-gray-200 p-2" id="cell-12">
-            <div class="text-xs text-gray-500">12</div>
-          </div>
-          <div class="h-full border-b border-gray-200 p-2" id="cell-13">
-            <div class="text-xs text-gray-500">13</div>
-          </div>
-          <div class="h-full border-b border-gray-200 p-2" id="cell-14">
-            <div class="text-xs text-gray-500">14</div>
-          </div>
+    </div>
+  </div>
+  
+  <div class="mt-auto">
+    <div class="p-4 bg-indigo-700 rounded-lg">
+      <p class="text-sm opacity-90 mb-2">Adaptation automatique de votre agenda en cours...</p>
+      <div class="flex items-center">
+        <div class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
     </div>
+  </div>
+  
+  <div id="particles" class="absolute top-0 left-0 w-full h-full pointer-events-none"></div>
+  
+  <script>
+    // Fonction pour ajouter un nouvel événement avec icône IA
+    function addNewCalendarEvent(title, time) {
+      const eventsContainer = document.getElementById('calendar-events');
+      
+      // Créer l'élément d'événement
+      const eventEl = document.createElement('div');
+      eventEl.className = 'p-2 bg-indigo-700 rounded flex items-start event-new';
+      
+      // Contenu de l'événement avec icône IA
+      eventEl.innerHTML = `
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="text-sm font-medium">${title}</span>
+            <div class="h-5 w-5 bg-white rounded-full flex items-center justify-center ml-2 ai-icon-pulse">
+              <i class="fa fa-robot text-indigo-600 text-xs"></i>
+            </div>
+          </div>
+          <p class="text-xs opacity-80">${time}</p>
+          <p class="text-xs text-indigo-300">Nouveau rendez-vous via IA</p>
+        </div>
+      `;
+      
+      // Ajouter au conteneur
+      eventsContainer.prepend(eventEl);
+      
+      // Notification visuelle puis normalisation
+      setTimeout(() => {
+        const icon = eventEl.querySelector('.ai-icon-pulse');
+        if (icon) icon.classList.remove('ai-icon-pulse');
+        eventEl.classList.remove('event-new');
+      }, 5000);
+      
+      // Déplacer l'assistant IA vers le nouvel événement
+      moveAIToEvent(eventEl);
+    }
+
+    // Style pour les animations
+    const style = document.createElement('style');
+    style.textContent = `
+      .event-new { 
+        animation: fadeIn 0.5s ease-out;
+      }
+      .ai-icon-pulse {
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+      }
+      
+      /* Styles pour l'assistant IA qui suit les rendez-vous */
+      #ai-tracker {
+        pointer-events: none;
+        transform: translateY(-50%);
+      }
+      .ai-assistant-glow {
+        box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.6);
+        animation: glow 2s infinite alternate;
+      }
+      @keyframes glow {
+        0% { box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.6); }
+        100% { box-shadow: 0 0 12px 4px rgba(129, 140, 248, 0.8); }
+      }
+      .tracking-beam {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 40px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+        transform-origin: left center;
+        transform: translateY(-50%);
+        opacity: 0.7;
+      }
+      .event-focused {
+        position: relative;
+        box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.8);
+        animation: focus-pulse 1.5s infinite alternate;
+      }
+      @keyframes focus-pulse {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(3px); }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Fonction pour déplacer l'assistant IA vers un événement
+    function moveAIToEvent(eventEl) {
+      const aiTracker = document.getElementById('ai-tracker');
+      if (!aiTracker || !eventEl) return;
+      
+      // Enlever la mise en évidence de l'événement précédent
+      document.querySelectorAll('.event-focused').forEach(el => {
+        el.classList.remove('event-focused');
+      });
+      
+      // Ajouter la mise en évidence au nouvel événement
+      eventEl.classList.add('event-focused');
+      
+      // Obtenir la position de l'événement
+      const eventRect = eventEl.getBoundingClientRect();
+      const containerRect = document.querySelector('.bg-indigo-700\\/50').getBoundingClientRect();
+      
+      // Positionner l'assistant à gauche de l'événement
+      const top = eventRect.top - containerRect.top + (eventRect.height / 2);
+      const left = -10; // Juste à gauche de l'événement
+      
+      // Déplacer l'assistant
+      aiTracker.style.top = `${top}px`;
+      aiTracker.style.left = `${left}px`;
+      
+      // Orienter le faisceau vers l'événement
+      const beam = aiTracker.querySelector('.tracking-beam');
+      if (beam) {
+        beam.style.width = `${eventRect.width + 20}px`;
+      }
+      
+      // Planifier le prochain mouvement
+      scheduleNextMove();
+    }
+    
+    // Fonction pour planifier le prochain mouvement
+    function scheduleNextMove() {
+      setTimeout(() => {
+        const events = document.querySelectorAll('#calendar-events > div');
+        if (events.length > 0) {
+          const randomIndex = Math.floor(Math.random() * events.length);
+          moveAIToEvent(events[randomIndex]);
+        }
+      }, 3000 + Math.random() * 2000); // Entre 3 et 5 secondes
+    }
+    
+    // Initialisation de l'assistant IA après chargement des événements
+    document.addEventListener('DOMContentLoaded', () => {
+      // Simulation d'ajout d'événements (à titre de démonstration)
+      setTimeout(() => {
+        addNewCalendarEvent("Réunion équipe marketing", "Mercredi, 14h30");
+      }, 2000);
+      
+      setTimeout(() => {
+        addNewCalendarEvent("Appel client Dupont", "Vendredi, 10h00");
+      }, 5000);
+      
+      // Événement initial pour montrer l'assistant dès le début
+      setTimeout(() => {
+        addNewCalendarEvent("Point équipe", "Aujourd'hui, 15h00");
+      }, 1000);
+    });
+  </script>
+</div>
+    
+    <div class="w-full md:w-3/4 p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Mon Agenda Intelligent</h1>
+    <div class="flex space-x-3">
+      <button class="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center">
+        <i class="fa fa-magic mr-2"></i> Planifier avec IA
+      </button>
+    </div>
+  </div>
+  
+  <div class="mb-6 p-4 bg-indigo-50 border border-indigo-200 rounded-lg shadow-sm adaptive-message">
+    <div class="flex">
+      <div class="flex-shrink-0 mr-3">
+        <i class="fa fa-lightbulb text-indigo-600 text-xl"></i>
+      </div>
+      <div>
+        <h3 class="text-indigo-800 font-semibold mb-1">Agenda adaptatif intelligent</h3>
+        <p class="text-indigo-700 text-sm">Notre IA analyse en permanence vos objectifs professionnels et résultats pour adapter automatiquement votre planning. Elle identifie les plages horaires optimales, priorise vos tâches et vous suggère des ajustements pour maximiser votre efficacité.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="flex justify-between items-center mb-6">
+    <div class="flex space-x-2">
+      <button class="p-2 rounded-lg hover:bg-gray-100">
+        <i class="fa fa-chevron-left text-gray-500"></i>
+      </button>
+      <h2 class="text-xl font-semibold text-gray-700">Avril 2023</h2>
+      <button class="p-2 rounded-lg hover:bg-gray-100">
+        <i class="fa fa-chevron-right text-gray-500"></i>
+      </button>
+    </div>
+    <div class="flex space-x-2">
+      <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Jour</button>
+      <button class="px-3 py-1 text-sm bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-md">Semaine</button>
+      <button class="px-3 py-1 text-sm border border-gray-200 rounded-md">Mois</button>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden h-full relative">
+    <!-- Assistant IA qui se déplace -->
+    <div id="ai-assistant" class="absolute z-10 flex items-center justify-center w-10 h-10 bg-indigo-500 text-white rounded-full shadow-lg transition-all duration-700 ease-in-out" style="top: 60px; left: 20px; transform: scale(0.8);">
+      <i class="fa fa-robot"></i>
+    </div>
+    
+    <div class="grid grid-cols-7 bg-gray-100 border-b border-gray-200">
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Lun</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Mar</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Mer</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Jeu</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Ven</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Sam</div>
+      <div class="py-2 text-center text-sm font-medium text-gray-500">Dim</div>
+    </div>
+    
+    <div class="grid grid-cols-7 h-full">
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-1">
+        <div class="text-xs text-gray-500">1</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-2">
+        <div class="text-xs text-gray-500">2</div>
+        <div class="mt-1 p-1 bg-blue-100 text-xs rounded border-l-2 border-blue-400 event-item">
+          Réunion équipe
+        </div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-3">
+        <div class="text-xs text-gray-500">3</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-4">
+        <div class="text-xs text-gray-500">4</div>
+        <div class="mt-1 p-1 bg-green-100 text-xs rounded border-l-2 border-green-400 event-item">
+          Présentation client
+        </div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-5">
+        <div class="text-xs text-gray-500">5</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-6">
+        <div class="text-xs text-gray-500">6</div>
+      </div>
+      <div class="h-full border-b border-gray-200 p-2" id="cell-7">
+        <div class="text-xs text-gray-500">7</div>
+        <div class="mt-1 p-1 bg-indigo-100 text-xs rounded border-l-2 border-indigo-400 event-item">
+          Cours en ligne
+        </div>
+      </div>
+      
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-8">
+        <div class="text-xs text-gray-500">8</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-9">
+        <div class="text-xs text-gray-500">9</div>
+        <div class="mt-1 p-1 bg-red-100 text-xs rounded border-l-2 border-red-400 event-item">
+          Date limite projet
+        </div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-10">
+        <div class="text-xs text-gray-500">10</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-11">
+        <div class="text-xs text-gray-500">11</div>
+        <div class="mt-1 p-1 bg-yellow-100 text-xs rounded border-l-2 border-yellow-400 event-item">
+          Atelier créatif
+        </div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-12">
+        <div class="text-xs text-gray-500">12</div>
+      </div>
+      <div class="h-full border-b border-r border-gray-200 p-2" id="cell-13">
+        <div class="text-xs text-gray-500">13</div>
+      </div>
+      <div class="h-full border-b border-gray-200 p-2" id="cell-14">
+        <div class="text-xs text-gray-500">14</div>
+        <div class="mt-1 p-1 bg-purple-100 text-xs rounded border-l-2 border-purple-400 event-item">
+          Formation
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const aiAssistant = document.getElementById('ai-assistant');
+      const eventItems = document.querySelectorAll('.event-item');
+      const eventCells = [];
+      
+      // Récupérer les cellules qui contiennent des événements
+      eventItems.forEach(item => {
+        const cell = item.closest('[id^="cell-"]');
+        if (cell) {
+          eventCells.push(cell);
+        }
+      });
+      
+      let currentIndex = 0;
+      
+      // Animation pour déplacer l'IA vers chaque événement
+      function moveAIToNextEvent() {
+        if (eventCells.length === 0) return;
+        
+        const targetCell = eventCells[currentIndex];
+        const cellRect = targetCell.getBoundingClientRect();
+        const calendarRect = targetCell.closest('.bg-gray-50').getBoundingClientRect();
+        
+        // Calculer la position relative
+        const top = cellRect.top - calendarRect.top + 15;
+        const left = cellRect.left - calendarRect.left + cellRect.width / 2 - 15;
+        
+        // Appliquer une petite animation
+        aiAssistant.style.transition = 'all 0.8s ease-in-out';
+        aiAssistant.style.top = `${top}px`;
+        aiAssistant.style.left = `${left}px`;
+        
+        // Effet de travail de l'IA
+        setTimeout(() => {
+          aiAssistant.innerHTML = '<i class="fa fa-cog fa-spin"></i>';
+          targetCell.style.transition = 'background-color 0.3s';
+          targetCell.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+          
+          setTimeout(() => {
+            aiAssistant.innerHTML = '<i class="fa fa-robot"></i>';
+            targetCell.style.backgroundColor = '';
+            
+            // Passer à l'événement suivant
+            currentIndex = (currentIndex + 1) % eventCells.length;
+            setTimeout(moveAIToNextEvent, 1000);
+          }, 800);
+        }, 500);
+      }
+      
+      // Démarrer l'animation après un court délai
+      setTimeout(moveAIToNextEvent, 1500);
+      
+      // Animation pour l'ajout d'événements
+      let newEvents = [
+        { day: 'cell-3', title: 'Call avec Paul', color: 'bg-pink-100 border-pink-400' },
+        { day: 'cell-8', title: 'Planification', color: 'bg-teal-100 border-teal-400' },
+        { day: 'cell-12', title: 'Brainstorming', color: 'bg-orange-100 border-orange-400' }
+      ];
+      
+      function addNewEvent(index) {
+        if (index >= newEvents.length) return;
+        
+        const event = newEvents[index];
+        const cell = document.getElementById(event.day);
+        
+        // Animer l'IA vers la cellule où l'événement sera ajouté
+        const cellRect = cell.getBoundingClientRect();
+        const calendarRect = cell.closest('.bg-gray-50').getBoundingClientRect();
+        
+        aiAssistant.style.transition = 'all 0.8s ease-in-out';
+        aiAssistant.style.top = `${cellRect.top - calendarRect.top + 15}px`;
+        aiAssistant.style.left = `${cellRect.left - calendarRect.left + cellRect.width / 2 - 15}px`;
+        
+        setTimeout(() => {
+          // Animer l'ajout de l'événement
+          aiAssistant.innerHTML = '<i class="fa fa-plus"></i>';
+          
+          setTimeout(() => {
+            const newEventElem = document.createElement('div');
+            newEventElem.className = `mt-1 p-1 ${event.color} text-xs rounded border-l-2 event-item opacity-0 transition-opacity duration-500`;
+            newEventElem.textContent = event.title;
+            cell.appendChild(newEventElem);
+            
+            // Faire apparaître progressivement
+            setTimeout(() => {
+              newEventElem.classList.remove('opacity-0');
+              aiAssistant.innerHTML = '<i class="fa fa-check"></i>';
+              
+              setTimeout(() => {
+                aiAssistant.innerHTML = '<i class="fa fa-robot"></i>';
+                eventCells.push(cell);
+                
+                // Passer au prochain événement à ajouter
+                setTimeout(() => addNewEvent(index + 1), 1000);
+              }, 600);
+            }, 100);
+          }, 800);
+        }, 800);
+      }
+      
+      // Démarrer l'ajout des nouveaux événements après l'animation initiale
+      setTimeout(() => addNewEvent(0), 8000);
+    });
+  </script>
+</div>
   </div>
   
   <style>
