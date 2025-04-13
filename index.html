@@ -257,8 +257,19 @@
                     <a href="#accueil" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Accueil</a>
                     <a href="#fonctionnalites" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Fonctionnalités</a>
                     <a href="#statistiques" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Statistiques</a>
-                    <a href="#temoignages" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Témoignages</a>
-                    <a href="#tarifs" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Tarifs</a>
+                    <a href="#header-debriefing" class="nav-link text-white hover:text-primary-300 transition-colors font-medium" id="debriefing-link" onclick="document.querySelector('#header-debriefing').scrollIntoView({ behavior: 'smooth' }); return false;">Débriefing Psychologique</a><script>
+  document.getElementById('debriefing-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector('#debriefing-psychologique');
+    if (target) {
+      window.scrollTo({
+        top: target.offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  });
+</script>
+                    
                     <a href="#contact" class="nav-link text-white hover:text-primary-300 transition-colors font-medium">Contact</a>
                 </nav>
                 <div class="md:hidden">
