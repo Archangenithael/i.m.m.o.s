@@ -1642,83 +1642,9 @@
   </div>
 </div>
     <!-- Animation de matching mandat -->
-    <div class="matrix-frame relative mt-10">
-  <div class="matrix-border"></div>
-  <div class="mt-10 bg-dark-200 p-6 rounded-xl relative z-10">
+    <div class="mt-10 bg-dark-200 p-6 rounded-xl relative z-10">
   <div class="relative">
     <style>
-      /* Style Matrix pour le cadre */
-      .matrix-frame {
-        position: relative;
-        padding: 4px;
-        border-radius: 1rem;
-        background-color: rgba(0, 0, 0, 0.8);
-        box-shadow: 0 0 20px rgba(0, 255, 70, 0.5);
-        overflow: hidden;
-      }
-      
-      .matrix-border {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        z-index: 1;
-      }
-      
-      .matrix-border::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(90deg, 
-          transparent 0%, 
-          rgba(0, 255, 70, 0.2) 25%, 
-          rgba(0, 255, 70, 0.6) 50%, 
-          rgba(0, 255, 70, 0.2) 75%, 
-          transparent 100%);
-        z-index: 1;
-        animation: matrix-scan 3s linear infinite;
-      }
-      
-      .matrix-border::after {
-        content: "01010101010101010101010110101010101010101010101001010101010";
-        position: absolute;
-        font-family: monospace;
-        font-size: 10px;
-        color: rgba(0, 255, 70, 0.8);
-        white-space: nowrap;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-size: cover;
-        opacity: 0.3;
-        z-index: 0;
-        animation: matrix-rain 2s linear infinite;
-      }
-      
-      @keyframes matrix-scan {
-        0% {
-          transform: translateX(-100%);
-        }
-        100% {
-          transform: translateX(100%);
-        }
-      }
-      
-      @keyframes matrix-rain {
-        0% {
-          transform: translateY(-100%);
-        }
-        100% {
-          transform: translateY(100%);
-        }
-      }
-
       .flux-line {
         stroke: #2a6df4;
         stroke-width: 2;
@@ -2148,7 +2074,6 @@
       });
     </script>
   </div>
-</div>
 </div>
     <style>
         @keyframes streamAnimation {
