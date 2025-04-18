@@ -300,11 +300,19 @@
     <section id="accueil" class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
         <div class="blob top-1/4 left-1/4"></div>
         <div class="blob bottom-1/4 right-1/4"></div>
-        <div class="container mx-auto px-4 py-16 md:py-24 z-10">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                        <span class="gradient-text" style="
+        <div class="container mx-auto px-4 py-16 md:py-24 z-10 relative">
+    <!-- Particles animation for AI effect -->
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+    
+    <div class="flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-10 md:mb-0">
+            <!-- Animated AI assistant avatar -->
+            <div class="ai-assistant mb-6">
+                
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                <span class="gradient-text" style="
   background-image: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
   background-size: 400% 400%;
   color: transparent;
@@ -314,142 +322,480 @@
   font-weight: bold;
   font-size: 1.5em;
   animation: gradient-animation 8s ease infinite;
-">I.M.M.O.S.</span><style>
-@keyframes gradient-animation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-</style>
-                    </h1>
-                    <h2 class="text-xl md:text-2xl mb-6 text-gray-300 typing-effect" id="hero-title">
-                        Intelligence Modulaire pour la Maîtrise des Opérations immobilières Stratégiques
-                    </h2>
-                    <p class="text-xl md:text-2xl mb-8 text-gray-300 typing-effect" id="hero-subtitle">Un assistant IA qui travaille pour vous 24/7</p>
-                    <p class="text-lg mb-10 text-gray-400">Ce logiciel intelligent planifie vos actions, récupère vos prospects, détecte les propriétaires et vous accompagne comme un coach personnel pour vendre plus… sans vous épuiser.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        
-                        
-                    </div>
-                    <div class="mt-8 flex items-center">
-                        <div class="flex -space-x-2">
-                            
-                            
-                            
-                            
-                        </div>
-                        <div class="ml-4">
-                            
-                            
-                        </div>
-                    </div>
+">I.M.M.O.S.</span>
+            </h1>
+            <h2 class="text-xl md:text-2xl mb-6 text-gray-300 typing-effect" id="hero-title">
+                Intelligence Modulaire pour la Maîtrise des Opérations immobilières Stratégiques
+            </h2>
+            <p class="text-xl md:text-2xl mb-8 text-gray-300 typing-effect" id="hero-subtitle">Un assistant IA qui travaille pour vous 24/7</p>
+            <p class="text-lg mb-10 text-gray-400 fade-in-up">Ce logiciel intelligent planifie vos actions, récupère vos prospects, détecte les propriétaires et vous accompagne comme un coach personnel pour vendre plus… sans vous épuiser.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                
+                
+            </div>
+            <div class="mt-8 flex items-center">
+                <div class="flex -space-x-2">
+                    
+                    
+                    
+                    
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="gradient-border w-full max-w-lg floating">
-                        <div class="p-4">
-                            <div class="bg-dark-100 rounded-lg overflow-hidden shadow-2xl">
-                                <div class="bg-dark-300 p-4 flex justify-between items-center">
-                                    <div class="flex items-center">
-                                        <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-                                        <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                                    </div>
-                                    <div class="text-gray-400 text-sm">I.M.M.O.S Dashboard</div>
+                <div class="ml-4">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+            <div class="gradient-border w-full max-w-lg floating">
+                <div class="p-4">
+                    <div class="bg-dark-100 rounded-lg overflow-hidden shadow-2xl">
+                        <div class="bg-dark-300 p-4 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-gray-400 text-sm">I.M.M.O.S Dashboard</div>
+                        </div>
+                        <div class="p-6 dashboard-animation">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mr-4 pulse-animation">
+                                    <i class="fas fa-robot text-white text-xl"></i>
                                 </div>
-                                <div class="p-6 dashboard-animation">
-                                    <div class="flex items-center mb-6">
-                                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center mr-4">
-                                            <i class="fas fa-robot text-white text-xl"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-gray-300 text-sm">Bonjour,</p>
-                                            <p class="text-white font-semibold">Thomas Martin</p>
-                                        </div>
-                                        <div class="ml-auto text-right">
-                                            <p class="text-gray-300 text-sm">Lundi</p>
-                                            <p class="text-white font-semibold">15 Avril 2025</p>
-                                        </div>
+                                <div class="slide-in-right" style="animation-delay: 0.2s;">
+                                    <p class="text-gray-300 text-sm">Bonjour,</p>
+                                    <p class="text-white font-semibold">Thomas Martin</p>
+                                </div>
+                                <div class="ml-auto text-right slide-in-left" style="animation-delay: 0.3s;">
+                                    <p class="text-gray-300 text-sm">Lundi</p>
+                                    <p class="text-white font-semibold">15 Avril 2025</p>
+                                </div>
+                            </div>
+                            <div class="mb-6 fade-in-up" style="animation-delay: 0.5s;">
+                                <div class="flex justify-between items-center mb-2">
+                                    <h3 class="text-white font-bold">Objectifs hebdomadaires</h3>
+                                    <span class="text-primary-400 text-sm">3/7 jours</span>
+                                </div>
+                                <div class="bg-dark-300 h-3 rounded-full">
+                                    <div class="bg-gradient-to-r from-primary-500 to-secondary-500 h-3 rounded-full progress-animation"></div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-dark-300 p-4 rounded-lg fade-in-up" style="animation-delay: 0.7s;">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400 text-sm">Prospects contactés</span>
+                                        <span class="text-white font-bold count-up" data-target="120" data-suffix="/240">0/240</span>
                                     </div>
-                                    <div class="mb-6">
-                                        <div class="flex justify-between items-center mb-2">
-                                            <h3 class="text-white font-bold">Objectifs hebdomadaires</h3>
-                                            <span class="text-primary-400 text-sm">3/7 jours</span>
-                                        </div>
-                                        <div class="bg-dark-300 h-3 rounded-full">
-                                            <div class="bg-gradient-to-r from-primary-500 to-secondary-500 h-3 rounded-full" style="width: 45%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-4 mb-6">
-                                        <div class="bg-dark-300 p-4 rounded-lg">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-gray-400 text-sm">Prospects contactés</span>
-                                                <span class="text-white font-bold">120/240</span>
-                                            </div>
-                                            <div class="bg-dark-100 h-2 rounded-full">
-                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 50%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-dark-300 p-4 rounded-lg">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-gray-400 text-sm">Contacts initiaux</span>
-                                                <span class="text-white font-bold">15/20</span>
-                                            </div>
-                                            <div class="bg-dark-100 h-2 rounded-full">
-                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-dark-300 p-4 rounded-lg">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-gray-400 text-sm">Estimations</span>
-                                                <span class="text-white font-bold">6/8</span>
-                                            </div>
-                                            <div class="bg-dark-100 h-2 rounded-full">
-                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 75%"></div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-dark-300 p-4 rounded-lg">
-                                            <div class="flex justify-between items-center mb-2">
-                                                <span class="text-gray-400 text-sm">Mandats signés</span>
-                                                <span class="text-white font-bold">1/2</span>
-                                            </div>
-                                            <div class="bg-dark-100 h-2 rounded-full">
-                                                <div class="bg-primary-500 h-2 rounded-full" style="width: 50%"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-dark-300 p-4 rounded-lg mb-6">
-                                        <div class="flex items-center mb-3">
-                                            <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3">
-                                                <i class="fas fa-lightbulb text-white"></i>
-                                            </div>
-                                            <h3 class="text-white font-semibold">Conseil I.M.M.O.S</h3>
-                                        </div>
-                                        <p class="text-gray-300 text-sm">Pour atteindre votre objectif hebdomadaire, concentrez-vous sur 30 appels supplémentaires aujourd'hui. J'ai déjà planifié votre journée en conséquence.</p>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors">
-                                            <i class="fas fa-calendar-alt mr-2"></i>Agenda
-                                        </button>
-                                        <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors">
-                                            <i class="fas fa-users mr-2"></i>Contacts
-                                        </button>
-                                        <button class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-lg">
-                                            <i class="fas fa-tasks mr-2"></i>Actions
-                                        </button>
+                                    <div class="bg-dark-100 h-2 rounded-full">
+                                        <div class="bg-primary-500 h-2 rounded-full progress-animation" data-percentage="50"></div>
                                     </div>
                                 </div>
+                                <div class="bg-dark-300 p-4 rounded-lg fade-in-up" style="animation-delay: 0.8s;">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400 text-sm">Contacts initiaux</span>
+                                        <span class="text-white font-bold count-up" data-target="15" data-suffix="/20">0/20</span>
+                                    </div>
+                                    <div class="bg-dark-100 h-2 rounded-full">
+                                        <div class="bg-primary-500 h-2 rounded-full progress-animation" data-percentage="75"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-300 p-4 rounded-lg fade-in-up" style="animation-delay: 0.9s;">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400 text-sm">Estimations</span>
+                                        <span class="text-white font-bold count-up" data-target="6" data-suffix="/8">0/8</span>
+                                    </div>
+                                    <div class="bg-dark-100 h-2 rounded-full">
+                                        <div class="bg-primary-500 h-2 rounded-full progress-animation" data-percentage="75"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-dark-300 p-4 rounded-lg fade-in-up" style="animation-delay: 1s;">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-gray-400 text-sm">Mandats signés</span>
+                                        <span class="text-white font-bold count-up" data-target="1" data-suffix="/2">0/2</span>
+                                    </div>
+                                    <div class="bg-dark-100 h-2 rounded-full">
+                                        <div class="bg-primary-500 h-2 rounded-full progress-animation" data-percentage="50"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-dark-300 p-4 rounded-lg mb-6 bounce-in" style="animation-delay: 1.2s;">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3 light-pulse">
+                                        <i class="fas fa-lightbulb text-white"></i>
+                                    </div>
+                                    <h3 class="text-white font-semibold">Conseil I.M.M.O.S</h3>
+                                </div>
+                                <p class="text-gray-300 text-sm typing-ai">Pour atteindre votre objectif hebdomadaire, concentrez-vous sur 30 appels supplémentaires aujourd'hui. J'ai déjà planifié votre journée en conséquence.</p>
+                            </div>
+                            <div class="flex justify-between fade-in-up" style="animation-delay: 1.4s;">
+                                <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors btn-hover">
+                                    <i class="fas fa-calendar-alt mr-2"></i>Agenda
+                                </button>
+                                <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors btn-hover">
+                                    <i class="fas fa-users mr-2"></i>Contacts
+                                </button>
+                                <button class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-lg pulse-btn">
+                                    <i class="fas fa-tasks mr-2"></i>Actions
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white scroll-down">
-                <p class="text-center mb-2">Découvrir plus</p>
-                <div class="flex justify-center">
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
         </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white scroll-down">
+        <p class="text-center mb-2">Découvrir plus</p>
+        <div class="flex justify-center">
+            <i class="fas fa-chevron-down animate-bounce"></i>
+        </div>
+    </div>
+
+    <style>
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* AI assistant animations */
+        .ai-assistant {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .ai-avatar {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .ai-circle {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #0070f3, #00c4cc);
+            animation: pulse 2s infinite;
+        }
+        
+        .ai-wave {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .ai-wave:before, .ai-wave:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            left: 0;
+        }
+        
+        .ai-wave:before {
+            top: -5px;
+        }
+        
+        .ai-wave:after {
+            top: 5px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 243, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 112, 243, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 112, 243, 0); }
+        }
+        
+        /* Wave animation for AI speech */
+        .ai-wave, .ai-wave:before, .ai-wave:after {
+            animation: wave 1.5s infinite ease-in-out;
+        }
+        
+        .ai-wave:before {
+            animation-delay: -0.3s;
+        }
+        
+        .ai-wave:after {
+            animation-delay: -0.6s;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(2); }
+        }
+        
+        /* Dashboard animations */
+        .floating {
+            animation: floating 5s infinite ease-in-out;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .progress-animation {
+            width: 0;
+            animation: progress 1.5s forwards ease-out;
+        }
+        
+        @keyframes progress {
+            to { width: attr(data-percentage); }
+        }
+        
+        .progress-animation[data-percentage="50"] {
+            animation-name: progress50;
+        }
+        
+        .progress-animation[data-percentage="75"] {
+            animation-name: progress75;
+        }
+        
+        @keyframes progress50 {
+            to { width: 50%; }
+        }
+        
+        @keyframes progress75 {
+            to { width: 75%; }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideInRight 0.5s forwards;
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideInLeft 0.5s forwards;
+        }
+        
+        @keyframes slideInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .bounce-in {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: bounceIn 0.6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes bounceIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        .light-pulse {
+            animation: lightPulse 2s infinite;
+        }
+        
+        @keyframes lightPulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+        
+        .pulse-btn {
+            animation: pulsateBtn 2s infinite;
+        }
+        
+        @keyframes pulsateBtn {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Typing animation */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #ffffff;
+            white-space: nowrap;
+            margin: 0;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ffffff }
+        }
+        
+        .typing-ai {
+            overflow: hidden;
+            border-right: 2px solid #ffffff;
+            white-space: normal;
+            margin: 0;
+            animation: typingAI 3s steps(50, end), blink-caret 0.75s step-end infinite;
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+        
+        @keyframes typingAI {
+            from { 
+                width: 0;
+                opacity: 1;
+            }
+            to { 
+                width: 100%;
+                opacity: 1;
+            }
+        }
+    </style>
+    
+    <script>
+        // Initialize the particles effect
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add particle.js library dynamically
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+            script.onload = function() {
+                particlesJS('particles-js', {
+                    "particles": {
+                        "number": {
+                            "value": 80,
+                            "density": { "enable": true, "value_area": 800 }
+                        },
+                        "color": { "value": "#0070f3" },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": { "width": 0, "color": "#000000" }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#0070f3",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": false,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": { "enable": true, "mode": "grab" },
+                            "onclick": { "enable": true, "mode": "push" },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                            "push": { "particles_nb": 4 }
+                        }
+                    },
+                    "retina_detect": true
+                });
+            };
+            document.body.appendChild(script);
+            
+            // Animate progress bars
+            setTimeout(() => {
+                document.querySelectorAll('.progress-animation').forEach(bar => {
+                    const percentage = bar.getAttribute('data-percentage');
+                    bar.style.width = percentage + '%';
+                });
+            }, 500);
+            
+            // Counter animation for statistics
+            const countElements = document.querySelectorAll('.count-up');
+            countElements.forEach(element => {
+                const target = parseInt(element.getAttribute('data-target'));
+                const suffix = element.getAttribute('data-suffix') || '';
+                let count = 0;
+                const duration = 2000; // ms
+                const increment = Math.ceil(target / (duration / 30));
+                
+                const timer = setInterval(() => {
+                    count += increment;
+                    if (count >= target) {
+                        element.textContent = target + suffix;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = count + suffix;
+                    }
+                }, 30);
+            });
+        });
+    </script>
+</div>
     </section>
 
     <!-- Problème Section -->
