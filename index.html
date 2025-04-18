@@ -304,6 +304,35 @@
     <!-- Particles animation for AI effect -->
     <div id="particles-js" class="absolute inset-0 z-0"></div>
     
+    <!-- AI Robot Character -->
+    <div id="ai-robot" class="absolute z-20">
+        <div class="robot-container">
+            <div class="robot-head">
+                <div class="robot-face">
+                    <div class="robot-eyes">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                    </div>
+                    <div class="robot-antenna"></div>
+                </div>
+            </div>
+            <div class="robot-body">
+                <div class="robot-controls">
+                    <div class="robot-light"></div>
+                    <div class="robot-light"></div>
+                    <div class="robot-light"></div>
+                </div>
+            </div>
+            <div class="robot-arms">
+                <div class="robot-arm left"></div>
+                <div class="robot-arm right"></div>
+            </div>
+            <div class="robot-message">
+                <p>Surveillance active...</p>
+            </div>
+        </div>
+    </div>
+    
     <div class="flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 mb-10 md:mb-0">
             <!-- Animated AI assistant avatar -->
@@ -420,14 +449,35 @@
                                 </div>
                             </div>
                             <div class="bg-dark-300 p-4 rounded-lg mb-6 bounce-in" style="animation-delay: 1.2s;">
-                                <div class="flex items-center mb-3">
-                                    <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3 light-pulse">
-                                        <i class="fas fa-lightbulb text-white"></i>
-                                    </div>
-                                    <h3 class="text-white font-semibold">Conseil I.M.M.O.S</h3>
-                                </div>
-                                <p class="text-gray-300 text-sm typing-ai">Pour atteindre votre objectif hebdomadaire, concentrez-vous sur 30 appels supplémentaires aujourd'hui. J'ai déjà planifié votre journée en conséquence.</p>
-                            </div>
+    <div class="flex items-center mb-3">
+        <div class="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center mr-3 light-pulse">
+            <i class="fas fa-lightbulb text-white"></i>
+        </div>
+        <h3 class="text-white font-semibold">Conseil I.M.M.O.S</h3>
+    </div>
+    <div id="carousel-conseils-immos" style="position: relative; overflow: hidden; min-height: 3em;">
+        <p class="text-gray-300 text-sm typing-ai conseil-slide" style="position: absolute; transition: opacity 1s ease; opacity: 1;">Pour atteindre votre objectif hebdomadaire, concentrez-vous sur 30 appels supplémentaires aujourd'hui. J'ai déjà planifié votre journée en conséquence.</p>
+        <p class="text-gray-300 text-sm typing-ai conseil-slide" style="position: absolute; transition: opacity 1s ease; opacity: 0;">Privilégiez les appels aux clients potentiels entre 10h et 12h, moment où le taux de réponse est le plus élevé selon nos analyses.</p>
+        <p class="text-gray-300 text-sm typing-ai conseil-slide" style="position: absolute; transition: opacity 1s ease; opacity: 0;">N'oubliez pas de qualifier vos leads avant de les contacter. Un lead bien qualifié multiplie par 3 vos chances de conversion.</p>
+        <p class="text-gray-300 text-sm typing-ai conseil-slide" style="position: absolute; transition: opacity 1s ease; opacity: 0;">Personnalisez votre approche en fonction du profil client. J'ai préparé 5 scripts différents adaptés à chaque segment de clientèle.</p>
+        <p class="text-gray-300 text-sm typing-ai conseil-slide" style="position: absolute; transition: opacity 1s ease; opacity: 0;">Analysez vos résultats hebdomadaires pour identifier vos points forts et vos axes d'amélioration.</p>
+    </div>
+    
+    <script>
+        // Script pour le carousel de conseils
+        const conseils = document.querySelectorAll('.conseil-slide');
+        let currentConseil = 0;
+        
+        function nextConseil() {
+            conseils[currentConseil].style.opacity = 0; // Masquer le conseil actuel
+            currentConseil = (currentConseil + 1) % conseils.length; // Passer au conseil suivant
+            conseils[currentConseil].style.opacity = 1; // Afficher le nouveau conseil
+        }
+        
+        // Changer de conseil toutes les 7 secondes
+        setInterval(nextConseil, 7000);
+    </script>
+</div>
                             <div class="flex justify-between fade-in-up" style="animation-delay: 1.4s;">
                                 <button class="bg-dark-300 text-white px-4 py-2 rounded-lg hover:bg-dark-100 transition-colors btn-hover">
                                     <i class="fas fa-calendar-alt mr-2"></i>Agenda
@@ -692,6 +742,200 @@
                 opacity: 1;
             }
         }
+        
+        /* AI Robot Character Styles */
+        #ai-robot {
+            width: 80px;
+            height: 120px;
+            z-index: 100;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+        
+        .robot-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .robot-head {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(145deg, #1e3a8a, #3b82f6);
+            border-radius: 25px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .robot-face {
+            width: 80%;
+            height: 80%;
+            position: relative;
+        }
+        
+        .robot-eyes {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 80%;
+            top: 35%;
+            left: 10%;
+        }
+        
+        .robot-eye {
+            width: 10px;
+            height: 10px;
+            background-color: #00e5ff;
+            border-radius: 50%;
+            animation: blink 3s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 95%, 100% { opacity: 1; }
+            97% { opacity: 0; }
+        }
+        
+        .robot-antenna {
+            position: absolute;
+            width: 4px;
+            height: 15px;
+            background: #d1d5db;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .robot-antenna::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ff3d00;
+            border-radius: 50%;
+            top: -5px;
+            left: -2px;
+            animation: antenna-pulse 2s infinite;
+        }
+        
+        @keyframes antenna-pulse {
+            0%, 100% { background: #ff3d00; }
+            50% { background: #ff9e80; }
+        }
+        
+        .robot-body {
+            position: relative;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(145deg, #1e3a8a, #3b82f6);
+            margin: -10px auto 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .robot-controls {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-top: 15px;
+        }
+        
+        .robot-light {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #4ade80;
+            animation: light-blink 1.5s infinite;
+        }
+        
+        .robot-light:nth-child(2) {
+            animation-delay: 0.5s;
+            background-color: #fb923c;
+        }
+        
+        .robot-light:nth-child(3) {
+            animation-delay: 1s;
+            background-color: #f87171;
+        }
+        
+        @keyframes light-blink {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .robot-arms {
+            position: absolute;
+            width: 100%;
+            top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .robot-arm {
+            width: 10px;
+            height: 30px;
+            background: #3b82f6;
+            border-radius: 5px;
+        }
+        
+        .robot-arm.left {
+            transform: rotate(15deg);
+            transform-origin: top right;
+            margin-left: -5px;
+            animation: arm-swing-left 3s infinite;
+        }
+        
+        .robot-arm.right {
+            transform: rotate(-15deg);
+            transform-origin: top left;
+            margin-right: -5px;
+            animation: arm-swing-right 3s infinite;
+        }
+        
+        @keyframes arm-swing-left {
+            0%, 100% { transform: rotate(15deg); }
+            50% { transform: rotate(30deg); }
+        }
+        
+        @keyframes arm-swing-right {
+            0%, 100% { transform: rotate(-15deg); }
+            50% { transform: rotate(-30deg); }
+        }
+        
+        .robot-message {
+            position: absolute;
+            width: 120px;
+            background: rgba(59, 130, 246, 0.8);
+            border-radius: 10px;
+            padding: 5px;
+            color: white;
+            font-size: 10px;
+            text-align: center;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .robot-container:hover .robot-message {
+            opacity: 1;
+        }
+        
+        /* Robot movement animation */
+        @keyframes float-robot {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-5px) rotate(5deg); }
+        }
     </style>
     
     <script>
@@ -792,6 +1036,63 @@
                         element.textContent = count + suffix;
                     }
                 }, 30);
+            });
+            
+            // AI Robot movement
+            const aiRobot = document.getElementById('ai-robot');
+            
+            // Set initial position
+            aiRobot.style.left = '20px';
+            aiRobot.style.top = '20%';
+            
+            // Apply floating animation
+            aiRobot.style.animation = 'float-robot 4s ease-in-out infinite';
+            
+            // Function to generate a random position for the robot
+            function moveRobot() {
+                // Get viewport dimensions
+                const viewportWidth = window.innerWidth - 100;
+                const viewportHeight = (window.innerHeight * 0.8) - 150;
+                
+                // Calculate new position
+                const newX = Math.floor(Math.random() * viewportWidth);
+                const newY = Math.floor(Math.random() * viewportHeight) + window.innerHeight * 0.1;
+                
+                // Apply new position with smooth transition
+                aiRobot.style.transition = 'left 10s, top 10s';
+                aiRobot.style.left = newX + 'px';
+                aiRobot.style.top = newY + 'px';
+            }
+            
+            // Move the robot initially and then every 10 seconds
+            moveRobot();
+            setInterval(moveRobot, 10000);
+            
+            // Robot interaction on click
+            aiRobot.addEventListener('click', function() {
+                const messages = [
+                    "Système sécurisé et opérationnel.",
+                    "Je surveille votre domaine immobilier.",
+                    "Analyse des données en cours...",
+                    "Détection de prospects potentiels.",
+                    "Je travaille pour vous 24/7."
+                ];
+                
+                // Select a random message
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                
+                // Update the robot's message
+                const robotMessage = aiRobot.querySelector('.robot-message p');
+                robotMessage.textContent = randomMessage;
+                
+                // Flash robot eyes
+                const robotEyes = aiRobot.querySelectorAll('.robot-eye');
+                robotEyes.forEach(eye => {
+                    eye.style.backgroundColor = '#ff3d00';
+                    setTimeout(() => {
+                        eye.style.backgroundColor = '#00e5ff';
+                    }, 300);
+                });
             });
         });
     </script>
